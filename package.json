@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/polkadot-js/api",
+  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "license": "Apache-2",
+  "private": true,
+  "type": "commonjs",
+  "workspaces": [
+    "packages/*"
+  ],
+  "resolutions": {
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "build": "yarn build:interfaces && polkadot-dev-build-ts",
+    "build:extra": "(cd packages/typegen && copyfiles scripts/* build)",
+    "build:interfaces": "polkadot-types-internal-interfaces",
+    "build:release": "polkadot-ci-ghact-build",
+    "docs:metadata": "polkadot-types-internal-metadata",
+    "chain:info": "polkadot-types-chain-info",
+    "lint": "polkadot-dev-run-lint",
+    "clean": "polkadot-dev-clean-build",
+    "postinstall": "polkadot-dev-yarn-only",
+    "test": "polkadot-dev-run-test --coverage --runInBand --testPathIgnorePatterns e2e",
+    "test:one": "polkadot-dev-run-test",
+    "test:watch": "polkadot-dev-run-test --watch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/register": "^7.13.16",
+    "@babel/runtime": "^7.14.0",
+    "@polkadot/dev": "^0.62.14",
+    "@polkadot/ts": "^0.3.65",
+    "@polkadot/typegen": "workspace:packages/typegen",
+    "@types/jest": "^26.0.23",
+    "copyfiles": "^2.4.1"
+  },
+  "version": "4.9.3-23"
+}
