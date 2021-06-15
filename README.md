@@ -7,29 +7,50 @@
 
 # @setheum-js
 Promise and RxJS APIs around Setheum RPC calls. 
-This library provides additional typing for users to access Setheum networks by using [polkadot.js](https://github.com/polkadot-js/api).
+This library provides additional typing for users to access Setheum networks by using [setheum.js](https://github.com/setheum-js/api).
 
+# Getting Started
 
-# @polkadot/api
+More documentation and examples on [setheum.js.org](https://setheum.js.org).
 
-This library provides a clean wrapper around all the methods exposed by a Polkadot/Substrate network client and defines all the types exposed by a node. For complete documentation around the classes, interfaces and their use, visit the [documentation portal](https://polkadot.js.org/docs/api/).
+- Install dependencies
 
-If you are an existing user, please be sure to track the [CHANGELOG](CHANGELOG.md) and [UPGRADING](UPGRADING.md) guides when changing versions.
+```bash
+yarn add @polkadot/api @setheum-js/api@beta
+```
 
-## tutorials
+- Create API instance
 
-Looking for tutorials to get started? Look at [examples](https://polkadot.js.org/docs/api/examples/promise/) for guides on how to use the API to make queries and submit transactions.
+```ts
+import { ApiPromise } from '@polkadot/api';
+import { WsProvider } from '@polkadot/rpc-provider';
+import { options } from '@setheum-js/api';
+
+async function main() {
+    const provider = new WsProvider('ws://127.0.0.1:9944');
+    const api = new ApiPromise(options({ provider }));
+    await api.isReady;
+
+    // use api
+}
+
+main()
+```
+
+- Use api to interact with node
+
+```ts
+// query and display account data
+const data = await api.query.system.account('5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY');
+console.log(data.toHuman())
+```
 
 ## overview
 
 The API is split up into a number of internal packages -
 
-- [@polkadot/api](packages/api/) The API library, providing both Promise and RxJS Observable-based interfaces. This is the main user-facing entry point.
-- [@polkadot/api-derive](packages/api-derive/) Derived results that are injected into the API, allowing for combinations of various query results (only used internally and exposed on the Api instances via `api.derive.*`)
-- [@polkadot/metadata](packages/metadata/) Base extrinsic, storage and constant injectors for injection
-- [@polkadot/rpc-core](packages/rpc-core/) Wrapper around all [JSON-RPC methods](https://polkadot.js.org/docs/substrate/rpc) exposed by a Polkadot network client
-- [@polkadot/rpc-provider](packages/rpc-provider/) Providers for connecting to nodes, including WebSockets and Http
-
-Type definitions for interfaces as exposed by Polkadot & Substrate clients -
-
-- [@polkadot/types](packages/types/) Codecs for all Polkadot and Substrate primitives
+- [@setheum-js/api](packages/api/) The API library, providing both Promise and RxJS Observable-based interfaces. This is the main user-facing entry point.
+- [@setheum-js/api-derive](packages/api-derive/) Derived results that are injected into the API, allowing for combinations of various query results (only used internally and exposed on the Api instances via `api.derive.*`)
+- [@setheum-js/app-util](./packages/app-util)
+  - Utilities to work with Setheum
+- [@setheum-js/types](packages/types/) Codecs for all Polkadot.js type definations for Setheum primitives
