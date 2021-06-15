@@ -19,7 +19,7 @@
     "polkadot-types-internal-metadata": "./scripts/polkadot-types-internal-metadata.cjs"
   },
   "repository": "github:polkadot-js/api",
-  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
   "maintainers": [],
   "contributors": [],
   "license": "Apache-2.0",
