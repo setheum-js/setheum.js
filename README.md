@@ -5,8 +5,9 @@
 [![maintainability](https://img.shields.io/codeclimate/maintainability-percentage/polkadot-js/api?logo=code-climate&style=flat-square)](https://codeclimate.com/github/polkadot-js/api)
 [![coverage](https://img.shields.io/codeclimate/coverage/polkadot-js/api?logo=code-climate&style=flat-square)](https://codeclimate.com/github/polkadot-js/api)
 
-# setheum.js
-Promise and RxJS APIs around Setheum and related Substrate-based chain RPC calls. It is dynamically generated based on what the Substrate runtime provides in terms of metadata and tuned with SetheumJS and Setters.JS for Setheum Networks. Full documentation &amp; examples available
+# @setheum-js
+Promise and RxJS APIs around Setheum RPC calls. 
+This library provides additional typing for users to access Setheum networks by using [polkadot.js](https://github.com/polkadot-js/api).
 
 
 # @polkadot/api
