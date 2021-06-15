@@ -9,6 +9,7 @@ import node from './node';
 import nodeTemplate from './node-template';
 import polkadot from './polkadot';
 import rococo from './rococo';
+import shell from './shell';
 import statemint from './statemint';
 import westend from './westend';
 
@@ -20,8 +21,11 @@ const typesSpec: Record<string, OverrideVersionedType[]> = {
   'node-template': nodeTemplate,
   polkadot,
   rococo,
+  shell,
+  statemine: statemint,
   statemint,
-  westend
+  westend,
+  westmint: statemint
 };
 
 export default typesSpec;

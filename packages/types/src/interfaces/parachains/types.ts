@@ -117,11 +117,17 @@ export interface CandidateDescriptor extends Struct {
   readonly erasureRoot: Hash;
   readonly signature: CollatorSignature;
   readonly paraHead: Hash;
-  readonly validationCodeHash: Hash;
+  readonly validationCodeHash: ValidationCodeHash;
 }
 
 /** @name CandidateHash */
 export interface CandidateHash extends Hash {}
+
+/** @name CandidateInfo */
+export interface CandidateInfo extends Struct {
+  readonly who: AccountId;
+  readonly deposit: Balance;
+}
 
 /** @name CandidatePendingAvailability */
 export interface CandidatePendingAvailability extends Struct {
@@ -608,6 +614,9 @@ export interface UpwardMessage extends Bytes {}
 
 /** @name ValidationCode */
 export interface ValidationCode extends Bytes {}
+
+/** @name ValidationCodeHash */
+export interface ValidationCodeHash extends Hash {}
 
 /** @name ValidationData */
 export interface ValidationData extends Struct {

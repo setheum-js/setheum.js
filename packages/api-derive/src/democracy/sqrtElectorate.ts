@@ -2,9 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ApiInterfaceRx } from '@polkadot/api/types';
+import type { BN } from '@polkadot/util';
 import type { Observable } from '@polkadot/x-rxjs';
-
-import BN from 'bn.js';
 
 import { bnSqrt } from '@polkadot/util';
 import { map } from '@polkadot/x-rxjs/operators';

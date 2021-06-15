@@ -6,6 +6,10 @@
 import type { OverrideVersionedType } from '@polkadot/types/types';
 
 const sharedTypes = {
+  // 16 validators
+  CompactAssignments: 'CompactAssignmentsWith16',
+  RawSolution: 'RawSolutionWith16',
+  // general
   Keys: 'SessionKeys6',
   ProxyType: {
     _enum: ['Any', 'NonTransfer', 'Staking', 'SudoBalances', 'IdentityJudgement', 'CancelProxy']
@@ -15,8 +19,10 @@ const sharedTypes = {
 const addrAccountIdTypes = {
   AccountInfo: 'AccountInfoWithRefCount',
   Address: 'AccountId',
+  CompactAssignments: 'CompactAssignmentsWith16',
   LookupSource: 'AccountId',
   Keys: 'SessionKeys5',
+  RawSolution: 'RawSolutionWith16',
   ValidatorPrefs: 'ValidatorPrefsWithCommission'
 };
 

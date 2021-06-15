@@ -4,10 +4,9 @@
 import type { ApiInterfaceRx } from '@polkadot/api/types';
 import type { Option } from '@polkadot/types';
 import type { AccountId, ReferendumInfo, ReferendumInfoFinished, ReferendumInfoTo239, Vote, VotingDelegating, VotingDirect, VotingDirectVote } from '@polkadot/types/interfaces';
+import type { BN } from '@polkadot/util';
 import type { Observable } from '@polkadot/x-rxjs';
 import type { DeriveDemocracyLock } from '../types';
-
-import BN from 'bn.js';
 
 import { BN_ZERO, isUndefined } from '@polkadot/util';
 import { of } from '@polkadot/x-rxjs';

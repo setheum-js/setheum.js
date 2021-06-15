@@ -8,7 +8,6 @@ import type { Codec, Registry } from '@polkadot/types/types';
 import type { ProviderInterface, ProviderInterfaceEmitCb, ProviderInterfaceEmitted } from '../types';
 import type { MockStateDb, MockStateSubscriptionCallback, MockStateSubscriptions } from './types';
 
-import BN from 'bn.js';
 import EventEmitter from 'eventemitter3';
 
 import { createTestKeyring } from '@polkadot/keyring/testing';
@@ -17,7 +16,7 @@ import rpcMetadata from '@polkadot/metadata/static';
 import jsonrpc from '@polkadot/types/interfaces/jsonrpc';
 import rpcHeader from '@polkadot/types/json/Header.004.json';
 import rpcSignedBlock from '@polkadot/types/json/SignedBlock.004.immortal.json';
-import { assert, bnToU8a, logger, u8aToHex } from '@polkadot/util';
+import { assert, BN, bnToU8a, logger, u8aToHex } from '@polkadot/util';
 import { randomAsU8a } from '@polkadot/util-crypto';
 
 const INTERVAL = 1000;
@@ -45,6 +44,8 @@ export class MockProvider implements ProviderInterface {
 
   private emitter = new EventEmitter();
 
+  private intervalId?: NodeJS.Timeout | null;
+
   public isUpdating = true;
 
   private registry: Registry;
@@ -55,7 +56,7 @@ export class MockProvider implements ProviderInterface {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-unsafe-member-access
     chain_getBlock: () => this.registry.createType('SignedBlock', rpcSignedBlock.result).toJSON(),
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    chain_getBlockHash: () => '0x1234',
+    chain_getBlockHash: () => '0x1234000000000000000000000000000000000000000000000000000000000000',
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     chain_getFinalizedHead: () => this.registry.createType('Header', rpcHeader.result).hash,
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -104,8 +105,12 @@ export class MockProvider implements ProviderInterface {
     // noop
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   public async disconnect (): Promise<void> {
-    // noop
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 
   public get isConnected (): boolean {
@@ -175,7 +180,7 @@ export class MockProvider implements ProviderInterface {
     const query = decorateStorage(this.registry, metadata.asLatest, metadata.version);
 
     // Do something every 1 seconds
-    setInterval((): void => {
+    this.intervalId = setInterval((): void => {
       if (!this.isUpdating) {
         return;
       }
