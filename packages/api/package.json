@@ -1,13 +1,8 @@
 {
-  "name": "@polkadot/api",
-  "version": "4.14.1",
-  "type": "module",
-  "description": "Promise and RxJS wrappers around the Polkadot JS RPC",
+  "name": "@setheum-js/setheum.js",
+  "version": "0.8.0",
+  "description": "Setheum JS API",
   "main": "index.js",
-  "sideEffects": [
-    "./detectPackage.js",
-    "./detectPackage.cjs"
-  ],
   "engines": {
     "node": ">=14.0.0"
   },
@@ -15,21 +10,21 @@
   "maintainers": [],
   "contributors": [],
   "license": "Apache-2.0",
-  "repository": "github:polkadot-js/api",
-  "bugs": "https://github.com/polkadot-js/api/issues",
-  "homepage": "https://github.com/polkadot-js/api/tree/master/packages/api#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "bugs": {
+    "url": "https://github.com/setheum-js/setheum.js/issues"
+  },
+  "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@babel/runtime": "^7.14.5",
-    "@polkadot/api-derive": "4.14.1",
-    "@polkadot/keyring": "^6.8.1",
-    "@polkadot/metadata": "4.14.1",
-    "@polkadot/rpc-core": "4.14.1",
-    "@polkadot/rpc-provider": "4.14.1",
-    "@polkadot/types": "4.14.1",
-    "@polkadot/types-known": "4.14.1",
-    "@polkadot/util": "^6.8.1",
-    "@polkadot/util-crypto": "^6.8.1",
-    "@polkadot/x-rxjs": "^6.8.1",
-    "eventemitter3": "^4.0.7"
+    "@setheum-js/setheum.js-derive": "0.8.0",
+    "@setheum-js/types": "0.8.0",
+    "@babel/runtime": "^7.10.2",
+    "@open-web3/orml-api-derive": "^0.9.4-7",
+    "@polkadot/api": "^4.14.1",
+    "@polkadot/rpc-core": "^4.14.1"
   }
 }
