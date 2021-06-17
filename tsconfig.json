@@ -10,10 +10,10 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@setheum-js/api": [
+      "@setheum-js/setheum.js": [
         "packages/api/src"
       ],
-      "@setheum-js/api/*": [
+      "@setheum-js/setheum.js/*": [
         "packages/api/src/*"
       ],
       "@setheum-js/types": [
@@ -22,10 +22,10 @@
       "@setheum-js/types/*": [
         "packages/types/src/*"
       ],
-      "@setheum-js/api-derive": [
+      "@setheum-js/setheum.js-derive": [
         "packages/api-derive/src"
       ],
-      "@setheum-js/api-derive/*": [
+      "@setheum-js/setheum.js-derive/*": [
         "packages/api-derive/src/*"
       ],
       "@setheum-js/type-definitions": [
