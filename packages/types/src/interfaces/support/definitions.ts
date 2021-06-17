@@ -1,19 +1,4 @@
-// Copyright 2017-2021 @polkadot/types authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+import { Definitions } from '@polkadot/types/types';
+import support from '@setheum-js/type-definitions/support';
 
-// order important in structs... :)
-/* eslint-disable sort-keys */
-
-import type { Definitions } from '../../types';
-
-export default {
-  rpc: {},
-  types: {
-    WeightToFeeCoefficient: {
-      coeffInteger: 'Balance',
-      coeffFrac: 'Perbill',
-      negative: 'bool',
-      degree: 'u8'
-    }
-  }
-} as Definitions;
+export default support as Definitions;

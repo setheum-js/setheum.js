@@ -1,34 +1,23 @@
 {
-  "name": "@polkadot/api-derive",
-  "version": "4.14.1",
-  "type": "module",
-  "description": "Common functions used across Polkadot, derived from RPC calls and storage queries.",
+  "name": "@setheum-js/setheum.js-derive",
+  "version": "0.8.0",
+  "description": "Additional polkadot.js derives for Setheum Network",
   "main": "index.js",
-  "sideEffects": [
-    "./detectPackage.js",
-    "./detectPackage.cjs"
-  ],
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
-  "maintainers": [],
-  "contributors": [],
   "license": "Apache-2.0",
-  "repository": "github:polkadot-js/api",
-  "bugs": "https://github.com/polkadot-js/api/issues",
-  "homepage": "https://github.com/polkadot-js/api/tree/master/packages/api-derive#readme",
-  "dependencies": {
-    "@babel/runtime": "^7.14.5",
-    "@polkadot/api": "4.14.1",
-    "@polkadot/rpc-core": "4.14.1",
-    "@polkadot/types": "4.14.1",
-    "@polkadot/util": "^6.8.1",
-    "@polkadot/util-crypto": "^6.8.1",
-    "@polkadot/x-rxjs": "^6.8.1"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
-  "devDependencies": {
-    "@polkadot/keyring": "^6.8.1",
-    "@polkadot/rpc-provider": "4.14.1"
+  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "bugs": {
+    "url": "https://github.com/setheum-js/setheum.js/issues"
+  },
+  "homepage": "https://github.com/setheum-js/setheum.js",
+  "dependencies": {
+    "@setheum-js/types": "0.8.0",
+    "@babel/runtime": "^7.10.2",
+    "@open-web3/orml-types": "^0.9.4-7",
+    "@polkadot/api-derive": "^4.14.1"
   }
 }

@@ -1,15 +1,15 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Struct, bool, u8 } from '@polkadot/types';
-import type { Balance, Perbill } from '@polkadot/types/interfaces/runtime';
+import type { FixedU128 } from '@setheum-js/types/interfaces/runtime';
 
-/** @name WeightToFeeCoefficient */
-export interface WeightToFeeCoefficient extends Struct {
-  readonly coeffInteger: Balance;
-  readonly coeffFrac: Perbill;
-  readonly negative: bool;
-  readonly degree: u8;
-}
+/** @name ExchangeRate */
+export interface ExchangeRate extends FixedU128 {}
+
+/** @name Rate */
+export interface Rate extends FixedU128 {}
+
+/** @name Ratio */
+export interface Ratio extends FixedU128 {}
 
 export type PHANTOM_SUPPORT = 'support';

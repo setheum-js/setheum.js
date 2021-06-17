@@ -1,33 +1,30 @@
 {
-  "name": "@polkadot/types",
-  "version": "4.14.1",
-  "type": "module",
-  "description": "Implementation of the Parity codec",
+  "name": "@setheum-js/types",
+  "version": "0.8.0",
+  "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",
-  "sideEffects": [
-    "./detectPackage.js",
-    "./detectPackage.cjs"
-  ],
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
-  "maintainers": [],
-  "contributors": [],
   "license": "Apache-2.0",
-  "repository": "github:polkadot-js/api",
-  "bugs": "https://github.com/polkadot-js/api/issues",
-  "homepage": "https://github.com/polkadot-js/api/tree/master/packages/types#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "bugs": {
+    "url": "https://github.com/setheum-js/setheum.js/issues"
+  },
+  "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@babel/runtime": "^7.14.5",
-    "@polkadot/metadata": "4.14.1",
-    "@polkadot/util": "^6.8.1",
-    "@polkadot/util-crypto": "^6.8.1",
-    "@polkadot/x-rxjs": "^6.8.1"
+    "@setheum-js/type-definitions": "0.8.0",
+    "@babel/runtime": "^7.10.2",
+    "@open-web3/api-mobx": "^0.9.4-7",
+    "@open-web3/orml-types": "^0.9.4-7",
+    "@polkadot/api": "^4.14.1",
+    "@polkadot/typegen": "^4.14.1",
+    "@polkadot/types": "^4.14.1"
   },
   "devDependencies": {
-    "@polkadot/keyring": "^6.8.1",
-    "@types/bn.js": "^4.11.6",
-    "bn.js": "^4.11.9"
+    "@types/websocket": "^1.0.0",
+    "websocket": "^1.0.31"
   }
 }

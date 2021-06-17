@@ -1,0 +1,27 @@
+{
+  "name": "@setheum-js/sdk-loan",
+  "version": "0.8.0",
+  "description": "the loan sub module in setheum network sdk",
+  "main": "index.js",
+  "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "bugs": {
+    "url": "https://github.com/setheum-js/setheum.js/issues"
+  },
+  "homepage": "https://github.com/setheum-js/setheum.js",
+  "dependencies": {
+    "@setheum-js/setheum.js-derive": "0.8.0",
+    "@setheum-js/sdk-core": "0.8.0",
+    "@polkadot/api": "^4.14.1",
+    "@polkadot/types": "^4.14.1",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.161"
+  }
+}
