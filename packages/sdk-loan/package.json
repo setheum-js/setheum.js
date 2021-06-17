@@ -1,7 +1,7 @@
 {
-  "name": "@setheum-js/types",
+  "name": "@setheum-js/sdk-loan",
   "version": "0.8.0",
-  "description": "Polkadot.js type definations for Setheum Network",
+  "description": "the loan sub module in setheum network sdk",
   "main": "index.js",
   "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
   "license": "Apache-2.0",
@@ -15,16 +15,13 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/type-definitions": "0.8.0",
-    "@babel/runtime": "^7.10.2",
-    "@open-web3/api-mobx": "^0.9.4-7",
-    "@open-web3/orml-types": "^0.9.4-7",
+    "@setheum-js/setheum.js-derive": "0.8.0",
+    "@setheum-js/sdk-core": "0.8.0",
     "@polkadot/api": "^4.14.1",
-    "@polkadot/typegen": "^4.14.1",
-    "@polkadot/types": "^4.14.1"
+    "@polkadot/types": "^4.14.1",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@types/websocket": "^1.0.0",
-    "websocket": "^1.0.31"
+    "@types/lodash": "^4.14.161"
   }
 }
