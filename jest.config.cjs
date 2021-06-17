@@ -1,16 +1,16 @@
-// Copyright 2018-2021 @setheum-js/api authors & contributors
+// Copyright 2018-2021 @setheum-js/setheum.js authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 const config = require('@open-web3/dev-config/config/jest.cjs');
 
 module.exports = Object.assign({}, config, {
   moduleNameMapper: {
-    '@acala-network/api-derive(.*)$': '<rootDir>/packages/api-derive/src/$1',
-    '@acala-network/api(.*)$': '<rootDir>/packages/api/src/$1',
-    '@acala-network/types(.*)$': '<rootDir>/packages/types/src/$1',
-    '@acala-network/type-definitions(.*)$': '<rootDir>/packages/type-definitions/src/$1',
-    '@acala-network/sdk-core(.*)$': '<rootDir>/packages/sdk-core/src/$1',
-    '@acala-network/sdk-swap(.*)$': '<rootDir>/packages/sdk-swapcore/src/$1'
+    '@setheum-js/setheum.js-derive(.*)$': '<rootDir>/packages/api-derive/src/$1',
+    '@setheum-js/setheum.js(.*)$': '<rootDir>/packages/api/src/$1',
+    '@setheum-js/types(.*)$': '<rootDir>/packages/types/src/$1',
+    '@setheum-js/type-definitions(.*)$': '<rootDir>/packages/type-definitions/src/$1',
+    '@setheum-js/sdk-core(.*)$': '<rootDir>/packages/sdk-core/src/$1',
+    '@setheum-js/sdk-swap(.*)$': '<rootDir>/packages/sdk-swapcore/src/$1'
   },
   modulePathIgnorePatterns: [
     '<rootDir>/build',
