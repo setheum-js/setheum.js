@@ -1,31 +1,25 @@
-// Copyright 2017-2021 @polkadot/api authors & contributors
+// Copyright 2018-2021 @setheum-js/api authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-const config = require('@polkadot/dev/config/jest.cjs');
+const config = require('@open-web3/dev-config/config/jest.cjs');
 
-module.exports = {
-  ...config,
+module.exports = Object.assign({}, config, {
   moduleNameMapper: {
-    '@polkadot/api-(contract|derive)(.*)$': '<rootDir>/packages/api-$1/src/$2',
-    // eslint-disable-next-line sort-keys
-    '@polkadot/api(.*)$': '<rootDir>/packages/api/src/$1',
-    '@polkadot/metadata(.*)$': '<rootDir>/packages/metadata/src/$1',
-    '@polkadot/rpc-(core|provider)(.*)$': '<rootDir>/packages/rpc-$1/src/$2',
-    '@polkadot/typegen(.*)$': '<rootDir>/packages/typegen/src/$1',
-    '@polkadot/types-known(.*)$': '<rootDir>/packages/types-known/src/$1',
-    // eslint-disable-next-line sort-keys
-    '@polkadot/types(.*)$': '<rootDir>/packages/types/src/$1'
+    '@acala-network/api-derive(.*)$': '<rootDir>/packages/api-derive/src/$1',
+    '@acala-network/api(.*)$': '<rootDir>/packages/api/src/$1',
+    '@acala-network/types(.*)$': '<rootDir>/packages/types/src/$1',
+    '@acala-network/type-definitions(.*)$': '<rootDir>/packages/type-definitions/src/$1',
+    '@acala-network/sdk-core(.*)$': '<rootDir>/packages/sdk-core/src/$1',
+    '@acala-network/sdk-swap(.*)$': '<rootDir>/packages/sdk-swapcore/src/$1'
   },
   modulePathIgnorePatterns: [
+    '<rootDir>/build',
     '<rootDir>/packages/api/build',
-    '<rootDir>/packages/api-contract/build',
-    '<rootDir>/packages/api-derive/build',
-    '<rootDir>/packages/metadata/build',
-    '<rootDir>/packages/rpc-core/build',
-    '<rootDir>/packages/rpc-provider/build',
-    '<rootDir>/packages/typegen/build',
     '<rootDir>/packages/types/build',
-    '<rootDir>/packages/types-known/build'
+    '<rootDir>/packages/api-derive/build',
+    '<rootDir>/packages/type-definitions/build',
+    '<rootDir>/packages/sdk-core/build',
+    '<rootDir>/packages/sdk-swap/build'
   ],
   transformIgnorePatterns: ['/node_modules/(?!@polkadot|@babel/runtime/helpers/esm/)']
-};
+});
