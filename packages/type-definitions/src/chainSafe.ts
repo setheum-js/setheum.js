@@ -7,7 +7,7 @@ export const chainBridge = {
   }
 };
 
-export const chainSafeTransfer = {
+export const setheumChainBridge = {
   rpc: {},
   types: {}
 };

@@ -14,7 +14,7 @@ export default {
         LDOT: 3,
         RENBTC: 4,
 
-        KAR: 128,
+        NEOM: 128,
         KUSD: 129,
         KSM: 130,
         LKSM: 131
@@ -32,18 +32,18 @@ export default {
         Token: 'TokenSymbol',
         DEXShare: '(DexShare, DexShare)',
         ERC20: 'EvmAddress',
-        ChainSafe: '[u8; 32]'
+        ChainBridge: '[u8; 32]'
       }
     },
     CurrencyIdOf: 'CurrencyId',
     AirDropCurrencyId: {
-      _enum: ['KAR', 'DNAR']
+      _enum: ['NEOM', 'DNAR']
     },
     AuthoritysOriginId: {
-      _enum: ['Root', 'SetheumTreasury', 'SIF']
+      _enum: ['Root', 'SetheumTreasury', 'SettMintTreasury']
     },
     DataProviderId: {
-      _enum: ['Aggregated', 'Setheum', 'Band']
+      _enum: ['Aggregated', 'Setheum']
     },
     TradingPair: '(CurrencyId,  CurrencyId)',
     NFTBalance: 'u128'

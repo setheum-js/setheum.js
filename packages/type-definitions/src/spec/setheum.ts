@@ -56,7 +56,7 @@ const versioned: OverrideVersionedType[] = [
           PHA: 8,
           HDT: 9,
           BCG: 11,
-          KAR: 128,
+          NEOM: 128,
           KUSD: 129,
           KSM: 130,
           LKSM: 131,

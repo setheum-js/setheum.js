@@ -3,13 +3,13 @@
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
 import type { PalletBalanceOf } from '@setheum-js/types/interfaces/accounts';
-import type { CollateralAuctionItem, DebitAuctionItem, SurplusAuctionItem } from '@setheum-js/types/interfaces/auctionManager';
-import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio, LiquidationStrategy, OptionRate, OptionRatio, RiskManagementParams } from '@setheum-js/types/interfaces/cdpEngine';
+import type { CollateralAuctionItem, DebitAuctionItem, SurplusAuctionItem } from '@setheum-js/types/interfaces/serpAuctions';
+import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio, LiquidationStrategy, OptionRate, OptionRatio, RiskManagementParams } from '@setheum-js/types/interfaces/settMintEngine';
 import type { CandidateInfoOf } from '@setheum-js/types/interfaces/collatorSelection';
 import type { BalanceRequest, BalanceWrapper, TradingPairProvisionParameters, TradingPairStatus } from '@setheum-js/types/interfaces/dex';
 import type { CallRequest, CodeInfo, Erc20Info, EstimateResourcesResponse, EvmAccountInfo, EvmAddress, EvmContractInfo } from '@setheum-js/types/interfaces/evm';
 import type { PoolId } from '@setheum-js/types/interfaces/incentives';
-import type { Position } from '@setheum-js/types/interfaces/loans';
+import type { Position } from '@setheum-js/types/interfaces/settersManager';
 import type { CID, ClassData, ClassIdOf, ClassInfoOf, Properties, TokenData, TokenId, TokenIdOf, TokenInfoOf } from '@setheum-js/types/interfaces/nft';
 import type { AirDropCurrencyId, Amount, AmountOf, AuctionId, AuctionIdOf, AuthoritysOriginId, CurrencyId, CurrencyIdOf, DexShare, NFTBalance, TokenSymbol, TradingPair } from '@setheum-js/types/interfaces/primitives';
 import type { DestAddress, PublicKey } from '@setheum-js/types/interfaces/renvmBridge';

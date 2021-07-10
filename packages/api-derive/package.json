@@ -1,9 +1,13 @@
 {
-  "name": "@setheum-js/setheum.js-derive",
+  "name": "@setheum-js/api-derive",
   "version": "0.8.0",
   "description": "Additional polkadot.js derives for Setheum Network",
   "main": "index.js",
-  "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+  "author": "Setheum Labs",
+  "maintainers": [
+    "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+    "HuangLeiWan. <setheumjs@gmail.com>"
+  ],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",

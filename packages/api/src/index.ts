@@ -1,5 +1,5 @@
 import { derive as ormlDerives } from '@open-web3/orml-api-derive';
-import { derive as setheumDerives } from '@setheum-js/setheum.js-derive';
+import { derive as setheumDerives } from '@setheum-js/api-derive';
 import {
   rpc as setheumRpc,
   types as setheumTypes,

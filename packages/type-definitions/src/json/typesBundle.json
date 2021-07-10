@@ -199,7 +199,6 @@
                             "_enum": [
                                 "Aggregated",
                                 "Setheum",
-                                "Band"
                             ]
                         },
                         "TimestampedValue": {
@@ -436,21 +435,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -536,16 +534,12 @@
                                 "Historical": "Null",
                                 "GeneralCouncil": "CollectiveOrigin",
                                 "GeneralCouncilMembership": "Null",
-                                "HonzonCouncil": "CollectiveOrigin",
-                                "HonzonCouncilMembership": "Null",
                                 "TechnicalCommittee": "CollectiveOrigin",
                                 "TechnicalCommitteeMembership": "Null",
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -553,7 +547,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "NomineesElection": "Null",
@@ -602,7 +595,6 @@
                             "_enum": [
                                 "Aggregated",
                                 "Setheum",
-                                "Band"
                             ]
                         },
                         "TimestampedValue": {
@@ -840,21 +832,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -940,16 +931,12 @@
                                 "Historical": "Null",
                                 "GeneralCouncil": "CollectiveOrigin",
                                 "GeneralCouncilMembership": "Null",
-                                "HonzonCouncil": "CollectiveOrigin",
-                                "HonzonCouncilMembership": "Null",
                                 "TechnicalCommittee": "CollectiveOrigin",
                                 "TechnicalCommitteeMembership": "Null",
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -957,7 +944,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -1004,7 +990,6 @@
                             "_enum": [
                                 "Aggregated",
                                 "Setheum",
-                                "Band"
                             ]
                         },
                         "TimestampedValue": {
@@ -1228,7 +1213,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -1245,21 +1230,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -1345,16 +1329,12 @@
                                 "Historical": "Null",
                                 "GeneralCouncil": "CollectiveOrigin",
                                 "GeneralCouncilMembership": "Null",
-                                "HonzonCouncil": "CollectiveOrigin",
-                                "HonzonCouncilMembership": "Null",
                                 "TechnicalCommittee": "CollectiveOrigin",
                                 "TechnicalCommitteeMembership": "Null",
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -1362,7 +1342,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -1408,8 +1387,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -1633,7 +1611,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -1650,21 +1628,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -1755,9 +1732,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -1765,7 +1740,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -1809,8 +1783,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -2040,7 +2013,7 @@
                                 "PHA": 8,
                                 "HDT": 9,
                                 "BCG": 11,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131,
@@ -2064,15 +2037,14 @@
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -2163,9 +2135,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -2173,7 +2143,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -2392,8 +2361,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -2631,21 +2599,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -2736,9 +2703,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -2746,7 +2711,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -2792,8 +2756,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -3031,21 +2994,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -3136,9 +3098,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -3146,7 +3106,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -3192,8 +3151,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -3417,7 +3375,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -3434,21 +3392,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -3539,9 +3496,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -3549,7 +3504,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -3595,8 +3549,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -3820,7 +3773,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -3837,21 +3790,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -3942,9 +3894,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -3952,7 +3902,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -3996,8 +3945,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -4227,7 +4175,7 @@
                                 "PHA": 8,
                                 "HDT": 9,
                                 "BCG": 11,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131,
@@ -4251,15 +4199,14 @@
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -4350,9 +4297,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -4360,7 +4305,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -4579,8 +4523,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -4818,21 +4761,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -4923,9 +4865,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -4933,7 +4873,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -4979,8 +4918,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -5218,21 +5156,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -5323,9 +5260,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -5333,7 +5268,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -5379,8 +5313,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -5604,7 +5537,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -5621,21 +5554,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -5726,9 +5658,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -5736,7 +5666,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -5782,8 +5711,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -6007,7 +5935,7 @@
                                 "DOT": 2,
                                 "LDOT": 3,
                                 "RENBTC": 4,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131
@@ -6024,21 +5952,20 @@
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
                                 "ERC20": "EvmAddress",
-                                "ChainSafe": "[u8; 32]"
+                                "ChainBridge": "[u8; 32]"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -6129,9 +6056,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -6139,7 +6064,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",
@@ -6183,8 +6107,7 @@
                         "DataProviderId": {
                             "_enum": [
                                 "Aggregated",
-                                "Setheum",
-                                "Band"
+                                "Setheum"
                             ]
                         },
                         "TimestampedValue": {
@@ -6414,7 +6337,7 @@
                                 "PHA": 8,
                                 "HDT": 9,
                                 "BCG": 11,
-                                "KAR": 128,
+                                "NEOM": 128,
                                 "KUSD": 129,
                                 "KSM": 130,
                                 "LKSM": 131,
@@ -6438,16 +6361,14 @@
                         "CurrencyIdOf": "CurrencyId",
                         "AirDropCurrencyId": {
                             "_enum": [
-                                "KAR",
+                                "NEOM",
                                 "DNAR"
                             ]
                         },
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "SetheumTreasury",
-                                "HonzonTreasury",
-                                "SIF"
+                                "SetheumTreasury"
                             ]
                         },
                         "TradingPair": "(CurrencyId,  CurrencyId)",
@@ -6538,9 +6459,7 @@
                                 "Authority": "DelayedOrigin",
                                 "ElectionsPhragmen": "Null",
                                 "SetheumOracle": "Null",
-                                "BandOracle": "Null",
                                 "OperatorMembershipSetheum": "Null",
-                                "OperatorMembershipBand": "Null",
                                 "Auction": "Null",
                                 "Rewards": "Null",
                                 "OrmlNFT": "Null",
@@ -6548,7 +6467,6 @@
                                 "Dex": "Null",
                                 "AuctionManager": "Null",
                                 "Loans": "Null",
-                                "Honzon": "Null",
                                 "CdpTreasury": "Null",
                                 "CdpEngine": "Null",
                                 "Incentives": "Null",

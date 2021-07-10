@@ -32,8 +32,8 @@ export interface CurrencyId extends Enum {
   readonly asDexShare: ITuple<[DexShare, DexShare]>;
   // readonly isErc20: boolean;
   // readonly asErc20: EvmAddress;
-  readonly isChainSafe: boolean;
-  readonly asChainSafe: U8aFixed;
+  readonly isChainBridge: boolean;
+  readonly asChainBridge: U8aFixed;
 }
 
 /** @name CurrencyIdOf */
@@ -43,7 +43,6 @@ export interface CurrencyIdOf extends CurrencyId {}
 export interface DataProviderId extends Enum {
   readonly isAggregated: boolean;
   readonly isSetheum: boolean;
-  readonly isBand: boolean;
 }
 
 /** @name DexShare */

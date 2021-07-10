@@ -21,13 +21,7 @@
     "StorageKeyBytes": "Vec<u8>",
     "StorageValueBytes": "Vec<u8>",
     "RpcDataProviderId": "Text",
-    "DataProviderId": {
-        "_enum": [
-            "Aggregated",
-            "Setheum",
-            "Band"
-        ]
-    },
+    "DataProviderId": "u8",
     "TimestampedValue": {
         "value": "OracleValue",
         "timestamp": "Moment"
@@ -209,7 +203,7 @@
         "debit": "Balance"
     },
     "CID": "Vec<u8>",
-    "ClassId": "u32",
+    "NFTClassId": "u32",
     "ClassIdOf": "ClassId",
     "TokenId": "u64",
     "TokenIdOf": "TokenId",
@@ -238,6 +232,7 @@
             "Burnable": 2
         }
     },
+    "NFTBalance": "u128",
     "Amount": "i128",
     "AmountOf": "Amount",
     "AuctionId": "u32",
@@ -249,7 +244,7 @@
             "DOT": 2,
             "LDOT": 3,
             "RENBTC": 4,
-            "KAR": 128,
+            "NEOM": 128,
             "KUSD": 129,
             "KSM": 130,
             "LKSM": 131
@@ -265,19 +260,23 @@
         "_enum": {
             "Token": "TokenSymbol",
             "DEXShare": "(DexShare, DexShare)",
-            "ChainSafe": "[u8; 32]"
+            "ChainBridge": "[u8; 32]"
         }
     },
     "CurrencyIdOf": "CurrencyId",
     "AuthoritysOriginId": {
         "_enum": [
             "Root",
-            "SetheumTreasury",
-            "SIF"
+            "SetheumTreasury"
+        ]
+    },
+    "SetheumDataProviderId": {
+        "_enum": [
+            "Aggregated",
+            "Setheum",
         ]
     },
     "TradingPair": "(CurrencyId,  CurrencyId)",
-    "NFTBalance": "u128",
     "OracleKey": "CurrencyId",
     "AsOriginId": "AuthoritysOriginId",
     "SubAccountStatus": {
@@ -359,16 +358,12 @@
             "Historical": "Null",
             "GeneralCouncil": "CollectiveOrigin",
             "GeneralCouncilMembership": "Null",
-            "HonzonCouncil": "CollectiveOrigin",
-            "HonzonCouncilMembership": "Null",
             "TechnicalCommittee": "CollectiveOrigin",
             "TechnicalCommitteeMembership": "Null",
             "Authority": "DelayedOrigin",
             "ElectionsPhragmen": "Null",
             "SetheumOracle": "Null",
-            "BandOracle": "Null",
             "OperatorMembershipSetheum": "Null",
-            "OperatorMembershipBand": "Null",
             "Auction": "Null",
             "Rewards": "Null",
             "OrmlNFT": "Null",
@@ -376,7 +371,6 @@
             "Dex": "Null",
             "AuctionManager": "Null",
             "Loans": "Null",
-            "Honzon": "Null",
             "CdpTreasury": "Null",
             "CdpEngine": "Null",
             "EmergencyShutdown": "Null",

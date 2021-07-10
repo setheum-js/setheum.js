@@ -3,7 +3,9 @@
   "version": "0.8.0",
   "description": "the wallet sdk for setheum/neom network",
   "main": "index.js",
-  "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+ 
+  
+  
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
