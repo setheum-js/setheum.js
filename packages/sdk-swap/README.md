@@ -6,7 +6,7 @@ npm install @setheum-js/sdk-core @setheum-js/sdk-swap
 
 ```js
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { options } from '@setheum-js/setheum.js';
+import { options } from '@setheum-js/api';
 import { Token, FixedPointNumber, getPresetToken } from '@setheum-js/sdk-core';
 import { SwapTrade } from '@setheum-js/sdk-swap';
 

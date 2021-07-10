@@ -3,7 +3,11 @@
   "version": "0.8.0",
   "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",
-  "author": "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+  "author": "Setheum Labs",
+  "maintainers": [
+    "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
+    "HuangLeiWan. <setheumjs@gmail.com>"
+  ],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",

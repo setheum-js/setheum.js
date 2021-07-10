@@ -1,10 +1,10 @@
 export { default as accounts } from './accounts/definitions';
-export { default as auctionManager } from './auctionManager/definitions';
-export { default as cdpEngine } from './cdpEngine/definitions';
+export { default as auctionManager } from './serpAuctions/definitions';
+export { default as cdpEngine } from './settMintEngine/definitions';
 export { default as collatorSelection } from './collatorSelection/definitions';
 export { default as dex } from './dex/definitions';
 export { default as incentives } from './incentives/definitions';
-export { default as loans } from './loans/definitions';
+export { default as loans } from './settersManager/definitions';
 export { default as nft } from './nft/definitions';
 export { default as primitives } from './primitives/definitions';
 export { default as runtime } from './runtime/definitions';

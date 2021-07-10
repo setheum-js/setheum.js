@@ -61,7 +61,6 @@ const metadata = filterModules(
     'CdpTreasury',
     'Currencies',
     'Dex',
-    'Honzon',
     'Loans',
     'Oracle',
     'PolkadotBridge',
@@ -70,7 +69,7 @@ const metadata = filterModules(
     'StakingPool',
     'Tokens',
     'XTokens',
-    'ChainSafeTransfer',
+    'setheumChainBridge',
     'ChainBridge'
     // 'Vesting' Conflicts with pallet-vesting https://github.com/polkadot-js/api/issues/2338
   ],

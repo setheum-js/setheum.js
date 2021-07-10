@@ -1,5 +1,5 @@
 ![license](https://img.shields.io/badge/License-Apache%202.0-blue?logo=apache&style=flat-square)
-[![npm](https://img.shields.io/npm/v/@setheum-js/setheum.js?logo=npm&style=flat-square)](https://www.npmjs.com/package/@setheum-js/setheum.js)
+[![npm](https://img.shields.io/npm/v/@setheum-js/api?logo=npm&style=flat-square)](https://www.npmjs.com/package/@setheum-js/api)
 
 # @setheum-js
 Promise and RxJS APIs around Setheum RPC calls. 
@@ -12,7 +12,7 @@ More documentation and examples on [setheum.js.org](https://setheum.js.org).
 - Install dependencies
 
 ```bash
-yarn add @polkadot/api @setheum-js/setheum.js@beta
+yarn add @polkadot/api @setheum-js/api@beta
 ```
 
 - Create API instance
@@ -20,7 +20,7 @@ yarn add @polkadot/api @setheum-js/setheum.js@beta
 ```ts
 import { ApiPromise } from '@polkadot/api';
 import { WsProvider } from '@polkadot/rpc-provider';
-import { options } from '@setheum-js/setheum.js';
+import { options } from '@setheum-js/api';
 
 async function main() {
     const provider = new WsProvider('ws://127.0.0.1:9944');

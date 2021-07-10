@@ -9,8 +9,8 @@ const POLKADOT_KNOWN_ORIGINS: Record<string, string> = {
 };
 
 const DNAR_KNOWN_ORIGINS: Record<string, string> = {
-  GeneralCouncil: 'CollectiveOrigin',
-  HonzonCouncil: 'CollectiveOrigin',
+  GeneralCouncil
+  : 'CollectiveOrigin',
   Authority: 'DelayedOrigin'
 };
 

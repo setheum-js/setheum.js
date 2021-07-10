@@ -13,7 +13,7 @@ import primitives from './primitives';
 
 // ecosystem
 import renvmBridge from './renvmBridge';
-import { chainBridge, chainSafeTransfer } from './chainSafe';
+import { chainBridge, setheumChainBridge } from './chainBridge';
 
 import runtime from './runtime';
 import { signedExtensions as setheumSignedExtensions } from './signedExtensions';
@@ -60,9 +60,7 @@ const additionalOverride = {
       Authority: 'DelayedOrigin',
       ElectionsPhragmen: 'Null',
       SetheumOracle: 'Null',
-      BandOracle: 'Null',
       OperatorMembershipSetheum: 'Null',
-      OperatorMembershipBand: 'Null',
       Auction: 'Null',
       Rewards: 'Null',
       OrmlNFT: 'Null',
@@ -104,7 +102,7 @@ const setheumDefs = {
   // ecosystem
   renvmBridge,
   chainBridge,
-  chainSafeTransfer
+  setheumChainBridge
 };
 
 export const types = {
