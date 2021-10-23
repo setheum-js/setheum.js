@@ -17,7 +17,6 @@ export interface DerivedLoanConstants {
 
 export interface CollateralParams {
   maximumTotalDebitValue: Balance;
-  interestRatePerSec: OptionRate;
   liquidationRatio: OptionRatio;
   liquidationPenalty: OptionRate;
   requiredCollateralRatio: OptionRatio;
@@ -28,7 +27,6 @@ export interface DerivedLoanType extends Omit<CollateralParams, 'liquidationRati
   debitExchangeRate: Rate;
   liquidationRatio: OptionRatio | ExchangeRate;
   liquidationPenalty: OptionRatio | Rate;
-  globalInterestRatePerSec: Rate;
 }
 
 export interface DerivedUserLoan {

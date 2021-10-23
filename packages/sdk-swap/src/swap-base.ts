@@ -1,6 +1,6 @@
 import { ApiPromise, ApiRx } from '@polkadot/api';
-import { Observable, BehaviorSubject } from '@polkadot/x-rxjs';
-import { map } from '@polkadot/x-rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Token, TokenBalance, TokenPair, FixedPointNumber } from '@setheum-js/sdk-core';
 
 import { getSupplyAmount, getTargetAmount } from './utils';
@@ -18,6 +18,10 @@ function computeExchangeFee(path: Token[], fee: FixedPointNumber) {
       return acc.times(ONE.minus(fee));
     }, ONE)
   );
+}
+
+function tokenEq(token1: Token, token2: Token) {
+  return token1.name === token2.name;
 }
 
 export abstract class SwapBase<T extends ApiPromise | ApiRx> {
@@ -65,7 +69,7 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
   protected getTokenPairsFromPath(path: Token[]): TokenPair[] {
     const _path = path.slice();
     // push undefined as tail
-    _path.push((undefined as any) as Token);
+    _path.push(undefined as any as Token);
 
     return _path.reduce((acc, cur, current) => {
       if (!cur || !_path[current + 1]) return acc;
@@ -100,11 +104,11 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
   protected checkTradingPairIsEnabled(currency1: Token, currency2: Token, tradingPairs: TokenPair[]): boolean {
     const temp = new TokenPair(currency1, currency2);
 
-    return !!tradingPairs.find((item) => item.isEqual(temp));
+    return !!tradingPairs.find((item) => item.isEqual(temp, tokenEq));
   }
 
   protected sortLiquidityPoolWithTokenOrder(pool: LiquidityPool, token1: Token): [FixedPointNumber, FixedPointNumber] {
-    if (pool.token1.isEqual(token1)) {
+    if (pool.token1.isEqual(token1, tokenEq)) {
       return [pool.balance1, pool.balance2];
     }
 
@@ -130,7 +134,9 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     for (let i = 0; i < path.length - 1; i++) {
       const pair = new TokenPair(path[i], path[i + 1]);
       const [token1, token2] = pair.getPair();
-      const pool = liquidityPools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
+      const pool = liquidityPools.find(
+        (item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq)
+      );
 
       if (!pool) throw new NoLiquidityPoolError();
 
@@ -184,7 +190,9 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     for (let i = path.length - 1; i > 0; i--) {
       const pair = new TokenPair(path[i], path[i - 1]);
       const [token1, token2] = pair.getPair();
-      const pool = liquidityPools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
+      const pool = liquidityPools.find(
+        (item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq)
+      );
 
       if (!pool) throw new NoLiquidityPoolError();
 
@@ -233,7 +241,7 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     for (let i = 0; i < path.length - 1; i++) {
       const pair = new TokenPair(path[i], path[i + 1]);
       const [token1, token2] = pair.getPair();
-      const pool = pools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
+      const pool = pools.find((item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq));
 
       if (!pool) throw new NoLiquidityPoolError();
 
@@ -281,22 +289,20 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     liquidityPools: LiquidityPool[],
     baseParams: [Token, Token, FixedPointNumber, FixedPointNumber]
   ): SwapParameters {
-    const swapResult = paths.map(
-      (path): SwapResult => {
-        const params = [...baseParams, path, liquidityPools] as [
-          Token,
-          Token,
-          FixedPointNumber,
-          FixedPointNumber,
-          Token[],
-          LiquidityPool[]
-        ];
+    const swapResult = paths.map((path): SwapResult => {
+      const params = [...baseParams, path, liquidityPools] as [
+        Token,
+        Token,
+        FixedPointNumber,
+        FixedPointNumber,
+        Token[],
+        LiquidityPool[]
+      ];
 
-        return mode === 'EXACT_INPUT'
-          ? this.getOutputAmountWithExactInput(...params)
-          : this.getInputAmountWithExactOutput(...params);
-      }
-    );
+      return mode === 'EXACT_INPUT'
+        ? this.getOutputAmountWithExactInput(...params)
+        : this.getInputAmountWithExactOutput(...params);
+    });
 
     const temp = swapResult.reduce((acc, cur) => {
       if (mode === 'EXACT_INPUT' && acc.output.balance.isGreaterThanOrEqualTo(cur.output.balance)) return acc;

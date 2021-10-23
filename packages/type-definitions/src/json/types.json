@@ -13,11 +13,6 @@
     },
     "AuthorityOrigin": "DelayedOrigin",
     "StorageValue": "Vec<u8>",
-    "GraduallyUpdate": {
-        "key": "StorageKey",
-        "targetValue": "StorageValue",
-        "perBlock": "StorageValue"
-    },
     "StorageKeyBytes": "Vec<u8>",
     "StorageValueBytes": "Vec<u8>",
     "RpcDataProviderId": "Text",
@@ -30,8 +25,8 @@
     "OrderedSet": "Vec<AccountId>",
     "OrmlAccountData": {
         "free": "Balance",
-        "frozen": "Balance",
-        "reserved": "Balance"
+        "reserved": "Balance",
+        "frozen": "Balance"
     },
     "OrmlBalanceLock": {
         "amount": "Balance",
@@ -50,20 +45,62 @@
     },
     "DispatchId": "u32",
     "Price": "FixedU128",
-    "OrmlVestingSchedule": {
-        "start": "BlockNumber",
-        "period": "BlockNumber",
-        "periodCount": "u32",
-        "perPeriod": "Compact<Balance>"
-    },
-    "VestingScheduleOf": "OrmlVestingSchedule",
+    "OrmlCurrencyId": "CurrencyId",
     "PoolInfo": {
-        "totalShares": "Compact<Share>",
-        "totalRewards": "Compact<Balance>",
-        "totalWithdrawnRewards": "Compact<Balance>"
+        "totalShares": "Share"
     },
+    "CompactBalance": "Compact<Balance>",
     "Share": "u128",
     "OracleValue": "Price",
+    "Amount": "i128",
+    "AmountOf": "Amount",
+    "AuctionId": "u32",
+    "AuctionIdOf": "AuctionId",
+    "TokenSymbol": {
+        "_enum": {
+            "SETM": 0,
+            "SERP": 1,
+            "DNAR": 2,
+            "SETR": 3,
+            "SETUSD": 4,
+            "RENBTC": 121
+        }
+    },
+    "DexShare": {
+        "_enum": {
+            "Token": "TokenSymbol",
+            "Erc20": "EvmAddress"
+        }
+    },
+    "CurrencyId": {
+        "_enum": {
+            "Token": "TokenSymbol",
+            "DEXShare": "(DexShare, DexShare)",
+            "ERC20": "EvmAddress",
+        }
+    },
+    "CurrencyIdOf": "CurrencyId",
+    "AirDropCurrencyId": {
+        "_enum": [
+            "SETR",
+            "SETUSD"
+        ]
+    },
+    "AuthoritysOriginId": {
+        "_enum": [
+            "Root",
+            "Treasury",
+            "PublicFund"
+        ]
+    },
+    "SetheumDataProviderId": {
+        "_enum": [
+            "Aggregated",
+            "Setheum"
+        ]
+    },
+    "TradingPair": "(CurrencyId,  CurrencyId)",
+    "ChainBridgeChainId": "u8",
     "PalletBalanceOf": "Balance",
     "CollateralAuctionItem": {
         "refundRecipient": "AccountId",
@@ -71,16 +108,6 @@
         "initialAmount": "Compact<Balance>",
         "amount": "Compact<Balance>",
         "target": "Compact<Balance>",
-        "startTime": "BlockNumber"
-    },
-    "DebitAuctionItem": {
-        "initialAmount": "Compact<Balance>",
-        "amount": "Compact<Balance>",
-        "fix": "Compact<Balance>",
-        "startTime": "BlockNumber"
-    },
-    "SurplusAuctionItem": {
-        "amount": "Compact<Balance>",
         "startTime": "BlockNumber"
     },
     "LiquidationStrategy": {
@@ -111,7 +138,6 @@
     },
     "RiskManagementParams": {
         "maximumTotalDebitValue": "Balance",
-        "interestRatePerSec": "Option<Rate>",
         "liquidationRatio": "Option<Rate>",
         "liquidationPenalty": "Option<Rate>",
         "requiredCollateralRatio": "Option<Rate>"
@@ -149,8 +175,7 @@
     },
     "EvmAccountInfo": {
         "nonce": "Index",
-        "contractInfo": "Option<EvmContractInfo>",
-        "developerDeposit": "Option<Balance>"
+        "contractInfo": "Option<EvmContractInfo>"
     },
     "CodeInfo": {
         "codeSize": "u32",
@@ -170,32 +195,10 @@
         "value": "Option<U128>",
         "data": "Option<Bytes>"
     },
-    "RedeemStrategy": {
-        "_enum": {
-            "Immediately": "Null",
-            "Target": "EraIndex",
-            "WaitForUnbonding": "Null"
-        }
-    },
-    "RelaychainAccountId": "AccountId",
-    "SlashInfo": {
-        "validator": "RelaychainAccountId",
-        "relaychainTokenAmount": "Balance"
-    },
-    "ValidatorBacking": {
-        "totalInsurance": "Balance",
-        "isFrozen": "bool"
-    },
-    "Guarantee": {
-        "total": "Balance",
-        "bonded": "Balance",
-        "unbonding": "Option<(Balance, BlockNumber)>"
-    },
     "PoolId": {
         "_enum": {
-            "LoansIncentive": "CurrencyId",
-            "DexIncentive": "CurrencyId",
-            "DexBonus": "CurrencyId",
+            "Loans": "CurrencyId",
+            "Dex": "CurrencyId"
         }
     },
     "Position": {
@@ -203,108 +206,60 @@
         "debit": "Balance"
     },
     "CID": "Vec<u8>",
-    "NFTClassId": "u32",
-    "ClassIdOf": "ClassId",
+    "Attributes": "BTreeMap<Vec<u8>, Vec<u8>>",
+    "TokenInfoOf": {
+        "metadata": "CID",
+        "owner": "AccountId",
+        "data": "TokenData"
+    },
+    "Properties": {
+        "_set": {
+            "_bitLength": 8,
+            "Transferable": 1,
+            "Burnable": 2,
+            "Mintable": 4,
+            "ClassPropertiesMutable": 8
+        }
+    },
+    "ClassData": {
+        "deposit": "Balance",
+        "properties": "Properties",
+        "attributes": "Attributes"
+    },
+    "TokenData": {
+        "deposit": "Balance",
+        "attributes": "Attributes"
+    },
     "TokenId": "u64",
     "TokenIdOf": "TokenId",
+    "NFTClassId": "u32",
+    "ClassIdOf": "ClassId",
+    "NFTBalance": "u128",
+    "NFTBalanceOf": "NFTBalance",
     "ClassInfoOf": {
         "metadata": "CID",
         "totalIssuance": "TokenId",
         "owner": "AccountId",
         "data": "ClassData"
     },
-    "TokenInfoOf": {
-        "metadata": "CID",
-        "owner": "AccountId",
-        "data": "TokenData"
-    },
-    "ClassData": {
-        "deposit": "Balance",
-        "properties": "Properties"
-    },
-    "TokenData": {
-        "deposit": "Balance"
-    },
-    "Properties": {
-        "_set": {
-            "_bitLength": 8,
-            "Transferable": 1,
-            "Burnable": 2
-        }
-    },
-    "NFTBalance": "u128",
-    "Amount": "i128",
-    "AmountOf": "Amount",
-    "AuctionId": "u32",
-    "AuctionIdOf": "AuctionId",
-    "TokenSymbol": {
-        "_enum": {
-            "DNAR": 0,
-            "USDJ": 1,
-            "DOT": 2,
-            "LDOT": 3,
-            "RENBTC": 4,
-            "NEOM": 128,
-            "KUSD": 129,
-            "KSM": 130,
-            "LKSM": 131
-        }
-    },
-    "DexShare": {
-        "_enum": {
-            "Token": "TokenSymbol",
-            "Erc20": "EvmAddress"
-        }
-    },
-    "CurrencyId": {
-        "_enum": {
-            "Token": "TokenSymbol",
-            "DEXShare": "(DexShare, DexShare)",
-            "ChainBridge": "[u8; 32]"
-        }
-    },
-    "CurrencyIdOf": "CurrencyId",
-    "AuthoritysOriginId": {
-        "_enum": [
-            "Root",
-            "SetheumTreasury"
-        ]
-    },
-    "SetheumDataProviderId": {
-        "_enum": [
-            "Aggregated",
-            "Setheum",
-        ]
-    },
-    "TradingPair": "(CurrencyId,  CurrencyId)",
     "OracleKey": "CurrencyId",
     "AsOriginId": "AuthoritysOriginId",
+    "ProxyType": {
+        "_enum": [
+            "Any",
+            "CancelProxy",
+            "Governance",
+            "Auction",
+            "Swap",
+            "Loan"
+        ]
+    },
+    "AtLeast64BitUnsigned": "u128",
     "SubAccountStatus": {
         "bonded": "Balance",
         "available": "Balance",
         "unbonding": "Vec<(EraIndex,Balance)>",
         "mockRewardRate": "Rate"
-    },
-    "Params": {
-        "targetMaxFreeUnbondedRatio": "Ratio",
-        "targetMinFreeUnbondedRatio": "Ratio",
-        "targetUnbondingToFreeRatio": "Ratio",
-        "unbondingToFreeAdjustment": "Ratio",
-        "baseFeeRate": "Rate"
-    },
-    "StakingPoolPhase": {
-        "_enum": [
-            "Started",
-            "RelaychainUpdated",
-            "LedgerUpdated",
-            "Finished"
-        ]
-    },
-    "Ledger": {
-        "bonded": "Balance",
-        "unbondingToFree": "Balance",
-        "freePool": "Balance",
-        "toUnbondNextEra": "(Balance, Balance)"
     },
     "ChangeRate": {
         "_enum": {
@@ -321,70 +276,12 @@
     "BalanceInfo": {
         "amount": "Balance"
     },
-    "PolkadotAccountId": "AccountId",
-    "PolkadotAccountIdOf": "PolkadotAccountId",
     "ExchangeRate": "FixedU128",
     "Rate": "FixedU128",
     "Ratio": "FixedU128",
     "PublicKey": "[u8; 20]",
     "DestAddress": "Vec<u8>",
-    "DepositNonce": "u64",
-    "ResourceId": "[u8; 32]",
-    "ChainId": "u8",
-    "Keys": "SessionKeys1",
-    "PalletsOrigin": {
-        "_enum": {
-            "System": "SystemOrigin",
-            "Timestamp": "Null",
-            "RandomnessCollectiveFlip": "Null",
-            "Balances": "Null",
-            "Accounts": "Null",
-            "Currencies": "Null",
-            "Tokens": "Null",
-            "Vesting": "Null",
-            "SetheumTreasury": "Null",
-            "Utility": "Null",
-            "Multisig": "Null",
-            "Recovery": "Null",
-            "Proxy": "Null",
-            "Scheduler": "Null",
-            "Indices": "Null",
-            "GraduallyUpdate": "Null",
-            "Authorship": "Null",
-            "Babe": "Null",
-            "Grandpa": "Null",
-            "Staking": "Null",
-            "Session": "Null",
-            "Historical": "Null",
-            "GeneralCouncil": "CollectiveOrigin",
-            "GeneralCouncilMembership": "Null",
-            "TechnicalCommittee": "CollectiveOrigin",
-            "TechnicalCommitteeMembership": "Null",
-            "Authority": "DelayedOrigin",
-            "ElectionsPhragmen": "Null",
-            "SetheumOracle": "Null",
-            "OperatorMembershipSetheum": "Null",
-            "Auction": "Null",
-            "Rewards": "Null",
-            "OrmlNFT": "Null",
-            "Prices": "Null",
-            "Dex": "Null",
-            "AuctionManager": "Null",
-            "Loans": "Null",
-            "CdpTreasury": "Null",
-            "CdpEngine": "Null",
-            "EmergencyShutdown": "Null",
-            "NomineesElection": "Null",
-            "StakingPool": "Null",
-            "PolkadotBridge": "Null",
-            "Incentives": "Null",
-            "AirDrop": "Null",
-            "NFT": "Null",
-            "RenVmBridge": "Null",
-            "Contracts": "Null",
-            "EVM": "Null",
-            "Sudo": "Null",
-            "TransactionPayment": "Null"
-        }
-    }
+    "PoolTokenIndex": "u32",
+    "AssetId": "CurrencyId",
+    "Keys": "SessionKeys1"
 }

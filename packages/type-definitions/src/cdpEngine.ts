@@ -26,7 +26,6 @@ export default {
     },
     RiskManagementParams: {
       maximumTotalDebitValue: 'Balance',
-      interestRatePerSec: 'Option<Rate>',
       liquidationRatio: 'Option<Rate>',
       liquidationPenalty: 'Option<Rate>',
       requiredCollateralRatio: 'Option<Rate>'

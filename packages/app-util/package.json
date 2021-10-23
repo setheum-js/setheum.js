@@ -1,8 +1,8 @@
 {
   "name": "@setheum-js/app-util",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Utilities to work with Setheum Network",
-  "author": "Muhammad-Jibril B.A. <hello@setheum.one>",
+  "author": "Setheum Labs",
   "main": "index.js",
   "license": "Apache-2.0",
   "publishConfig": {

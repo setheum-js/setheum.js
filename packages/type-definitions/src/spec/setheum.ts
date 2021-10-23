@@ -1,78 +1,134 @@
 import type { OverrideVersionedType } from '@polkadot/types/types';
 
+const addressV0 = {
+  Address: 'LookupSource',
+  LookupSource: 'IndicesLookupSource'
+};
+
+const addressV1 = {
+  Address: 'GenericMultiAddress',
+  LookupSource: 'GenericMultiAddress'
+};
+
+const currencyV0 = {
+  CurrencyId: {
+    _enum: {
+      Token: 'TokenSymbol',
+      DEXShare: '(TokenSymbol, TokenSymbol)',
+      ERC20: 'EvmAddress'
+    }
+  }
+};
+
+const poolIdV0 = {
+  PoolId: {
+    _enum: {
+      Loans: 'CurrencyId',
+      DexSaving: 'CurrencyId',
+    }
+  }
+};
+
 const versioned: OverrideVersionedType[] = [
   {
     minmax: [600, 699],
     types: {
-      Address: 'LookupSource',
-      LookupSource: 'IndicesLookupSource',
+      ...poolIdV0,
+      ...addressV0,
       TokenSymbol: {
-        _enum: ['DNAR', 'USDJ', 'DOT', 'XBTC', 'LDOT', 'RENBTC']
+        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD', 'RENBTC']
       }
     }
   },
   {
     minmax: [700, 719],
     types: {
-      Address: 'GenericMultiAddress',
-      LookupSource: 'GenericMultiAddress',
+      ...poolIdV0,
+      ...addressV1,
       TokenSymbol: {
-        _enum: ['DNAR', 'USDJ', 'DOT', 'XBTC', 'LDOT', 'RENBTC']
+        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD', 'RENBTC']
       }
     }
   },
   {
-    minmax: [720, undefined],
+    minmax: [720, 722],
     types: {
-      Address: 'GenericMultiAddress',
-      LookupSource: 'GenericMultiAddress'
-    }
-  },
-  {
-    minmax: [600, 722],
-    types: {
-      PoolId: {
-        _enum: {
-          Loans: 'CurrencyId',
-          DexIncentive: 'CurrencyId',
-          DexSaving: 'CurrencyId',
-        }
-      }
-    }
-  },
-  {
-    minmax: [719, 729],
-    types: {
+      ...addressV1,
+      ...poolIdV0,
+      ...currencyV0,
       TokenSymbol: {
         _enum: {
-          DNAR: 0,
-          USDJ: 1,
-          DOT: 2,
-          LDOT: 3,
-          XBTC: 4,
-          RENBTC: 5,
-          POLKABTC: 6,
-          PLM: 7,
-          PHA: 8,
-          HDT: 9,
-          BCG: 11,
-          NEOM: 128,
-          KUSD: 129,
-          KSM: 130,
-          LKSM: 131,
-          SDN: 135,
-          KILT: 138
-        }
-      },
-      CurrencyId: {
-        _enum: {
-          Token: 'TokenSymbol',
-          DEXShare: '(TokenSymbol, TokenSymbol)',
-          ERC20: 'EvmAddress'
+          SETM: 0,
+          SERP: 1,
+          DNAR: 2,
+          SETR: 3,
+          SETUSD: 4,
+          RENBTC: 121,
         }
       }
     }
-  }
+  },
+  {
+    minmax: [723, 729],
+    types: {
+      ...addressV1,
+      ...currencyV0,
+      TokenSymbol: {
+        _enum: {
+          SETM: 0,
+          SERP: 1,
+          DNAR: 2,
+          SETR: 3,
+          SETUSD: 4,
+          RENBTC: 121,
+        }
+      }
+    }
+  },
+  {
+    minmax: [730, 1007],
+    types: {
+      ...addressV1,
+      TokenSymbol: {
+        _enum: {
+          SETM: 0,
+          SERP: 1,
+          DNAR: 2,
+          SETR: 3,
+          SETUSD: 4,
+          RENBTC: 121,
+        }
+      }
+    }
+  },
+  {
+    minmax: [1008, 1008],
+    types: {
+      ...addressV1,
+      TokenSymbol: {
+        _enum: {
+          SETM: 0,
+          SERP: 1,
+          DNAR: 2,
+          SETR: 3,
+          SETUSD: 4,
+          RENBTC: 121,
+        }
+      }
+    }
+  },
+  {
+    minmax: [1008, 1009],
+    types: {
+      ...addressV1,
+    }
+  },
+  {
+    minmax: [1010, 1013],
+    types: {
+      ...addressV1,
+    }
+  },
 ];
 
 export default versioned;

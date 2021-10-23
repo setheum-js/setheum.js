@@ -136,30 +136,5 @@
             "method": "estimateResources",
             "section": "evm"
         }
-    },
-    "stakingPool": {
-        "getAvailableUnbonded": {
-            "description": "Get Available Unbonded",
-            "params": [
-                {
-                    "name": "account",
-                    "type": "AccountId"
-                }
-            ],
-            "type": "BalanceInfo",
-            "isSubscription": false,
-            "jsonrpc": "stakingPool_getAvailableUnbonded",
-            "method": "getAvailableUnbonded",
-            "section": "stakingPool"
-        },
-        "getLiquidStakingExchangeRate": {
-            "description": "get liquid staking exchange rate",
-            "params": [],
-            "type": "ExchangeRate",
-            "isSubscription": false,
-            "jsonrpc": "stakingPool_getLiquidStakingExchangeRate",
-            "method": "getLiquidStakingExchangeRate",
-            "section": "stakingPool"
-        }
     }
 }

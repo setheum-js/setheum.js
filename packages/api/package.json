@@ -1,17 +1,9 @@
 {
   "name": "@setheum-js/api",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Setheum JS API",
   "main": "index.js",
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "author": "Setheum Labs",
-  "maintainers": [
-    "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
-    "HuangLeiWan. <setheumjs@gmail.com>"
-  ],
-  "contributors": [],
+  "author": "Setheum Developers",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -23,11 +15,15 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/api-derive": "0.8.0",
-    "@setheum-js/types": "0.8.0",
+    "@setheum-js/api-derive": "1.0.0",
+    "@setheum-js/types": "1.0.0",
     "@babel/runtime": "^7.10.2",
-    "@open-web3/orml-api-derive": "^0.9.4-7",
-    "@polkadot/api": "^4.14.1",
-    "@polkadot/rpc-core": "^4.14.1"
+    "@open-web3/orml-api-derive": "^1.0.2-0",
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/rpc-core": "^6.3.1"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/types": "^6.3.1"
   }
 }

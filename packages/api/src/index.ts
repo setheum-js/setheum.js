@@ -49,10 +49,6 @@ export const options = ({
         ...setheumTypesBundle?.spec?.newrome,
         ...typesBundle?.spec?.newrome
       },
-      neom: {
-        ...setheumTypesBundle?.spec?.neom,
-        ...typesBundle?.spec?.newrome
-      }
     }
   },
   signedExtensions: {

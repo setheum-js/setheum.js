@@ -185,9 +185,6 @@ export class LoanHelper {
   public debits: Fixed18;
   public collaterals: Fixed18;
   public requiredCollateralRatio: Fixed18;
-  public stableFee: Fixed18;
-  public globalStableFee: Fixed18;
-  public expectedBlockTime: number;
   public liquidationRatio: Fixed18;
   public collateralPrice: Fixed18;
   public stableCoinPrice: Fixed18;
@@ -197,9 +194,6 @@ export class LoanHelper {
     this.debits = convertToFixed18(params.debits);
     this.collaterals = convertToFixed18(params.collaterals);
     this.requiredCollateralRatio = convertToFixed18(params.requiredCollateralRatio);
-    this.stableFee = convertToFixed18(params.stableFee);
-    this.globalStableFee = convertToFixed18(params.globalStableFee);
-    this.expectedBlockTime = params.expectedBlockTime;
     this.liquidationRatio = convertToFixed18(params.liquidationRatio);
     this.collateralPrice = convertToFixed18(params.collateralPrice);
     this.debitExchangeRate = convertToFixed18(params.debitExchangeRate);
@@ -233,13 +227,6 @@ export class LoanHelper {
    */
   get requiredCollateral(): Fixed18 {
     return calcRequiredCollateral(this.debitAmount, this.requiredCollateralRatio, this.collateralPrice);
-  }
-
-  /**
-   * @property {Fixed18} stableFeAPR
-   */
-  get stableFeeAPR(): Fixed18 {
-    return calcStableFeeAPR(this.stableFee.add(this.globalStableFee), this.expectedBlockTime);
   }
 
   /**

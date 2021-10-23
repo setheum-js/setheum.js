@@ -11,7 +11,7 @@ export class ConvertToCurrencyIdFailed extends Error {
   }
 }
 
-export class ConvertToNameFailed extends Error {
+export class ConvertToCurrencyIdNameFailed extends Error {
   constructor() {
     super();
 
@@ -82,18 +82,18 @@ export const forceToCurrencyIdName = (target: MaybeCurrency): string => {
   if (target instanceof Token) return target.toString();
 
   try {
-    if ((target as CurrencyId).isToken) return target.asToken.toString();
+    if ((target as CurrencyId).isToken) return (target as CurrencyId).asToken.toString();
 
     if ((target as CurrencyId).isDexShare) {
       return createLPCurrencyName(
-        forceToCurrencyIdName(target.asDexShare[0] as CurrencyId),
-        forceToCurrencyIdName(target.asDexShare[1] as CurrencyId)
+        forceToCurrencyIdName((target as CurrencyId).asDexShare[0] as CurrencyId),
+        forceToCurrencyIdName((target as CurrencyId).asDexShare[1] as CurrencyId)
       );
     }
 
-    if ((target as CurrencyId).isErc20) return target.asErc20.toString();
+    if ((target as CurrencyId).isErc20) return (target as CurrencyId).asErc20.toString();
   } catch (e) {
-    throw new ConvertToNameFailed();
+    throw new ConvertToCurrencyIdNameFailed();
   }
 
   return '';

@@ -1,8 +1,5 @@
-import { Token, FixedPointNumber } from '@setheum-js/sdk-core';
-
-export interface TokenProvider {
-  getAllTokens: () => Token[];
-}
+import { FixedPointNumber, Token, TokenBalance } from '@setheum-js/sdk-core';
+import { BlockNumber } from '@setheum-js/types/interfaces';
 
 export interface PriceData {
   token: Token;
@@ -10,3 +7,25 @@ export interface PriceData {
 }
 
 export type PriceDataWithTimestamp = PriceData & { timestamp: Date };
+
+export interface BalanceData {
+  freeBalance: FixedPointNumber;
+  availableBalance: FixedPointNumber;
+  lockedBalance: FixedPointNumber;
+  reservedBalance: FixedPointNumber;
+}
+
+export interface TransferConfig {
+  existentialDeposit: FixedPointNumber;
+}
+
+export interface NativeAllBalance {
+  freeBalance: TokenBalance;
+  availableBalance: TokenBalance;
+  lockedBalance: TokenBalance;
+  isVesting: boolean;
+  vestingBalance: TokenBalance;
+  vestingEndBlock: BlockNumber;
+  vestingPeriod: BlockNumber;
+  vestingPerPeriod: TokenBalance;
+}

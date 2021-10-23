@@ -1,24 +1,20 @@
 {
   "name": "@setheum-js/type-definitions",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",
   "author": "Setheum Labs",
-  "maintainers": [
-    "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
-    "HuangLeiWan. <setheumjs@gmail.com>"
-  ],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "repository": "https://github.com/setheum-labs/setheum.js.git",
   "bugs": {
-    "url": "https://github.com/setheum-js/setheum.js/issues"
+    "url": "https://github.com/setheum-labs/setheum.js/issues"
   },
-  "homepage": "https://github.com/setheum-js/setheum.js",
+  "homepage": "https://github.com/setheum-labs/setheum.js",
   "dependencies": {
-    "@open-web3/orml-type-definitions": "^0.9.4-7"
+    "@open-web3/orml-type-definitions": "^1.0.2-0"
   }
 }

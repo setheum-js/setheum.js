@@ -2,48 +2,48 @@ import { Token, TokenPair } from '@setheum-js/sdk-core';
 import { TradeGraph } from './trade-graph';
 
 describe('trade graph', () => {
+  const setm = new Token('SETM');
+  const setusd = new Token('SETUSD');
   const dnar = new Token('DNAR');
-  const ausd = new Token('USDJ');
-  const dot = new Token('DOT');
-  const xbtc = new Token('XBTC');
+  const serp = new Token('SERP');
   const renbtc = new Token('RENBTC');
 
   test('create trade graph', () => {
     const tradeGraph = new TradeGraph([
-      new TokenPair(dnar, ausd),
-      new TokenPair(dnar, dot),
-      new TokenPair(dnar, xbtc),
-      new TokenPair(dnar, renbtc),
-      new TokenPair(dot, renbtc)
+      new TokenPair(setm, setusd),
+      new TokenPair(setm, dnar),
+      new TokenPair(setm, serp),
+      new TokenPair(setm, renbtc),
+      new TokenPair(dnar, renbtc)
     ]);
 
-    expect(tradeGraph.getAdj(dnar)).toEqual([ausd, dot, xbtc, renbtc]);
-    expect(tradeGraph.getAdj(ausd)).toEqual([dnar]);
-    expect(tradeGraph.getAdj(renbtc)).toEqual([dnar, dot]);
+    expect(tradeGraph.getAdj(setm)).toEqual([setusd, dnar, serp, renbtc]);
+    expect(tradeGraph.getAdj(setusd)).toEqual([setm]);
+    expect(tradeGraph.getAdj(renbtc)).toEqual([setm, dnar]);
   });
 
   test('get path should be work', () => {
     const tradeGraph = new TradeGraph([
-      new TokenPair(dnar, ausd),
-      new TokenPair(dnar, dot),
-      new TokenPair(dnar, xbtc),
+      new TokenPair(setm, setusd),
+      new TokenPair(setm, dnar),
+      new TokenPair(setm, serp),
+      new TokenPair(setm, renbtc),
       new TokenPair(dnar, renbtc),
-      new TokenPair(dot, renbtc),
-      new TokenPair(dot, ausd)
+      new TokenPair(dnar, setusd)
     ]);
 
-    const _dot = new Token('DOT');
+    const _dnar = new Token('DNAR');
 
-    const dot2renbtc = tradeGraph.getPathes(_dot, renbtc);
+    const dot2renbtc = tradeGraph.getPathes(_dnar, renbtc);
 
-    expect(dot2renbtc[0]).toEqual([_dot, dnar, renbtc]);
-    expect(dot2renbtc[1]).toEqual([_dot, renbtc]);
-    expect(dot2renbtc[2]).toEqual([_dot, ausd, dnar, renbtc]);
+    expect(dot2renbtc[0]).toEqual([_dnar, setm, renbtc]);
+    expect(dot2renbtc[1]).toEqual([_dnar, renbtc]);
+    expect(dot2renbtc[2]).toEqual([_dnar, setusd, setm, renbtc]);
 
-    const dnar2ausd = tradeGraph.getPathes(dnar, ausd);
+    const setm2setusd = tradeGraph.getPathes(setm, setusd);
 
-    expect(dnar2ausd[0]).toEqual([dnar, ausd]);
-    expect(dnar2ausd[1]).toEqual([dnar, dot, ausd]);
-    expect(dnar2ausd[2]).toEqual([dnar, renbtc, dot, ausd]);
+    expect(setm2setusd[0]).toEqual([setm, setusd]);
+    expect(setm2setusd[1]).toEqual([setm, dnar, setusd]);
+    expect(setm2setusd[2]).toEqual([setm, renbtc, dnar, setusd]);
   });
 });

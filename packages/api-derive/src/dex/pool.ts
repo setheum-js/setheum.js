@@ -1,7 +1,7 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
-import { map } from '@polkadot/x-rxjs/operators';
+import { map } from 'rxjs/operators';
 import primitivesConfig from '@setheum-js/type-definitions/primitives';
-import { Observable } from '@polkadot/x-rxjs';
+import { Observable } from 'rxjs';
 
 import { CurrencyId, Balance } from '@setheum-js/types/interfaces';
 import { memo } from '@polkadot/api-derive/util';

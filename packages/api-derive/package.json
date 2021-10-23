@@ -1,13 +1,9 @@
 {
   "name": "@setheum-js/api-derive",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Additional polkadot.js derives for Setheum Network",
   "main": "index.js",
   "author": "Setheum Labs",
-  "maintainers": [
-    "Muhammad-Jibril B.A. <jbashir52@gmail.com>",
-    "HuangLeiWan. <setheumjs@gmail.com>"
-  ],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -19,9 +15,9 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/types": "0.8.0",
+    "@setheum-js/types": "1.0.0",
     "@babel/runtime": "^7.10.2",
-    "@open-web3/orml-types": "^0.9.4-7",
-    "@polkadot/api-derive": "^4.14.1"
+    "@open-web3/orml-types": "^1.0.2-0",
+    "@polkadot/api-derive": "^6.3.1"
   }
 }

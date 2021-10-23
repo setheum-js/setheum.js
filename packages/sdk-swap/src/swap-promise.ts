@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import { memoize } from '@polkadot/util';
-import { Observable, from, of } from '@polkadot/x-rxjs';
-import { switchMap, map, shareReplay, withLatestFrom } from '@polkadot/x-rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, map, shareReplay, withLatestFrom, filter, take } from 'rxjs/operators';
 import { Balance } from '@setheum-js/types/interfaces';
 import { eventMethodsFilter, Token, TokenPair, TokenSet } from '@setheum-js/sdk-core';
 import { FixedPointNumber } from '@setheum-js/sdk-core/fixed-point-number';
@@ -36,10 +36,12 @@ export class SwapPromise extends SwapBase<ApiPromise> {
   }
 
   public async getEnableTradingPairs(): Promise<TokenPair[]> {
-    return this.enableTradingPairs$.toPromise();
+    const result = await this.enableTradingPairs$.toPromise();
+
+    return result || [];
   }
 
-  private getLiquidityPoolsByPath(paths: Token[][]): Observable<LiquidityPool[]> {
+  private getLiquidityPoolsByPath = memoize((paths: Token[][]): Observable<LiquidityPool[]> => {
     const usedTokenPairs = paths
       .reduce((acc: TokenPair[], path: Token[]) => {
         acc = acc.concat(this.getTokenPairsFromPath(path));
@@ -73,9 +75,10 @@ export class SwapPromise extends SwapBase<ApiPromise> {
             balance2: FixedPointNumber.fromInner(liquidity[1].toString())
           };
         });
-      })
+      }),
+      shareReplay(1)
     );
-  }
+  });
 
   private _getTradingPairs() {
     const inner = async () => {
@@ -103,19 +106,18 @@ export class SwapPromise extends SwapBase<ApiPromise> {
     return this.enableTradingPairs$;
   }
 
-  private _swapper = memoize((inputToken: Token, outputToken: Token) => {
+  private swapper = memoize((inputToken: Token, outputToken: Token) => {
     return this.getTradePathes(inputToken, outputToken).pipe(
       switchMap((paths) => this.getLiquidityPoolsByPath(paths).pipe(withLatestFrom(of(paths)))),
       shareReplay(1)
     );
   });
 
-  public swap(
+  public async swap(
     path: [Token, Token],
     input: FixedPointNumber,
-    mode: SwapTradeMode,
-    callback: (parameters: SwapParameters) => void
-  ): void {
+    mode: SwapTradeMode
+  ): Promise<SwapParameters | undefined> {
     const inputToken = path[0];
     const outputToken = path[1];
 
@@ -125,23 +127,23 @@ export class SwapPromise extends SwapBase<ApiPromise> {
     const inputAmount = mode === 'EXACT_INPUT' ? _input : FixedPointNumber.ZERO;
     const outputAmount = mode === 'EXACT_OUTPUT' ? _input : FixedPointNumber.ZERO;
 
-    const swapper = this._swapper(inputToken, outputToken);
+    const swapper = this.swapper(inputToken, outputToken);
 
-    swapper
+    const result = await swapper
       .pipe(
+        filter(([liquidityPool]) => liquidityPool.length !== 0),
         map(([liquidityPool, paths]) => {
-          const result = this.getBestSwapResult(mode, paths, liquidityPool, [
+          return this.getBestSwapResult(mode, paths, liquidityPool, [
             inputToken,
             outputToken,
             inputAmount,
             outputAmount
           ]);
-
-          if (result) {
-            callback(result);
-          }
-        })
+        }),
+        take(1)
       )
-      .subscribe();
+      .toPromise();
+
+    return result;
   }
 }

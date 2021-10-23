@@ -49,14 +49,6 @@ describe('calculate loan properties', () => {
     expect(loan.calcCollateralRatio(collateralAmount, Fixed18.ZERO)).toEqual(Fixed18.fromNatural(Infinity));
   });
 
-  // stableFee APR approximate 5%
-  const stableFee = Fixed18.fromRational(618850393, 100000000000000000);
-  const globalStableFee = Fixed18.fromParts(0);
-  const expectedBlockTime = 4000;
-  test('calcStableFeeAPR should work', () => {
-    expect(loan.calcStableFeeAPR(stableFee, expectedBlockTime).toNumber(2, 3)).toEqual(0.05);
-  });
-
   const requiredCollateralRatio = Fixed18.fromRational(150, 100);
   // requiredCollatearl = debitAmount * requiredCollateral / collatearlPrice = 10 * 1.5 / 100 = 0.15
   const requiredCollateral = Fixed18.fromNatural(0.15);
@@ -145,15 +137,11 @@ describe('calculate loan properties', () => {
       requiredCollateralRatio,
       liquidationRatio,
       debitExchangeRate,
-      stableFee,
-      globalStableFee,
-      expectedBlockTime,
       collateralPrice,
       stableCoinPrice
     });
     expect(userLoan.debitAmount).toEqual(debitAmount);
     expect(userLoan.collateralAmount).toEqual(collateralAmount);
-    expect(userLoan.stableFeeAPR.toNumber(2, 3)).toEqual(0.05);
     expect(userLoan.collateralRatio).toEqual(collateralRatio);
     expect(userLoan.requiredCollateral).toEqual(requiredCollateral);
     expect(userLoan.liquidationPrice).toEqual(liquidationPrice);

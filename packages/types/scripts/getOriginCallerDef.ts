@@ -8,15 +8,16 @@ const POLKADOT_KNOWN_ORIGINS: Record<string, string> = {
   TechnicalCommittee: 'CollectiveOrigin'
 };
 
-const DNAR_KNOWN_ORIGINS: Record<string, string> = {
-  GeneralCouncil
-  : 'CollectiveOrigin',
+const SETHEUM_KNOWN_ORIGINS: Record<string, string> = {
+  ShuraCouncil: 'CollectiveOrigin',
+  FinancialCouncil: 'CollectiveOrigin',
+  PublicFundCouncil: 'CollectiveOrigin',
   Authority: 'DelayedOrigin'
 };
 
 const KNOWN_ORIGINS = {
   ...POLKADOT_KNOWN_ORIGINS,
-  ...DNAR_KNOWN_ORIGINS
+  ...SETHEUM_KNOWN_ORIGINS
 };
 
 function getOriginCallerDef(): void {

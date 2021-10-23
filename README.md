@@ -3,7 +3,7 @@
 
 # @setheum-js
 Promise and RxJS APIs around Setheum RPC calls. 
-This library provides additional typing for users to access Setheum networks by using [setheum.js](https://github.com/setheum-js/api).
+This library provides additional typing for users to access Setheum networks by using [setheum.js](https://github.com/setheum-js/api) using [polkadot.js](https://github.com/polkadot-js/api).
 
 # Getting Started
 
@@ -37,17 +37,17 @@ main()
 
 ```ts
 // query and display account data
-const data = await api.query.system.account('5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY');
+const data = await api.query.system.account('5F98oWfz2r5rcRVnP9VCndg33DAAsky3iuoBSpaPUbgN9AJn');
 console.log(data.toHuman())
 ```
 
-## overview
+## Packages Overview
 
 The API is split up into a number of internal packages -
 
 - [@setheum-js/api](packages/api/) The API library, providing both Promise and RxJS Observable-based interfaces. This is the main user-facing entry point.
 - [@setheum-js/api-derive](packages/api-derive/) Additional polkadot.js derives for Setheum Network.
-Derived results that are injected into the API, allowing for combinations of various query results (only used internally and exposed on the Api instances via `api.derive.*`)
+Derived results that are injected into the API, allowing for combinations of various query results (only used internally and exposed on the Api instances via `api.derive.*`).
 - [@setheum-js/app-util](./packages/app-util)
-  - Utilities to work with Setheum
-- [@setheum-js/types](packages/types/) Codecs for all Polkadot.js type definations for Setheum primitives
+  - Utilities to work with Setheum.
+- [@setheum-js/types](packages/types/) Codecs for all Polkadot.js type definations for Setheum primitives.

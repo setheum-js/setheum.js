@@ -5,20 +5,15 @@ export default {
     AmountOf: 'Amount',
     AuctionId: 'u32',
     AuctionIdOf: 'AuctionId',
-    Share: 'u128',
     TokenSymbol: {
       _enum: {
-        DNAR: 0,
-        USDJ: 1,
-        DOT: 2,
-        LDOT: 3,
-        RENBTC: 4,
-
-        NEOM: 128,
-        KUSD: 129,
-        KSM: 130,
-        LKSM: 131
-        // Reserve for XBTC = 132
+        SETM: 0,
+        SERP: 1,
+        DNAR: 2,
+        SETR: 3,
+        SETUSD: 4,
+        // 121 - 255: External tokens (e.g. bridged)
+        RENBTC: 121,
       }
     },
     DexShare: {
@@ -32,20 +27,24 @@ export default {
         Token: 'TokenSymbol',
         DEXShare: '(DexShare, DexShare)',
         ERC20: 'EvmAddress',
-        ChainBridge: '[u8; 32]'
       }
     },
     CurrencyIdOf: 'CurrencyId',
     AirDropCurrencyId: {
-      _enum: ['NEOM', 'DNAR']
+      _enum: ['SETR', 'SETUSD']
     },
     AuthoritysOriginId: {
-      _enum: ['Root', 'SetheumTreasury', 'SettMintTreasury']
+      _enum: ['Root', 'Treasury', 'PublicFund']
     },
-    DataProviderId: {
+    SetheumDataProviderId: {
       _enum: ['Aggregated', 'Setheum']
     },
     TradingPair: '(CurrencyId,  CurrencyId)',
-    NFTBalance: 'u128'
+    OrmlCurrencyId: 'CurrencyId',
+  },
+  typesAlias: {
+    oracle: {
+      DataProviderId: 'SetheumDataProviderId'
+    },
   }
 };
