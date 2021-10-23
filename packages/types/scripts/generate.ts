@@ -53,25 +53,35 @@ const definations = {
 
 const metadata = filterModules(
   [
-    'Accounts',
-    'AirDrop',
+    'SetheumOracle',
     'Auction',
     'AuctionManager',
+    'Authority',
     'CdpEngine',
     'CdpTreasury',
     'Currencies',
     'Dex',
+    'EmergencyShutdown',
+    'EVM',
+    'EvmAccounts',
+    'EVMBridge',
+    'EvmManager',
+    'FinancialCouncil',
+    'FinancialCouncilMembership',
+    'SetMint',
     'Loans',
-    'Oracle',
-    'PolkadotBridge',
+    'NFT',
+    'OperatorMembershipSetheum',
+    'OrmlNFT',
     'Prices',
-    'ScheduleUpdate',
-    'StakingPool',
+    'PublicFundCouncil',
+    'PublicFundCouncilMembership',
+    'SerpTreasury',
+    'SerpOcw',
+    // TODO: Add SetCloud modules later when we enable it.
+    'ShuraCouncil',
+    'ShuraCouncilMembership',
     'Tokens',
-    'XTokens',
-    'setheumChainBridge',
-    'ChainBridge'
-    // 'Vesting' Conflicts with pallet-vesting https://github.com/polkadot-js/api/issues/2338
   ],
   definations
 );

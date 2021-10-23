@@ -1,6 +1,6 @@
 {
   "name": "@setheum-js/types",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",
   "author": "Setheum Labs",
@@ -19,16 +19,21 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/type-definitions": "0.8.0",
+    "@setheum-js/type-definitions": "1.0.0",
     "@babel/runtime": "^7.10.2",
-    "@open-web3/api-mobx": "^0.9.4-7",
-    "@open-web3/orml-types": "^0.9.4-7",
-    "@polkadot/api": "^4.14.1",
-    "@polkadot/typegen": "^4.14.1",
-    "@polkadot/types": "^4.14.1"
+    "@open-web3/api-mobx": "^1.0.2-0",
+    "@open-web3/orml-types": "^1.0.2-0",
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/typegen": "^6.3.1",
+    "@polkadot/types": "^6.3.1"
   },
   "devDependencies": {
     "@types/websocket": "^1.0.0",
     "websocket": "^1.0.31"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/typegen": "^6.3.1",
+    "@polkadot/types": "^6.3.1"
   }
 }
