@@ -1,0 +1,30 @@
+{
+  "name": "@setheum-js/sdk-core",
+  "version": "1.0.0",
+  "description": "the core of Setheum Network sdk",
+  "main": "index.js",
+  "author": "Setheum Labs",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/setheum-js/setheum.js.git",
+  "bugs": {
+    "url": "https://github.com/setheum-js/setheum.js/issues"
+  },
+  "homepage": "https://github.com/setheum-js/setheum.js",
+  "dependencies": {
+    "@setheum-js/api": "1.0.0",
+    "@setheum-js/type-definitions": "1.0.0",
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/types": "^6.3.1",
+    "@types/events": "^3.0.0",
+    "bignumber.js": "^9.0.0",
+    "events": "^3.2.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.161"
+  }
+}
