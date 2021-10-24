@@ -43,7 +43,7 @@ export class LoanRx {
 
   constructor(api: ApiRx, currency: MaybeCurrency, address: string, wallet: WalletRx) {
     const collateralToken = wallet.getToken(currency);
-    const stableCoinToken = wallet.getToken(api.consts.cdpEngine.getStableCurrencyId);
+    const stableCoinToken = wallet.getToken(api.consts.cdpEngine.getSetUSDCurrencyId);
 
     assert(collateralToken && stableCoinToken, `init the loan sdk failed, can't find useable token in currency chain`);
 
