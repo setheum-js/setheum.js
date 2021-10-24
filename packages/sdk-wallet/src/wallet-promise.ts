@@ -99,7 +99,7 @@ export class WalletPromise extends WalletBase<ApiPromise> {
       const currencyId = forceToCurrencyId(this.api, token);
 
       return (
-        queryFN(this.api.query.acalaOracle.values, hash)(currencyId) as any as Promise<Option<TimestampedValue>>
+        queryFN(this.api.query.setheumOracle.values, hash)(currencyId) as any as Promise<Option<TimestampedValue>>
       ).then((data) => {
         const token = this.getToken(currencyId);
         const price = data.unwrapOrDefault().value;
