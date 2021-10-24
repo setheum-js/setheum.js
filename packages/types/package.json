@@ -1,5 +1,5 @@
 {
-  "name": "@setheum-js/types",
+  "name": "@setheum.js/types",
   "version": "1.0.0",
   "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/type-definitions": "1.0.0",
+    "@setheum.js/type-definitions": "1.0.0",
     "@babel/runtime": "^7.10.2",
     "@open-web3/api-mobx": "^1.0.2-0",
     "@open-web3/orml-types": "^1.0.2-0",

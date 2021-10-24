@@ -2,7 +2,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiInterfaceRx } from '@polkadot/api/types';
 
-import { CurrencyId, AccountId, Position } from '@setheum-js/types/interfaces';
+import { CurrencyId, AccountId, Position } from '@setheum.js/types/interfaces';
 import { memo } from '@polkadot/api-derive/util';
 
 import { DerivedUserLoan } from '../types/loan';

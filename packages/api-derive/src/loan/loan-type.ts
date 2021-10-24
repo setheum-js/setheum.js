@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { memo } from '@polkadot/api-derive/util';
 
-import { CurrencyId, Rate, ExchangeRate, Balance, Position, Ratio } from '@setheum-js/types/interfaces';
+import { CurrencyId, Rate, ExchangeRate, Balance, Position, Ratio } from '@setheum.js/types/interfaces';
 
 import { DerivedLoanConstants, DerivedLoanType, DerivedLoanOverView, CollateralParams } from '../types/loan';
 import { getAllCollateralCurrencyIds } from '../utils';

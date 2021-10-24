@@ -1,1 +1,1 @@
-# @setheum-js/sdk-wallet
+# @setheum.js/sdk-wallet

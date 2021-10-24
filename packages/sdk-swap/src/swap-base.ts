@@ -1,7 +1,7 @@
 import { ApiPromise, ApiRx } from '@polkadot/api';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Token, TokenBalance, TokenPair, FixedPointNumber } from '@setheum-js/sdk-core';
+import { Token, TokenBalance, TokenPair, FixedPointNumber } from '@setheum.js/sdk-core';
 
 import { getSupplyAmount, getTargetAmount } from './utils';
 import { LiquidityPool, SwapResult, Fee, SwapTradeMode, MiddleResult } from './types';

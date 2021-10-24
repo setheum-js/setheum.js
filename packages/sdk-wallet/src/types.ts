@@ -1,5 +1,5 @@
-import { FixedPointNumber, Token, TokenBalance } from '@setheum-js/sdk-core';
-import { BlockNumber } from '@setheum-js/types/interfaces';
+import { FixedPointNumber, Token, TokenBalance } from '@setheum.js/sdk-core';
+import { BlockNumber } from '@setheum.js/types/interfaces';
 
 export interface PriceData {
   token: Token;

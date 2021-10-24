@@ -1,15 +1,15 @@
 import { ApiPromise } from '@polkadot/api';
 
 import { TimestampedValue, OrmlAccountData } from '@open-web3/orml-types/interfaces';
-import { FixedPointNumber as FN, getPromiseOrAtQuery, Token } from '@setheum-js/sdk-core';
-import { Balance, CurrencyId, OracleKey, Ledger } from '@setheum-js/types/interfaces';
+import { FixedPointNumber as FN, getPromiseOrAtQuery, Token } from '@setheum.js/sdk-core';
+import { Balance, CurrencyId, OracleKey, Ledger } from '@setheum.js/types/interfaces';
 import {
   forceToCurrencyId,
   forceToCurrencyIdName,
   getLPCurrenciesFormName,
   isDexShare
-} from '@setheum-js/sdk-core/converter';
-import { MaybeAccount, MaybeCurrency } from '@setheum-js/sdk-core/types';
+} from '@setheum.js/sdk-core/converter';
+import { MaybeAccount, MaybeCurrency } from '@setheum.js/sdk-core/types';
 import { BalanceData, PriceData, PriceDataWithTimestamp } from './types';
 import type { ISubmittableResult, ITuple } from '@polkadot/types/types';
 import { WalletBase } from './wallet-base';

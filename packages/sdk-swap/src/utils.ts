@@ -1,4 +1,4 @@
-import { FixedPointNumber } from '@setheum-js/sdk-core';
+import { FixedPointNumber } from '@setheum.js/sdk-core';
 import { Fee } from './types';
 
 // get how much target amount will be got fro specific supply amount and price impact

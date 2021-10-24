@@ -1,5 +1,5 @@
 {
-  "name": "@setheum-js/sdk-wallet",
+  "name": "@setheum.js/sdk-wallet",
   "version": "1.0.0",
   "description": "the wallet sdk for Setheum network",
   "main": "index.js",
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/sdk-core": "1.0.0",
+    "@setheum.js/sdk-core": "1.0.0",
     "@polkadot/api": "^6.3.1",
     "@polkadot/types": "^6.3.1",
     "lodash": "^4.17.20",

@@ -1,1 +1,1 @@
-# @setheum-js/sdk-loan
+# @setheum.js/sdk-loan

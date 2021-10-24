@@ -4,7 +4,7 @@ import {
   typesAlias as setheumTypeAlias,
   rpc as setheumRpc,
   signedExtensions as setheumSignedExtensions
-} from '@setheum-js/type-definitions';
+} from '@setheum.js/type-definitions';
 import {
   OverrideBundleType,
   OverrideModuleType,

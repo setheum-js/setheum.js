@@ -1,11 +1,11 @@
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { assert } from '@polkadot/util';
-import { FixedPointNumber, forceToCurrencyId, MaybeCurrency, Token } from '@setheum-js/sdk-core';
-import { CurrencyId, Position } from '@setheum-js/types/interfaces';
-import { DerivedLoanType } from '@setheum-js/api-derive';
+import { FixedPointNumber, forceToCurrencyId, MaybeCurrency, Token } from '@setheum.js/sdk-core';
+import { CurrencyId, Position } from '@setheum.js/types/interfaces';
+import { DerivedLoanType } from '@setheum.js/api-derive';
 import { ApiRx } from '@polkadot/api';
-import { WalletRx } from '@setheum-js/sdk-wallet';
+import { WalletRx } from '@setheum.js/sdk-wallet';
 import { memoize } from 'lodash';
 
 export interface LoanParams {

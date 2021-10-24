@@ -1,4 +1,4 @@
-import { Token, TokenPair } from '@setheum-js/sdk-core';
+import { Token, TokenPair } from '@setheum.js/sdk-core';
 import { TradeGraph } from './trade-graph';
 
 describe('trade graph', () => {

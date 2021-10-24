@@ -10,52 +10,52 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@setheum-js/api": [
+      "@setheum.js/api": [
         "packages/api/src"
       ],
-      "@setheum-js/api/*": [
+      "@setheum.js/api/*": [
         "packages/api/src/*"
       ],
-      "@setheum-js/types": [
+      "@setheum.js/types": [
         "packages/types/src"
       ],
-      "@setheum-js/types/*": [
+      "@setheum.js/types/*": [
         "packages/types/src/*"
       ],
-      "@setheum-js/api-derive": [
+      "@setheum.js/api-derive": [
         "packages/api-derive/src"
       ],
-      "@setheum-js/api-derive/*": [
+      "@setheum.js/api-derive/*": [
         "packages/api-derive/src/*"
       ],
-      "@setheum-js/type-definitions": [
+      "@setheum.js/type-definitions": [
         "packages/type-definitions/src"
       ],
-      "@setheum-js/type-definitions/*": [
+      "@setheum.js/type-definitions/*": [
         "packages/type-definitions/src/*"
       ],
-      "@setheum-js/sdk-core": [
+      "@setheum.js/sdk-core": [
         "packages/sdk-core/src"
       ],
-      "@setheum-js/sdk-core/*": [
+      "@setheum.js/sdk-core/*": [
         "packages/sdk-core/src/*"
       ],
-      "@setheum-js/sdk-wallet": [
+      "@setheum.js/sdk-wallet": [
         "packages/sdk-wallet/src"
       ],
-      "@setheum-js/sdk-wallet/*": [
+      "@setheum.js/sdk-wallet/*": [
         "packages/sdk-wallet/src/*"
       ],
-      "@setheum-js/sdk-swap": [
+      "@setheum.js/sdk-swap": [
         "packages/sdk-swap/src"
       ],
-      "@setheum-js/sdk-swap/*": [
+      "@setheum.js/sdk-swap/*": [
         "packages/sdk-swap/src/*"
       ],
-      "@setheum-js/sdk-loan": [
+      "@setheum.js/sdk-loan": [
         "packages/sdk-loan/src"
       ],
-      "@setheum-js/sdk-loan/*": [
+      "@setheum.js/sdk-loan/*": [
         "packages/sdk-loan/src/*"
       ],
     },

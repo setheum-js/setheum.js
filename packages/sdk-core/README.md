@@ -1,1 +1,1 @@
-# @setheum-js/sdk-core
+# @setheum.js/sdk-core

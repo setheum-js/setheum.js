@@ -1,4 +1,4 @@
-import { Token, FixedPointNumber, TokenBalance } from '@setheum-js/sdk-core';
+import { Token, FixedPointNumber, TokenBalance } from '@setheum.js/sdk-core';
 
 import { SwapTradeMode } from './types';
 

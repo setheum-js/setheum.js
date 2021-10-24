@@ -1,1 +1,1 @@
-# @setheum-js/sdk-swap
+# @setheum.js/sdk-swap

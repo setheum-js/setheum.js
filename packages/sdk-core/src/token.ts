@@ -1,5 +1,5 @@
-import { CurrencyId, TokenSymbol, DexShare, TradingPair } from '@setheum-js/types/interfaces';
-import primitivesConfig from '@setheum-js/type-definitions/primitives';
+import { CurrencyId, TokenSymbol, DexShare, TradingPair } from '@setheum.js/types/interfaces';
+import primitivesConfig from '@setheum.js/type-definitions/primitives';
 import { assert } from '@polkadot/util';
 
 import { AnyApi } from './types';

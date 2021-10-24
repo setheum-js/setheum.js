@@ -1,4 +1,4 @@
-import { CurrencyId } from '@setheum-js/types/interfaces';
+import { CurrencyId } from '@setheum.js/types/interfaces';
 import { ApiPromise, ApiRx } from '@polkadot/api';
 import { AccountId } from '@polkadot/types/interfaces';
 import { Codec, Observable } from '@polkadot/types/types';

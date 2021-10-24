@@ -6,7 +6,7 @@ import {
   AccountId,
   Balance,
   ExchangeRate
-} from '@setheum-js/types/interfaces';
+} from '@setheum.js/types/interfaces';
 
 export interface DerivedLoanConstants {
   minimumDebitValue: Balance;
