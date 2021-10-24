@@ -8,8 +8,8 @@ import {
   getLPCurrenciesFormName,
   isDexShare,
   FixedPointNumber as FN
-} from '@setheum-js/sdk-core';
-import { CurrencyId } from '@setheum-js/types/interfaces';
+} from '@setheum.js/sdk-core';
+import { CurrencyId } from '@setheum.js/types/interfaces';
 
 import { ApiRx, ApiPromise } from '@polkadot/api';
 import { SubmittableExtrinsic } from '@polkadot/api/types';

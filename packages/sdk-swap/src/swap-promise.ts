@@ -2,9 +2,9 @@ import { ApiPromise } from '@polkadot/api';
 import { memoize } from '@polkadot/util';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, shareReplay, withLatestFrom, filter, take } from 'rxjs/operators';
-import { Balance } from '@setheum-js/types/interfaces';
-import { eventMethodsFilter, Token, TokenPair, TokenSet } from '@setheum-js/sdk-core';
-import { FixedPointNumber } from '@setheum-js/sdk-core/fixed-point-number';
+import { Balance } from '@setheum.js/types/interfaces';
+import { eventMethodsFilter, Token, TokenPair, TokenSet } from '@setheum.js/sdk-core';
+import { FixedPointNumber } from '@setheum.js/sdk-core/fixed-point-number';
 import { ITuple } from '@polkadot/types/types';
 
 import { SwapParameters } from './swap-parameters';

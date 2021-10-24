@@ -1,4 +1,4 @@
-import { CurrencyId } from '@setheum-js/types/interfaces';
+import { CurrencyId } from '@setheum.js/types/interfaces';
 import { Token } from './token';
 import { AnyApi, MaybeCurrency } from './types';
 

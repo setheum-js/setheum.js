@@ -1,3 +1,3 @@
-# @setheum-js/api-derive
+# @setheum.js/api-derive
 
 Additional polkadot.js derives for Setheum Network

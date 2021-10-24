@@ -1,3 +1,3 @@
-# @setheum-js/app-util
+# @setheum.js/app-util
 
 Utilities to work with Setheum Network

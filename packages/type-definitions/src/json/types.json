@@ -76,7 +76,7 @@
         "_enum": {
             "Token": "TokenSymbol",
             "DEXShare": "(DexShare, DexShare)",
-            "ERC20": "EvmAddress",
+            "ERC20": "EvmAddress"
         }
     },
     "CurrencyIdOf": "CurrencyId",

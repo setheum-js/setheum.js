@@ -1,4 +1,4 @@
-import { Balance, CurrencyId } from '@setheum-js/types/interfaces';
+import { Balance, CurrencyId } from '@setheum.js/types/interfaces';
 
 export interface DerivedBalance {
   currency: CurrencyId | string;

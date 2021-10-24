@@ -1,4 +1,4 @@
-import { FixedPointNumber as FN } from '@setheum-js/sdk-core';
+import { FixedPointNumber as FN } from '@setheum.js/sdk-core';
 
 /*
 the max amount rule:

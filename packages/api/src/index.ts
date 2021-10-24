@@ -1,12 +1,12 @@
 import { derive as ormlDerives } from '@open-web3/orml-api-derive';
-import { derive as setheumDerives } from '@setheum-js/api-derive';
+import { derive as setheumDerives } from '@setheum.js/api-derive';
 import {
   rpc as setheumRpc,
   types as setheumTypes,
   typesAlias as setheumTypesAlias,
   typesBundle as setheumTypesBundle,
   signedExtensions as setheumSignedExtensions
-} from '@setheum-js/types';
+} from '@setheum.js/types';
 import { ApiOptions } from '@polkadot/api/types';
 
 export const defaultOptions: ApiOptions = {

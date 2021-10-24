@@ -11,15 +11,15 @@ import {
   getSubscribeOrAtQuery,
   Token,
   TokenBalance
-} from '@setheum-js/sdk-core';
-import { Balance, CurrencyId, Ledger, OracleKey } from '@setheum-js/types/interfaces';
+} from '@setheum.js/sdk-core';
+import { Balance, CurrencyId, Ledger, OracleKey } from '@setheum.js/types/interfaces';
 import {
   forceToCurrencyId,
   forceToCurrencyIdName,
   getLPCurrenciesFormName,
   isDexShare
-} from '@setheum-js/sdk-core/converter';
-import { MaybeAccount, MaybeCurrency } from '@setheum-js/sdk-core/types';
+} from '@setheum.js/sdk-core/converter';
+import { MaybeAccount, MaybeCurrency } from '@setheum.js/sdk-core/types';
 import { PriceData, PriceDataWithTimestamp, NativeAllBalance, BalanceData } from './types';
 import type { ISubmittableResult, ITuple } from '@polkadot/types/types';
 import type { Option } from '@polkadot/types';

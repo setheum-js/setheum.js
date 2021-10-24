@@ -1,5 +1,5 @@
 {
-  "name": "@setheum-js/sdk-core",
+  "name": "@setheum.js/sdk-core",
   "version": "1.0.0",
   "description": "the core of Setheum Network sdk",
   "main": "index.js",
@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum-js/api": "1.0.0",
-    "@setheum-js/type-definitions": "1.0.0",
+    "@setheum.js/api": "1.0.0",
+    "@setheum.js/type-definitions": "1.0.0",
     "@polkadot/api": "^6.3.1",
     "@polkadot/types": "^6.3.1",
     "@types/events": "^3.0.0",

@@ -1,4 +1,4 @@
-import { FixedPointNumber } from '@setheum-js/sdk-core';
+import { FixedPointNumber } from '@setheum.js/sdk-core';
 
 const MAX = FixedPointNumber.fromInner('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff');
 const ZERO = FixedPointNumber.ZERO;

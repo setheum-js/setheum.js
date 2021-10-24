@@ -1,4 +1,4 @@
-import { MaybeAccount, forceToCurrencyIdName, MaybeCurrency } from '@setheum-js/sdk-core';
+import { MaybeAccount, forceToCurrencyIdName, MaybeCurrency } from '@setheum.js/sdk-core';
 
 export class NotSupportToken extends Error {
   constructor() {

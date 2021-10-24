@@ -1,4 +1,4 @@
-import { Token, FixedPointNumber, TokenBalance } from '@setheum-js/sdk-core';
+import { Token, FixedPointNumber, TokenBalance } from '@setheum.js/sdk-core';
 
 export interface LiquidityPool {
   token1: Token;

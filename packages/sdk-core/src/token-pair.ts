@@ -1,5 +1,5 @@
-import { Token } from '@setheum-js/sdk-core/token';
-import { CurrencyId, TradingPair } from '@setheum-js/types/interfaces';
+import { Token } from '@setheum.js/sdk-core/token';
+import { CurrencyId, TradingPair } from '@setheum.js/types/interfaces';
 import { assert } from '@polkadot/util';
 import { AnyApi } from './types';
 

@@ -1,5 +1,5 @@
 import { getSupplyAmount, getTargetAmount } from './utils';
-import { FixedPointNumber } from '@setheum-js/sdk-core';
+import { FixedPointNumber } from '@setheum.js/sdk-core';
 
 describe('test getSupplyAmount, getTargetAmount', () => {
   const fee = {
