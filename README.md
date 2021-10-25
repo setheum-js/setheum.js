@@ -12,7 +12,7 @@ More documentation and examples on [setheum.js.org](https://setheum.js.org).
 - Install dependencies
 
 ```bash
-yarn add @polkadot/api @setheum.js/api@beta
+yarn add @polkadot/api @setheum.js/api
 ```
 
 - Create API instance
