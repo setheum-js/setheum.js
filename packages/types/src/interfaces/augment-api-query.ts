@@ -23,7 +23,6 @@ import type { Proposal } from '@polkadot/types/interfaces/democracy';
 import type { SessionIndex } from '@polkadot/types/interfaces/session';
 import type { AccountInfo } from '@polkadot/types/interfaces/system';
 import type { ClassId } from '@polkadot/types/interfaces/uniques';
-import type { MultiLocation } from '@polkadot/types/interfaces/xcm';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/storage' {

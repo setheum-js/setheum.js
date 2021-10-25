@@ -15,17 +15,13 @@ import type { AccountId, Balance, BalanceOf, BlockNumber, H256, Hash, KeyTypeId,
 import type { ExchangeRate, Rate } from '@setheum.js/types/interfaces/support';
 import type { ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { OrderedSet, TimestampedValueOf } from '@open-web3/orml-types/interfaces/oracle';
-import type { PoolInfo } from '@open-web3/orml-types/interfaces/rewards';
 import type { AuctionInfo, Price } from '@open-web3/orml-types/interfaces/traits';
-import type { VestingScheduleOf } from '@open-web3/orml-types/interfaces/vesting';
 import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import type { AccountData, BalanceLock, ReserveData } from '@polkadot/types/interfaces/balances';
 import type { ProposalIndex, Votes } from '@polkadot/types/interfaces/collective';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { ConfigData, OverweightIndex, PageCounter, PageIndexData } from '@polkadot/types/interfaces/cumulus';
 import type { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
 import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
-import type { AbridgedHostConfiguration, MessageQueueChain, MessagingStateSnapshot, OutboundHrmpMessage, ParaId, PersistedValidationData, RelayBlockNumber, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
 import type { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
@@ -33,11 +29,10 @@ import type { AccountInfo, ConsumedWeight, DigestOf, EventIndex, EventRecord, La
 import type { Bounty, BountyIndex, OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import type { ClassId } from '@polkadot/types/interfaces/uniques';
-import type { InboundStatus, OutboundStatus, QueueConfigData, XcmpMessageFormat } from '@polkadot/types/interfaces/xcm';
 import type { BaseStorageType, StorageMap } from '@open-web3/api-mobx';
 
 export interface StorageType extends BaseStorageType {
-  acalaOracle: {    /**
+  setheumOracle: {    /**
      * If an oracle operator has feed a value in this block
      **/
     hasDispatched: OrderedSet | null;
@@ -346,23 +341,6 @@ export interface StorageType extends BaseStorageType {
      **/
     tradingPairStatuses: StorageMap<TradingPair, TradingPairStatus>;
   };
-  dmpQueue: {    /**
-     * The configuration.
-     **/
-    configuration: ConfigData | null;
-    /**
-     * The overweight messages.
-     **/
-    overweight: StorageMap<OverweightIndex | AnyNumber, Option<ITuple<[RelayBlockNumber, Bytes]>>>;
-    /**
-     * The page index.
-     **/
-    pageIndex: PageIndexData | null;
-    /**
-     * The queue pages.
-     **/
-    pages: StorageMap<PageCounter | AnyNumber, Vec<ITuple<[RelayBlockNumber, Bytes]>>>;
-  };
   emergencyShutdown: {    /**
      * Open final redemption flag
      *
@@ -546,7 +524,7 @@ export interface StorageType extends BaseStorageType {
      **/
     prime: Option<AccountId> | null;
   };
-  honzon: {    /**
+  setmint: {    /**
      * The authorization relationship map from
      * Authorizer -> (CollateralType, Authorizee) -> Authorized
      *
