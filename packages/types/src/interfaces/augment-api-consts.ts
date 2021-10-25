@@ -185,22 +185,23 @@ declare module '@polkadot/api/types/consts' {
       [key: string]: Codec;
     };
     serpTreasury: {
-      /**
-       * Native (SETM) currency Stablecoin currency id
+       /**
+       * Native (SETM) currency id
        **/
        getNativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-      /**
-       * The Dinar (DNAR) currency Stablecoin currency id
+       /**
+       * The Serp (DNAR) currency id
+       **/
+       getSerpCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+       /**
+       * The Dinar (DNAR) currency id
        **/
        getDinarCurrencyId: CurrencyId & AugmentedConst<ApiType>;
        /**
-      /**
-       * Setter (SETR) currency Stablecoin currency id
+       * Setter (SETR) currency id
        **/
        setterCurrencyId: CurrencyId & AugmentedConst<ApiType>;
        /**
-      /**
        * The SetUSD currency id, it should be SETUSD in Setheum.
        **/
        getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
@@ -209,9 +210,17 @@ declare module '@polkadot/api/types/consts' {
         **/
        cashDropPoolAccountId: AccountId & AugmentedConst<ApiType>;
         /**
-         * The vault account to keep the Cashdrops for claiming.
+         * The vault account to keep the PublicFund for claiming.
          **/
-       charityFundAccountId: AccountId & AugmentedConst<ApiType>;
+       publicFundAccountId: AccountId & AugmentedConst<ApiType>;
+       /**
+        * CDP-Treasury account for processing serplus funds 
+        **/
+       cdpTreasuryAccountId: AccountId & AugmentedConst<ApiType>;
+       /**
+        * SerpUp pool/account for receiving Treasury funds
+        **/
+       setheumTreasuryAccountId: AccountId & AugmentedConst<ApiType>;
        /**
         * The limit for length of trading path
         **/
