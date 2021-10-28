@@ -1,0 +1,31 @@
+{
+  "name": "@setheum.js/setcloud-pin",
+  "version": "1.0.0",
+  "description": "Decentralized SetCloud pin on Setheum Network",
+  "main": "src/index.js",
+  "license": "Apache-2.0",
+  "keywords": [
+    "setheum",
+    "setcloud",
+    "ipfs",
+    "decentralized storage"
+  ],
+  "scripts": {
+    "build:types": "echo 'No types in SetCloud Pin'",
+    "build": "tsc",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix"
+  },
+  "dependencies": {
+    "@setheum.js/type-definitions": "^2.0.0",
+    "@polkadot/api": "^4.2.1"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.13.2",
+    "@types/node": "^14.14.31",
+    "gts": "^3.1.0",
+    "typescript": "^4.0.3"
+  }
+}
