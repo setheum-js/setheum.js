@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/setheum-labs/setheum.js",
   "scripts": {
-    "build:types": "npx ts-node src/scripts/generate.ts",
+    "build:types": "npx ts-node /scripts/generate.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
