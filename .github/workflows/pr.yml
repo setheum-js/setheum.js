@@ -1,0 +1,33 @@
+name: PR
+on: [pull_request]
+
+jobs:
+  pr:
+    strategy:
+      matrix:
+        step: ['lint', 'compile', 'build:types']
+    name: ${{ matrix.step }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+      
+      - name: Type definitions ${{ matrix.step }}
+        run: |
+          cd packages/type-definitions
+          yarn
+          yarn ${{ matrix.step }}
+      
+      - name: SetCloud pin ${{ matrix.step }}
+        run: |
+          cd packages/setcloud-pin
+          yarn
+          yarn ${{ matrix.step }}
+
+      

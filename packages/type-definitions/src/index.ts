@@ -10,6 +10,11 @@ import evm from './evm';
 import loans from './loans';
 import nft from './nft';
 import primitives from './primitives';
+import base from './base';
+import benefit from './benefit';
+import market from './market';
+import staking from './staking';
+import swork from './swork';
 
 // ecosystem
 import renvmBridge from './renvmBridge';
@@ -19,7 +24,6 @@ import { signedExtensions as setheumSignedExtensions } from './signedExtensions'
 import support from './support';
 
 import setheumVersioned from './spec/setheum';
-import newromeVersioned from './spec/newrome';
 
 // FIXME: currently we cannot override this in runtime definations because the code generation script cannot handle overrides
 // This will make it behave correctly in runtime, but wrong types in TS defination.
@@ -38,8 +42,12 @@ const setheumDefs = {
   nft,
   runtime,
   support,
-
-  // bridges
+  base,
+  benefit,
+  market,
+  staking,
+  swork,
+  // Bridges
   renvmBridge,
 };
 
@@ -74,7 +82,6 @@ function getBundle(versioned: OverrideVersionedType[]) {
 export const typesBundle = {
   spec: {
     setheum: getBundle(setheumVersioned),
-    newrome: getBundle(newromeVersioned),
   }
 };
 
@@ -82,7 +89,6 @@ export const typesBundle = {
 export const typesBundleForPolkadot = {
   spec: {
     setheum: getBundle(setheumVersioned),
-    newrome: getBundle(newromeVersioned),
   }
 };
 

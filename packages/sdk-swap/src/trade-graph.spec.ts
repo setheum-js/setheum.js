@@ -34,11 +34,11 @@ describe('trade graph', () => {
 
     const _dnar = new Token('DNAR');
 
-    const dot2renbtc = tradeGraph.getPathes(_dnar, renbtc);
+    const dnar2renbtc = tradeGraph.getPathes(_dnar, renbtc);
 
-    expect(dot2renbtc[0]).toEqual([_dnar, setm, renbtc]);
-    expect(dot2renbtc[1]).toEqual([_dnar, renbtc]);
-    expect(dot2renbtc[2]).toEqual([_dnar, setusd, setm, renbtc]);
+    expect(dnar2renbtc[0]).toEqual([_dnar, setm, renbtc]);
+    expect(dnar2renbtc[1]).toEqual([_dnar, renbtc]);
+    expect(dnar2renbtc[2]).toEqual([_dnar, setusd, setm, renbtc]);
 
     const setm2setusd = tradeGraph.getPathes(setm, setusd);
 
