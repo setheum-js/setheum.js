@@ -5,8 +5,6 @@ import type { BalanceRequest, BalanceWrapper } from '@setheum.js/types/interface
 import type { CallRequest, EstimateResourcesResponse } from '@setheum.js/types/interfaces/evm';
 import type { CurrencyId } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@setheum.js/types/interfaces/runtime';
-import type { BalanceInfo } from '@setheum.js/types/interfaces/stakingPool';
-import type { ExchangeRate } from '@setheum.js/types/interfaces/support';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
 import type { Bytes, HashMap, Json, Metadata, Null, Option, Raw, StorageKey, Text, U256, U64, Vec, bool, u32, u64 } from '@polkadot/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -415,16 +413,6 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Retrieves the list of RPC methods that are exposed by the node
        **/
       methods: AugmentedRpc<() => Observable<RpcMethods>>;
-    };
-    stakingPool: {
-      /**
-       * Get Available Unbonded
-       **/
-      getAvailableUnbonded: AugmentedRpc<(account: AccountId | string | Uint8Array) => Observable<BalanceInfo>>;
-      /**
-       * get liquid staking exchange rate
-       **/
-      getLiquidStakingExchangeRate: AugmentedRpc<() => Observable<ExchangeRate>>;
     };
     state: {
       /**

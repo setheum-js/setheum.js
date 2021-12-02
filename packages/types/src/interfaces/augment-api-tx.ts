@@ -4,7 +4,6 @@
 import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio } from '@setheum.js/types/interfaces/cdpEngine';
 import type { Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, Balance, BalanceOf, BlockNumber, Call, LookupSource, Weight } from '@setheum.js/types/interfaces/runtime';
-import type { Rate } from '@setheum.js/types/interfaces/support';
 import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
 import type { Compact, Option, Vec, bool } from '@polkadot/types';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';

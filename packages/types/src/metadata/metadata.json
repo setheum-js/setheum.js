@@ -1833,8 +1833,8 @@
               ]
             },
             {
-              "name": "ModuleId",
-              "type": "ModuleId",
+              "name": "PalletId",
+              "type": "PalletId",
               "value": "0x6163612f74727379",
               "documentation": [
                 " The treasury's module id, used for deriving its sovereign account ID."
@@ -7409,7 +7409,7 @@
               "documentation": []
             },
             {
-              "name": "ModuleId",
+              "name": "PalletId",
               "type": "LockIdentifier",
               "value": "0x6163612f70687265",
               "documentation": []
@@ -8392,7 +8392,7 @@
                 " - `max_amount_a`: maximum currency A amount allowed to inject to",
                 "   liquidity pool.",
                 " - `max_amount_b`: maximum currency A amount allowed to inject to",
-                "   liquidity pool.",
+                "   liquidity pool."
               ]
             },
             {
@@ -8612,8 +8612,8 @@
               ]
             },
             {
-              "name": "ModuleId",
-              "type": "ModuleId",
+              "name": "PalletId",
+              "type": "PalletId",
               "value": "0x6163612f6465786d",
               "documentation": [
                 " The DEX's module id, keep all assets in DEX."
@@ -9105,8 +9105,8 @@
           ],
           "constants": [
             {
-              "name": "ModuleId",
-              "type": "ModuleId",
+              "name": "PalletId",
+              "type": "PalletId",
               "value": "0x6163612f6c6f616e",
               "documentation": [
                 " The loan's module id, keep all collaterals of CDPs."
@@ -9446,8 +9446,8 @@
               ]
             },
             {
-              "name": "ModuleId",
-              "type": "ModuleId",
+              "name": "PalletId",
+              "type": "PalletId",
               "value": "0x6163612f63647074",
               "documentation": [
                 " The CDP treasury's module id, keep surplus and collateral assets",
@@ -10273,8 +10273,8 @@
               ]
             },
             {
-              "name": "ModuleId",
-              "type": "ModuleId",
+              "name": "PalletId",
+              "type": "PalletId",
               "value": "0x6163612f614e4654",
               "documentation": [
                 " The NFT's module id"
