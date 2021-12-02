@@ -12,8 +12,6 @@ export default {
         DNAR: 2,
         SETR: 3,
         SETUSD: 4,
-        // 121 - 255: External tokens (e.g. bridged)
-        RENBTC: 121,
       }
     },
     DexShare: {
@@ -34,7 +32,7 @@ export default {
       _enum: ['SETR', 'SETUSD']
     },
     AuthoritysOriginId: {
-      _enum: ['Root', 'Treasury', 'PublicFund']
+      _enum: ['Root', 'Treasury']
     },
     SetheumDataProviderId: {
       _enum: ['Aggregated', 'Setheum']

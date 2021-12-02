@@ -229,8 +229,7 @@
                                 "SERP",
                                 "DNAR",
                                 "SETR",
-                                "SETUSD",
-                                "RENBTC"
+                                "SETUSD"
                             ]
                         },
                         "DexShare": {
@@ -243,8 +242,7 @@
                             "_enum": {
                                 "Token": "TokenSymbol",
                                 "DEXShare": "(DexShare, DexShare)",
-                                "ERC20": "EvmAddress",
-                                "StableAssetPoolToken": "StableAssetPoolId"
+                                "ERC20": "EvmAddress"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
@@ -257,8 +255,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -531,8 +528,7 @@
                                 "SERP",
                                 "DNAR",
                                 "SETR",
-                                "SETUSD",
-                                "RENBTC"
+                                "SETUSD"
                             ]
                         },
                         "DexShare": {
@@ -558,8 +554,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -822,8 +817,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -849,8 +843,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "SetheumLabs"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -1115,8 +1108,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -1142,8 +1134,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -1403,8 +1394,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -1430,8 +1420,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -1691,8 +1680,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -1718,8 +1706,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -1979,8 +1966,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -2006,8 +1992,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {
@@ -2267,8 +2252,7 @@
                                 "SERP": 1,
                                 "DNAR": 2,
                                 "SETR": 3,
-                                "SETUSD": 4,
-                                "RENBTC": 121
+                                "SETUSD": 4
                             }
                         },
                         "DexShare": {
@@ -2294,8 +2278,7 @@
                         "AuthoritysOriginId": {
                             "_enum": [
                                 "Root",
-                                "Treasury",
-                                "PublicFund"
+                                "Treasury"
                             ]
                         },
                         "SetheumDataProviderId": {

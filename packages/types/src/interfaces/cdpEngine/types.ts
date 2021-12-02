@@ -41,7 +41,6 @@ export interface OptionRatio extends Option<Ratio> {}
 /** @name RiskManagementParams */
 export interface RiskManagementParams extends Struct {
   readonly maximumTotalDebitValue: Balance;
-  readonly interestRatePerSec: Option<Rate>;
   readonly liquidationRatio: Option<Rate>;
   readonly liquidationPenalty: Option<Rate>;
   readonly requiredCollateralRatio: Option<Rate>;

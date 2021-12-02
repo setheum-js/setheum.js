@@ -24,7 +24,7 @@ declare module '@polkadot/api/types/consts' {
       /**
        * The stable currency id
        **/
-      getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+      getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
       /**
        * The minimum increment size of each bid compared to the previous one
        **/
@@ -65,7 +65,7 @@ declare module '@polkadot/api/types/consts' {
       /**
        * Stablecoin currency id
        **/
-      getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+      getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
       /**
        * A configuration for base priority of unsigned transactions.
        * 
@@ -82,7 +82,7 @@ declare module '@polkadot/api/types/consts' {
       /**
        * Stablecoin currency id
        **/
-       getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+       getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
       /**
        * The cap of lots number when create collateral auction on a
        * liquidation or to create debit/surplus auction on block end.
@@ -170,7 +170,7 @@ declare module '@polkadot/api/types/consts' {
       /**
        * The stable currency id, it should be SETUSD in Setheum.
        **/
-      getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+      getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
       /**
        * The stable currency id, it should be SETR in Setheum.
        **/
@@ -204,15 +204,11 @@ declare module '@polkadot/api/types/consts' {
        /**
        * The SetUSD currency id, it should be SETUSD in Setheum.
        **/
-       getSetUSDCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+       getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
        /**
         * The vault account to keep the Cashdrops for claiming.
         **/
        cashDropPoolAccountId: AccountId & AugmentedConst<ApiType>;
-        /**
-         * The vault account to keep the PublicFund for claiming.
-         **/
-       publicFundAccountId: AccountId & AugmentedConst<ApiType>;
        /**
         * CDP-Treasury account for processing serplus funds 
         **/

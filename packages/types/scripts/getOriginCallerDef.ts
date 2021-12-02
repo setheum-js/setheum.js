@@ -11,7 +11,6 @@ const POLKADOT_KNOWN_ORIGINS: Record<string, string> = {
 const SETHEUM_KNOWN_ORIGINS: Record<string, string> = {
   ShuraCouncil: 'CollectiveOrigin',
   FinancialCouncil: 'CollectiveOrigin',
-  PublicFundCouncil: 'CollectiveOrigin',
   Authority: 'DelayedOrigin'
 };
 

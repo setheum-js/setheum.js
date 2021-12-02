@@ -343,9 +343,6 @@ export interface SignedBlockWithJustifications extends Struct {
 /** @name Slot */
 export interface Slot extends u64 {}
 
-/** @name StableAssetPoolId */
-export interface StableAssetPoolId extends u32 {}
-
 /** @name StorageData */
 export interface StorageData extends Bytes {}
 

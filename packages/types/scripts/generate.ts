@@ -73,8 +73,6 @@ const metadata = filterModules(
     'OperatorMembershipSetheum',
     'OrmlNFT',
     'Prices',
-    'PublicFundCouncil',
-    'PublicFundCouncilMembership',
     'Recovery',
     'SerpOcw',
     'SerpTreasury',

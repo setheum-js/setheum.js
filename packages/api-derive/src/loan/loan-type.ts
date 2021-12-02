@@ -38,7 +38,6 @@ export function loanType(
     ]).pipe(
       map((result) => {
         const constants = loanConstants(api);
-        const [globalInterestRatePerSec, debitExchangeRate, collateralParams] = result;
 
         return {
           currency,

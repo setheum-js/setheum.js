@@ -62,8 +62,7 @@
             "SERP": 1,
             "DNAR": 2,
             "SETR": 3,
-            "SETUSD": 4,
-            "RENBTC": 121
+            "SETUSD": 4
         }
     },
     "DexShare": {
@@ -89,8 +88,7 @@
     "AuthoritysOriginId": {
         "_enum": [
             "Root",
-            "Treasury",
-            "PublicFund"
+            "Treasury"
         ]
     },
     "SetheumDataProviderId": {
@@ -100,7 +98,6 @@
         ]
     },
     "TradingPair": "(CurrencyId,  CurrencyId)",
-    "ChainBridgeChainId": "u8",
     "PalletBalanceOf": "Balance",
     "CollateralAuctionItem": {
         "refundRecipient": "AccountId",

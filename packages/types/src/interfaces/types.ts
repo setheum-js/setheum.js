@@ -10,5 +10,4 @@ export * from './evm/types';
 export * from './loans/types';
 export * from './nft/types';
 export * from './runtime/types';
-export * from './renvmBridge/types';
 export * from './support/types';

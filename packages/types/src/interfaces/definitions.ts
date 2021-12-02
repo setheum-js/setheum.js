@@ -7,5 +7,4 @@ export { default as evm } from './evm/definitions';
 export { default as loans } from './loans/definitions';
 export { default as nft } from './nft/definitions';
 export { default as runtime } from './runtime/definitions';
-export { default as renvmBridge } from './renvmBridge/definitions';
 export { default as support } from './support/definitions';

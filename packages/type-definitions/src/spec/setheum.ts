@@ -36,7 +36,7 @@ const versioned: OverrideVersionedType[] = [
       ...poolIdV0,
       ...addressV0,
       TokenSymbol: {
-        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD', 'RENBTC']
+        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD']
       }
     }
   },
@@ -46,7 +46,7 @@ const versioned: OverrideVersionedType[] = [
       ...poolIdV0,
       ...addressV1,
       TokenSymbol: {
-        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD', 'RENBTC']
+        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD']
       }
     }
   },
@@ -62,8 +62,7 @@ const versioned: OverrideVersionedType[] = [
           SERP: 1,
           DNAR: 2,
           SETR: 3,
-          SETUSD: 4,
-          RENBTC: 121,
+          SETUSD: 4
         }
       }
     }
@@ -79,8 +78,7 @@ const versioned: OverrideVersionedType[] = [
           SERP: 1,
           DNAR: 2,
           SETR: 3,
-          SETUSD: 4,
-          RENBTC: 121,
+          SETUSD: 4
         }
       }
     }
@@ -95,8 +93,7 @@ const versioned: OverrideVersionedType[] = [
           SERP: 1,
           DNAR: 2,
           SETR: 3,
-          SETUSD: 4,
-          RENBTC: 121,
+          SETUSD: 4
         }
       }
     }
@@ -111,8 +108,7 @@ const versioned: OverrideVersionedType[] = [
           SERP: 1,
           DNAR: 2,
           SETR: 3,
-          SETUSD: 4,
-          RENBTC: 121,
+          SETUSD: 4
         }
       }
     }
