@@ -50,6 +50,5 @@ describe('token', () => {
 
     expect(Token.sort(setm, dnar)).toEqual([setm, dnar]);
     expect(Token.sort(dnar, setm)).toEqual([setm, dnar]);
-    expect(Token.sort(dnar, setusd, setm)).toEqual([setm, setusd, dnar]);
   });
 });
