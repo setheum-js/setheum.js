@@ -16,8 +16,6 @@ import market from './market';
 import staking from './staking';
 import swork from './swork';
 
-// ecosystem
-import renvmBridge from './renvmBridge';
 
 import runtime from './runtime';
 import { signedExtensions as setheumSignedExtensions } from './signedExtensions';
@@ -47,8 +45,6 @@ const setheumDefs = {
   market,
   staking,
   swork,
-  // Bridges
-  renvmBridge,
 };
 
 export const types = {

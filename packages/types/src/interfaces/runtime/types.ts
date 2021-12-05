@@ -209,8 +209,8 @@ export interface LookupSource extends MultiAddress {}
 /** @name LookupTarget */
 export interface LookupTarget extends AccountId {}
 
-/** @name ModuleId */
-export interface ModuleId extends LockIdentifier {}
+/** @name PalletId */
+export interface PalletId extends LockIdentifier {}
 
 /** @name Moment */
 export interface Moment extends UInt {}
@@ -246,8 +246,8 @@ export interface OriginCaller extends Enum {
   readonly asSystem: SystemOrigin;
 }
 
-/** @name ModuleId */
-export interface ModuleId extends LockIdentifier {}
+/** @name PalletId */
+export interface PalletId extends LockIdentifier {}
 
 /** @name PalletsOrigin */
 export interface PalletsOrigin extends OriginCaller {}
@@ -342,9 +342,6 @@ export interface SignedBlockWithJustifications extends Struct {
 
 /** @name Slot */
 export interface Slot extends u64 {}
-
-/** @name StableAssetPoolId */
-export interface StableAssetPoolId extends u32 {}
 
 /** @name StorageData */
 export interface StorageData extends Bytes {}

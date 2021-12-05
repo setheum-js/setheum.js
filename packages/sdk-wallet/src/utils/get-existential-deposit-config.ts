@@ -13,20 +13,18 @@ type ExistentialDepositConfig = {
 // TODO: Update to match chain impl!
 const EXISTENTIAL_DEPOSIT: ExistentialDepositConfig = {
   setheum: {
-    SETM: new FixedPointNumber(0.1, 12),
-    SERP: new FixedPointNumber(0.01, 12),
-    DNAR: new FixedPointNumber(10 * 0.00001, 12),
-    SETR: new FixedPointNumber(50 * 0.00001, 12),
-    SETUSD: MAX,
-    RENBTC: MAX,
+    SETM: new FixedPointNumber(0.1, 18),
+    SERP: new FixedPointNumber(0.1, 18),
+    DNAR: new FixedPointNumber(0.1, 18),
+    SETR: new FixedPointNumber(0.1, 18),
+    SETUSD: new FixedPointNumber(0.1, 18),
   },
   dev: {
-    SETM: new FixedPointNumber(0.1, 12),
-    SERP: new FixedPointNumber(0.01, 12),
-    DNAR: new FixedPointNumber(10 * 0.00001, 12),
-    SETR: new FixedPointNumber(50 * 0.00001, 12),
-    SETUSD: MAX,
-    RENBTC: MAX,
+    SETM: new FixedPointNumber(0.1, 18),
+    SERP: new FixedPointNumber(0.1, 18),
+    DNAR: new FixedPointNumber(0.1, 18),
+    SETR: new FixedPointNumber(0.1, 18),
+    SETUSD: new FixedPointNumber(0.1, 18),
   }
 };
 

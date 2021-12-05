@@ -33,7 +33,6 @@ export interface AuctionIdOf extends AuctionId {}
 export interface AuthoritysOriginId extends Enum {
   readonly isRoot: boolean;
   readonly isTreasury: boolean;
-  readonly isPublicFund: boolean;
 }
 
 /** @name CurrencyId */
@@ -67,7 +66,6 @@ export interface TokenSymbol extends Enum {
   readonly isDnar: boolean;
   readonly isSetr: boolean;
   readonly isSetusd: boolean;
-  readonly isRenbtc: boolean;
 }
 
 /** @name TradingPair */

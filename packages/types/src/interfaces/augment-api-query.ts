@@ -5,7 +5,6 @@ import type { CollateralAuctionItem } from '@setheum.js/types/interfaces/auction
 import type { RiskManagementParams } from '@setheum.js/types/interfaces/cdpEngine';
 import type { TradingPairStatus } from '@setheum.js/types/interfaces/dex';
 import type { CodeInfo, Erc20Info, EvmAddress } from '@setheum.js/types/interfaces/evm';
-import type { PoolId } from '@setheum.js/types/interfaces/incentives';
 import type { Position } from '@setheum.js/types/interfaces/loans';
 import type { ClassInfoOf, TokenId, TokenInfoOf } from '@setheum.js/types/interfaces/nft';
 import type { AuctionId, CurrencyId, TradingPair } from '@setheum.js/types/interfaces/primitives';
@@ -35,15 +34,15 @@ declare module '@polkadot/api/types/storage' {
       /**
        * True if Self::values(key) is up to date, otherwise the value is stale
        **/
-      isUpdated: AugmentedQuery<ApiType, (arg: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<bool>, [OracleKey]> & QueryableStorageEntry<ApiType, [OracleKey]>;
+      isUpdated: AugmentedQuery<ApiType, (arg: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<bool>, [OracleKey]> & QueryableStorageEntry<ApiType, [OracleKey]>;
       /**
        * Raw values for each oracle operators
        **/
-      rawValues: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Option<TimestampedValueOf>>, [AccountId, OracleKey]> & QueryableStorageEntry<ApiType, [AccountId, OracleKey]>;
+      rawValues: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Option<TimestampedValueOf>>, [AccountId, OracleKey]> & QueryableStorageEntry<ApiType, [AccountId, OracleKey]>;
       /**
        * Combined value, may not be up to date
        **/
-      values: AugmentedQuery<ApiType, (arg: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Option<TimestampedValueOf>>, [OracleKey]> & QueryableStorageEntry<ApiType, [OracleKey]>;
+      values: AugmentedQuery<ApiType, (arg: OracleKey | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Option<TimestampedValueOf>>, [OracleKey]> & QueryableStorageEntry<ApiType, [OracleKey]>;
       /**
        * Generic query
        **/
@@ -80,7 +79,7 @@ declare module '@polkadot/api/types/storage' {
        * 
        * TotalCollateralInAuction: map CurrencyId => Balance
        **/
-      totalCollateralInAuction: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      totalCollateralInAuction: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Record of total target sales of all active collateral auctions
        * 
@@ -106,26 +105,14 @@ declare module '@polkadot/api/types/storage' {
        * 
        * CollateralParams: CurrencyId => RiskManagementParams
        **/
-      collateralParams: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<RiskManagementParams>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      collateralParams: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<RiskManagementParams>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Mapping from collateral type to its exchange rate of debit units and
        * debit value
        * 
        * DebitExchangeRate: CurrencyId => Option<ExchangeRate>
        **/
-      debitExchangeRate: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Option<ExchangeRate>>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
-      /**
-       * Global interest rate per sec for all types of collateral
-       * 
-       * GlobalInterestRatePerSec: Rate
-       **/
-      globalInterestRatePerSec: AugmentedQuery<ApiType, () => Observable<Rate>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Timestamp in seconds of the last interest accumulation
-       * 
-       * LastAccumulationSecs: u64
-       **/
-      lastAccumulationSecs: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
+      debitExchangeRate: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Option<ExchangeRate>>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Generic query
        **/
@@ -145,7 +132,7 @@ declare module '@polkadot/api/types/storage' {
        * 
        * ExpectedCollateralAuctionSize: map CurrencyId => Balance
        **/
-      expectedCollateralAuctionSize: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      expectedCollateralAuctionSize: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Generic query
        **/
@@ -465,37 +452,7 @@ declare module '@polkadot/api/types/storage' {
        * 
        * Authorization: double_map AccountId, (CurrencyId, T::AccountId) => Option<Balance>
        **/
-      authorization: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: ITuple<[CurrencyId, AccountId]> | [CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<Option<Balance>>, [AccountId, ITuple<[CurrencyId, AccountId]>]> & QueryableStorageEntry<ApiType, [AccountId, ITuple<[CurrencyId, AccountId]>]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    incentives: {
-      /**
-       * Mapping from pool to its claim reward deduction rate.
-       * 
-       * ClaimRewardDeductionRates: map Pool => DeductionRate
-       **/
-      claimRewardDeductionRates: AugmentedQuery<ApiType, (arg: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array) => Observable<Rate>, [PoolId]> & QueryableStorageEntry<ApiType, [PoolId]>;
-      /**
-       * Mapping from pool to its fixed reward rate per period.
-       * 
-       * DexSavingRewardRates: map Pool => SavingRatePerPeriod
-       **/
-      dexSavingRewardRates: AugmentedQuery<ApiType, (arg: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array) => Observable<Rate>, [PoolId]> & QueryableStorageEntry<ApiType, [PoolId]>;
-      /**
-       * Mapping from pool to its fixed incentive amounts of multi currencies per period.
-       * 
-       * IncentiveRewardAmounts: double_map Pool, RewardCurrencyId => RewardAmountPerPeriod
-       **/
-      incentiveRewardAmounts: AugmentedQuery<ApiType, (arg1: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array, arg2: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Balance>, [PoolId, CurrencyId]> & QueryableStorageEntry<ApiType, [PoolId, CurrencyId]>;
-      /**
-       * The pending rewards amount, actual available rewards amount may be deducted
-       * 
-       * PendingMultiRewards: double_map PoolId, AccountId => BTreeMap<CurrencyId, Balance>
-       **/
-      pendingMultiRewards: AugmentedQuery<ApiType, (arg1: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array, arg2: AccountId | string | Uint8Array) => Observable<BTreeMap<CurrencyId, Balance>>, [PoolId, AccountId]> & QueryableStorageEntry<ApiType, [PoolId, AccountId]>;
+      authorization: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: ITuple<[CurrencyId, AccountId]> | [CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<Option<Balance>>, [AccountId, ITuple<[CurrencyId, AccountId]>]> & QueryableStorageEntry<ApiType, [AccountId, ITuple<[CurrencyId, AccountId]>]>;
       /**
        * Generic query
        **/
@@ -508,14 +465,14 @@ declare module '@polkadot/api/types/storage' {
        * 
        * Positions: double_map CurrencyId, AccountId => Position
        **/
-      positions: AugmentedQuery<ApiType, (arg1: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array, arg2: AccountId | string | Uint8Array) => Observable<Position>, [CurrencyId, AccountId]> & QueryableStorageEntry<ApiType, [CurrencyId, AccountId]>;
+      positions: AugmentedQuery<ApiType, (arg1: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, arg2: AccountId | string | Uint8Array) => Observable<Position>, [CurrencyId, AccountId]> & QueryableStorageEntry<ApiType, [CurrencyId, AccountId]>;
       /**
        * The total collateralized debit positions, map from
        * CollateralType -> Position
        * 
        * TotalPositions: CurrencyId => Position
        **/
-      totalPositions: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Position>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      totalPositions: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Position>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Generic query
        **/
@@ -571,26 +528,7 @@ declare module '@polkadot/api/types/storage' {
        * 
        * map CurrencyId => Option<Price>
        **/
-      lockedPrice: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Option<Price>>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    rewards: {
-      /**
-       * Record reward pool info.
-       * 
-       * map PoolId => PoolInfo
-       **/
-      poolInfos: AugmentedQuery<ApiType, (arg: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array) => Observable<PoolInfo>, [PoolId]> & QueryableStorageEntry<ApiType, [PoolId]>;
-      /**
-       * Record share amount, reward currency and withdrawn reward amount for
-       * specific `AccountId` under `PoolId`.
-       * 
-       * double_map (PoolId, AccountId) => (Share, BTreeMap<CurrencyId, Balance>)
-       **/
-      sharesAndWithdrawnRewards: AugmentedQuery<ApiType, (arg1: PoolId | { Loans: any } | { Dex: any } | string | Uint8Array, arg2: AccountId | string | Uint8Array) => Observable<ITuple<[Share, BTreeMap<CurrencyId, Balance>]>>, [PoolId, AccountId]> & QueryableStorageEntry<ApiType, [PoolId, AccountId]>;
+      lockedPrice: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Option<Price>>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Generic query
        **/
@@ -605,16 +543,16 @@ declare module '@polkadot/api/types/storage' {
        * NOTE: This is only used in the case that this module is used to store
        * balances.
        **/
-      accounts: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<AccountData>, [AccountId, CurrencyId]> & QueryableStorageEntry<ApiType, [AccountId, CurrencyId]>;
+      accounts: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<AccountData>, [AccountId, CurrencyId]> & QueryableStorageEntry<ApiType, [AccountId, CurrencyId]>;
       /**
        * Any liquidity locks of a token type under an account.
        * NOTE: Should only be accessed when setting, changing and freeing a lock.
        **/
-      locks: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Vec<BalanceLock>>, [AccountId, CurrencyId]> & QueryableStorageEntry<ApiType, [AccountId, CurrencyId]>;
+      locks: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Vec<BalanceLock>>, [AccountId, CurrencyId]> & QueryableStorageEntry<ApiType, [AccountId, CurrencyId]>;
       /**
        * The total issuance of a token type.
        **/
-      totalIssuance: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | { StableAssetPoolToken: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      totalIssuance: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * Generic query
        **/
