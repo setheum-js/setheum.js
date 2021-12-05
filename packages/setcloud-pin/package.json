@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/setcloud-pin",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Decentralized SetCloud pin on Setheum Network",
   "main": "src/index.js",
   "license": "Apache-2.0",
@@ -19,7 +19,7 @@
     "fix": "gts fix"
   },
   "dependencies": {
-    "@setheum.js/type-definitions": "^2.0.0",
+    "@setheum.js/type-definitions": "^2.1.0",
     "@polkadot/api": "^4.2.1"
   },
   "devDependencies": {
