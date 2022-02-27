@@ -10,11 +10,6 @@ import evm from './evm';
 import loans from './loans';
 import nft from './nft';
 import primitives from './primitives';
-import base from './base';
-import benefit from './benefit';
-import market from './market';
-import staking from './staking';
-import swork from './swork';
 
 
 import runtime from './runtime';
@@ -22,6 +17,8 @@ import { signedExtensions as setheumSignedExtensions } from './signedExtensions'
 import support from './support';
 
 import setheumVersioned from './spec/setheum';
+
+import vesting from './vesting';
 
 // FIXME: currently we cannot override this in runtime definations because the code generation script cannot handle overrides
 // This will make it behave correctly in runtime, but wrong types in TS defination.
@@ -40,11 +37,7 @@ const setheumDefs = {
   nft,
   runtime,
   support,
-  base,
-  benefit,
-  market,
-  staking,
-  swork,
+  vesting,
 };
 
 export const types = {

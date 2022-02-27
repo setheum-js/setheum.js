@@ -56,13 +56,21 @@
     "AmountOf": "Amount",
     "AuctionId": "u32",
     "AuctionIdOf": "AuctionId",
+    "VestingSchedule": {
+        "start": "BlockNumber",
+        "period": "BlockNumber",
+        "periodCount": "u32",
+        "perPeriod": "Compact<Balance>"
+    },
+    "VestingScheduleOf": "VestingSchedule",
     "TokenSymbol": {
         "_enum": {
             "SETM": 0,
             "SERP": 1,
             "DNAR": 2,
-            "SETR": 3,
-            "SETUSD": 4
+            "HELP": 3,
+            "SETR": 4,
+            "SETUSD": 5
         }
     },
     "DexShare": {
@@ -70,6 +78,12 @@
             "Token": "TokenSymbol",
             "Erc20": "EvmAddress"
         }
+    },
+    "TokenInfo": {
+        "currency_id": "Option<u8>",
+        "name": "Vec<&str>",
+        "symbol": "Vec<&str>",
+        "decimals": "Option<u8>"
     },
     "CurrencyId": {
         "_enum": {
@@ -80,6 +94,16 @@
     },
     "CurrencyIdOf": "CurrencyId",
     "AirDropCurrencyId": {
+        "_enum": [
+            "SETR",
+            "SETUSD",
+            "SETM",
+            "SERP",
+            "DNAR",
+            "HELP"
+        ]
+    },
+    "SerpStableCurrencyId": {
         "_enum": [
             "SETR",
             "SETUSD"
@@ -139,7 +163,6 @@
         "liquidationPenalty": "Option<Rate>",
         "requiredCollateralRatio": "Option<Rate>"
     },
-    "CandidateInfoOf": "CandidateInfo",
     "TradingPairProvisionParameters": {
         "minContribution": "(Balance, Balance)",
         "targetProvision": "(Balance, Balance)",
@@ -252,12 +275,6 @@
         ]
     },
     "AtLeast64BitUnsigned": "u128",
-    "SubAccountStatus": {
-        "bonded": "Balance",
-        "available": "Balance",
-        "unbonding": "Vec<(EraIndex,Balance)>",
-        "mockRewardRate": "Rate"
-    },
     "ChangeRate": {
         "_enum": {
             "NoChange": "Null",
@@ -279,6 +296,5 @@
     "PublicKey": "[u8; 20]",
     "DestAddress": "Vec<u8>",
     "PoolTokenIndex": "u32",
-    "AssetId": "CurrencyId",
-    "Keys": "SessionKeys1"
+    "AssetId": "CurrencyId"
 }

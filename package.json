@@ -6,7 +6,7 @@
     "HuangLeiWan. <setheumjs@gmail.com>"
   ],
   "license": "Apache-2",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "engines": {
     "yarn": "^1.22.10"
@@ -15,8 +15,9 @@
     "packages/*"
   ],
   "resolutions": {
-    "@polkadot/api": "^6.3.1",
-    "@polkadot/types": "^6.3.1"
+    "@polkadot/api": "^7.1.1",
+    "@polkadot/types": "^7.1.1",
+    "typescript": "4.3.5"
   },
   "scripts": {
     "build": "yarn build:interfaces && polkadot-dev-build-ts",

@@ -23,8 +23,7 @@ const currencyV0 = {
 const poolIdV0 = {
   PoolId: {
     _enum: {
-      Loans: 'CurrencyId',
-      DexSaving: 'CurrencyId',
+      Loans: 'CurrencyId'
     }
   }
 };
@@ -36,7 +35,7 @@ const versioned: OverrideVersionedType[] = [
       ...poolIdV0,
       ...addressV0,
       TokenSymbol: {
-        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD']
+        _enum: ['SETM', 'SERP', 'DNAR', 'HELP', 'SETR', 'SETUSD']
       }
     }
   },
@@ -46,7 +45,7 @@ const versioned: OverrideVersionedType[] = [
       ...poolIdV0,
       ...addressV1,
       TokenSymbol: {
-        _enum: ['SETM', 'SERP', 'DNAR', 'SETR', 'SETUSD']
+        _enum: ['SETM', 'SERP', 'DNAR', 'HELP', 'SETR', 'SETUSD']
       }
     }
   },
@@ -61,8 +60,9 @@ const versioned: OverrideVersionedType[] = [
           SETM: 0,
           SERP: 1,
           DNAR: 2,
-          SETR: 3,
-          SETUSD: 4
+          HELP: 3,
+          SETR: 4,
+          SETUSD: 5
         }
       }
     }
@@ -77,8 +77,9 @@ const versioned: OverrideVersionedType[] = [
           SETM: 0,
           SERP: 1,
           DNAR: 2,
-          SETR: 3,
-          SETUSD: 4
+          HELP: 3,
+          SETR: 4,
+          SETUSD: 5
         }
       }
     }
@@ -92,23 +93,9 @@ const versioned: OverrideVersionedType[] = [
           SETM: 0,
           SERP: 1,
           DNAR: 2,
-          SETR: 3,
-          SETUSD: 4
-        }
-      }
-    }
-  },
-  {
-    minmax: [1008, 1008],
-    types: {
-      ...addressV1,
-      TokenSymbol: {
-        _enum: {
-          SETM: 0,
-          SERP: 1,
-          DNAR: 2,
-          SETR: 3,
-          SETUSD: 4
+          HELP: 3,
+          SETR: 4,
+          SETUSD: 5
         }
       }
     }
@@ -120,7 +107,7 @@ const versioned: OverrideVersionedType[] = [
     }
   },
   {
-    minmax: [1010, 1013],
+    minmax: [1008, undefined],
     types: {
       ...addressV1,
     }
