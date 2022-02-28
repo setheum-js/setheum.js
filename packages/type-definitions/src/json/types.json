@@ -45,24 +45,51 @@
     },
     "DispatchId": "u32",
     "Price": "FixedU128",
-    "OrmlCurrencyId": "CurrencyId",
-    "PoolInfo": {
-        "totalShares": "Share"
-    },
-    "CompactBalance": "Compact<Balance>",
-    "Share": "u128",
-    "OracleValue": "Price",
-    "Amount": "i128",
-    "AmountOf": "Amount",
-    "AuctionId": "u32",
-    "AuctionIdOf": "AuctionId",
-    "VestingSchedule": {
+    "OrmlVestingSchedule": {
         "start": "BlockNumber",
         "period": "BlockNumber",
         "periodCount": "u32",
         "perPeriod": "Compact<Balance>"
     },
     "VestingScheduleOf": "VestingSchedule",
+    "OrmlCurrencyId": "CurrencyId",
+    "PoolInfo": {
+        "totalShares": "Share",
+        "rewards": "BTreeMap<OrmlCurrencyId, (Balance, Balance)>"
+    },
+    "CompactBalance": "Compact<Balance>",
+    "PoolInfoV0": {
+        "totalShares": "Compact<Share>",
+        "totalRewards": "CompactBalance",
+        "totalWithdrawnRewards": "CompactBalance"
+    },
+    "Share": "u128",
+    "OracleValue": "Price",
+    "Amount": "i128",
+    "AmountOf": "Amount",
+    "AuctionId": "u32",
+    "AuctionIdOf": "AuctionId",
+    "AuthoritysOriginId": {
+        "_enum": [
+            "Root",
+            "Treasury"
+        ]
+    },
+    "DexShare": {
+        "_enum": {
+            "Token": "TokenSymbol",
+            "Erc20": "EvmAddress"
+        }
+    },
+    "CurrencyId": {
+        "_enum": {
+            "Token": "TokenSymbol",
+            "DEXShare": "(DexShare, DexShare)",
+            "ERC20": "EvmAddress"
+        }
+    },
+    "TradingPair": "(CurrencyId,  CurrencyId)",
+    "CurrencyIdOf": "CurrencyId",
     "TokenSymbol": {
         "_enum": {
             "SETM": 0,
@@ -73,26 +100,12 @@
             "SETUSD": 5
         }
     },
-    "DexShare": {
-        "_enum": {
-            "Token": "TokenSymbol",
-            "Erc20": "EvmAddress"
-        }
-    },
     "TokenInfo": {
         "currency_id": "Option<u8>",
-        "name": "Vec<&str>",
-        "symbol": "Vec<&str>",
+        "name": "Option<u8>",
+        "symbol": "Option<u8>",
         "decimals": "Option<u8>"
     },
-    "CurrencyId": {
-        "_enum": {
-            "Token": "TokenSymbol",
-            "DEXShare": "(DexShare, DexShare)",
-            "ERC20": "EvmAddress"
-        }
-    },
-    "CurrencyIdOf": "CurrencyId",
     "AirDropCurrencyId": {
         "_enum": [
             "SETR",
@@ -109,11 +122,11 @@
             "SETUSD"
         ]
     },
-    "AuthoritysOriginId": {
-        "_enum": [
-            "Root",
-            "Treasury"
-        ]
+    "SetheumAssetMetadata": {
+        "name": "Vec<u8>",
+        "symbol": "Vec<u8>",
+        "decimals": "u8",
+        "minimalBalance": "Balance"
     },
     "SetheumDataProviderId": {
         "_enum": [
@@ -121,7 +134,6 @@
             "Setheum"
         ]
     },
-    "TradingPair": "(CurrencyId,  CurrencyId)",
     "PalletBalanceOf": "Balance",
     "CollateralAuctionItem": {
         "refundRecipient": "AccountId",
@@ -215,12 +227,6 @@
         "value": "Option<U128>",
         "data": "Option<Bytes>"
     },
-    "PoolId": {
-        "_enum": {
-            "Loans": "CurrencyId",
-            "Dex": "CurrencyId"
-        }
-    },
     "Position": {
         "collateral": "Balance",
         "debit": "Balance"
@@ -293,8 +299,11 @@
     "ExchangeRate": "FixedU128",
     "Rate": "FixedU128",
     "Ratio": "FixedU128",
-    "PublicKey": "[u8; 20]",
-    "DestAddress": "Vec<u8>",
-    "PoolTokenIndex": "u32",
-    "AssetId": "CurrencyId"
+    "VestingSchedule": {
+        "start": "BlockNumber",
+        "period": "BlockNumber",
+        "periodCount": "u32",
+        "perPeriod": "Compact<Balance>"
+    },
+    "Keys": "SessionKeys1"
 }

@@ -36,8 +36,8 @@ export default {
     },
     TokenInfo: {
       currency_id: 'Option<u8>',
-      name: 'Vec<&str>',
-      symbol: 'Vec<&str>',
+      name: 'Option<u8>',
+      symbol: 'Option<u8>',
       decimals: 'Option<u8>'
     },
     AirDropCurrencyId: {
