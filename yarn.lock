@@ -1582,7 +1582,7 @@
     "@polkadot/util" "^8.1.2"
     rxjs "^7.4.0"
 
-"@polkadot/rpc-core@7.10.1":
+"@polkadot/rpc-core@7.10.1", "@polkadot/rpc-core@^7.1.1":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@polkadot/rpc-core/-/rpc-core-7.10.1.tgz#6cdeb4d9b367c98d6461b1636e842d4e1fa78b38"
   integrity sha512-EXtCVXUfdO+/VqZLmaTgvMoEOn6vCCh9wmpkDd5QmQJTAS1Pk/imB6uFHgQGywSVXQxw/rT9g0MVxf3OlnbDNA==
@@ -1866,6 +1866,18 @@
     "@babel/runtime" "^7.10.2"
     "@open-web3/orml-types" "^1.0.2-0"
     "@polkadot/api-derive" "^6.3.1"
+    "@setheum.js/types" "2.1.0"
+
+"@setheum.js/api@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@setheum.js/api/-/api-2.1.0.tgz#2f4ef3dc35c93bad548f4b39bc01aff583751363"
+  integrity sha512-89E5cKmzHdIoaAajQMMd22d0RKROQjGomTI/nPXUW7Q48cIlVKsxPJt4uRP+ro6VHWj44zvI60KaLzAciCoU9g==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/orml-api-derive" "^1.0.2-0"
+    "@polkadot/api" "^6.3.1"
+    "@polkadot/rpc-core" "^6.3.1"
+    "@setheum.js/api-derive" "2.1.0"
     "@setheum.js/types" "2.1.0"
 
 "@setheum.js/type-definitions@2.1.0":
