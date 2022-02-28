@@ -23,11 +23,3 @@ jobs:
           cd packages/type-definitions
           yarn
           yarn ${{ matrix.step }}
-      
-      - name: SetCloud pin ${{ matrix.step }}
-        run: |
-          cd packages/setcloud-pin
-          yarn
-          yarn ${{ matrix.step }}
-
-      
