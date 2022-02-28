@@ -11,3 +11,4 @@ export * from './loans/types';
 export * from './nft/types';
 export * from './runtime/types';
 export * from './support/types';
+export * from './vesting/types';

@@ -1,19 +1,18 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { BalanceRequest, BalanceWrapper } from '@setheum.js/types/interfaces/dex';
-import type { CallRequest, EstimateResourcesResponse } from '@setheum.js/types/interfaces/evm';
-import type { CurrencyId } from '@setheum.js/types/interfaces/primitives';
-import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@setheum.js/types/interfaces/runtime';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
-import type { Bytes, HashMap, Json, Metadata, Null, Option, Raw, StorageKey, Text, U256, U64, Vec, bool, u32, u64 } from '@polkadot/types';
+import type { AugmentedRpc } from '@polkadot/rpc-core/types';
+import type { Metadata, StorageKey } from '@polkadot/types';
+import type { Bytes, HashMap, Json, Null, Option, Raw, Text, U256, U64, Vec, bool, u32, u64 } from '@polkadot/types-codec';
+import type { AnyNumber, Codec, ITuple } from '@polkadot/types-codec/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
 import type { BeefySignedCommitment } from '@polkadot/types/interfaces/beefy';
 import type { BlockHash } from '@polkadot/types/interfaces/chain';
 import type { PrefixedStorageKey } from '@polkadot/types/interfaces/childstate';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { ContractCallRequest, ContractExecResult, ContractInstantiateResult, InstantiateRequest } from '@polkadot/types/interfaces/contracts';
+import type { CodeUploadRequest, CodeUploadResult, ContractCallRequest, ContractExecResult, ContractInstantiateResult, InstantiateRequest } from '@polkadot/types/interfaces/contracts';
 import type { CreatedBlock } from '@polkadot/types/interfaces/engine';
 import type { EthAccount, EthCallRequest, EthFilter, EthFilterChanges, EthLog, EthReceipt, EthRichBlock, EthSubKind, EthSubParams, EthSyncStatus, EthTransaction, EthTransactionRequest, EthWork } from '@polkadot/types/interfaces/eth';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
@@ -24,9 +23,13 @@ import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces
 import type { RpcMethods } from '@polkadot/types/interfaces/rpc';
 import type { ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
-import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot/types/types';
+import type { IExtrinsic, Observable } from '@polkadot/types/types';
+import type { BalanceRequest, BalanceWrapper } from '@setheum.js/types/interfaces/dex';
+import type { CallRequest, EstimateResourcesResponse } from '@setheum.js/types/interfaces/evm';
+import type { CurrencyId } from '@setheum.js/types/interfaces/primitives';
+import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@setheum.js/types/interfaces/runtime';
 
-declare module '@polkadot/rpc-core/types.jsonrpc' {
+declare module '@polkadot/rpc-core/types/jsonrpc' {
   export interface RpcInterface {
     author: {
       /**
@@ -69,6 +72,10 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       epochAuthorship: AugmentedRpc<() => Observable<HashMap<AuthorityId, EpochAuthorship>>>;
     };
     beefy: {
+      /**
+       * Returns hash of the latest BEEFY finalized block as seen by this client.
+       **/
+      getFinalizedHead: AugmentedRpc<() => Observable<H256>>;
       /**
        * Returns the block most recently finalized by BEEFY, alongside side its justification.
        **/
@@ -134,7 +141,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Executes a call to a contract
        **/
-      call: AugmentedRpc<(callRequest: ContractCallRequest | { origin?: any; dest?: any; value?: any; gasLimit?: any; inputData?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ContractExecResult>>;
+      call: AugmentedRpc<(callRequest: ContractCallRequest | { origin?: any; dest?: any; value?: any; gasLimit?: any; storageDepositLimit?: any; inputData?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ContractExecResult>>;
       /**
        * Returns the value under a specified storage key in a contract
        **/
@@ -142,11 +149,15 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Instantiate a new contract
        **/
-      instantiate: AugmentedRpc<(request: InstantiateRequest | { origin?: any; endowment?: any; gasLimit?: any; code?: any; data?: any; salt?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ContractInstantiateResult>>;
+      instantiate: AugmentedRpc<(request: InstantiateRequest | { origin?: any; value?: any; gasLimit?: any; storageDepositLimit?: any; code?: any; data?: any; salt?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ContractInstantiateResult>>;
       /**
        * Returns the projected time a given contract will be able to sustain paying its rent
        **/
       rentProjection: AugmentedRpc<(address: AccountId | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Option<BlockNumber>>>;
+      /**
+       * Upload new code without instantiating a contract from it
+       **/
+      uploadCode: AugmentedRpc<(uploadRequest: CodeUploadRequest | { origin?: any; code?: any; storageDepositLimit?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<CodeUploadResult>>;
     };
     dex: {
       /**
@@ -346,9 +357,9 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
     };
     grandpa: {
       /**
-       * Prove finality for the range (begin; end] hash.
+       * Prove finality for the given block number, returning the Justification for the last block in the set.
        **/
-      proveFinality: AugmentedRpc<(begin: BlockHash | string | Uint8Array, end: BlockHash | string | Uint8Array, authoritiesSetId?: u64 | AnyNumber | Uint8Array) => Observable<Option<EncodedFinalityProofs>>>;
+      proveFinality: AugmentedRpc<(blockNumber: BlockNumber | AnyNumber | Uint8Array) => Observable<Option<EncodedFinalityProofs>>>;
       /**
        * Returns the state of the current best round state as well as the ongoing background rounds
        **/
@@ -494,7 +505,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Provides a way to trace the re-execution of a single block
        **/
-      traceBlock: AugmentedRpc<(block: Hash | string | Uint8Array, targets: Option<Text> | null | object | string | Uint8Array, storageKeys: Option<Text> | null | object | string | Uint8Array) => Observable<TraceBlockResponse>>;
+      traceBlock: AugmentedRpc<(block: Hash | string | Uint8Array, targets: Option<Text> | null | object | string | Uint8Array, storageKeys: Option<Text> | null | object | string | Uint8Array, methods: Option<Text> | null | object | string | Uint8Array) => Observable<TraceBlockResponse>>;
     };
     syncstate: {
       /**
@@ -590,5 +601,5 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        **/
       sha3: AugmentedRpc<(data: Bytes | string | Uint8Array) => Observable<H256>>;
     };
-  }
-}
+  } // RpcInterface
+} // declare module

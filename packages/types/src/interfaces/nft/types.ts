@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AccountId, Balance } from '@setheum.js/types/interfaces/runtime';
-import type { BTreeMap, Bytes, Set, Struct, u128, u32, u64 } from '@polkadot/types';
+import type { BTreeMap, Bytes, Set, Struct, u128, u32, u64 } from '@polkadot/types-codec';
 import type { ClassId } from '@polkadot/types/interfaces/uniques';
+import type { AccountId, Balance } from '@setheum.js/types/interfaces/runtime';
 
 /** @name Attributes */
 export interface Attributes extends BTreeMap<Bytes, Bytes> {}

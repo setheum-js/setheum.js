@@ -8,3 +8,4 @@ export { default as loans } from './loans/definitions';
 export { default as nft } from './nft/definitions';
 export { default as runtime } from './runtime/definitions';
 export { default as support } from './support/definitions';
+export { default as vesting } from './vesting/definitions';
