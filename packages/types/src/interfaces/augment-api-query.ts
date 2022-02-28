@@ -5,7 +5,7 @@ import type { AccountId32, Call, H160, H256 } from '@setheum.js/types/interfaces
 import type { ApiTypes } from '@polkadot/api-base/types';
 import type { BTreeMap, Bytes, Null, Option, U8aFixed, Vec, bool, u128, u16, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
-import type { SetheumPrimitivesCurrencyCurrencyId, SetheumPrimitivesTradingPair, CumulusPalletDmpQueueConfigData, CumulusPalletDmpQueuePageIndexData, CumulusPalletParachainSystemRelayStateSnapshotMessagingStateSnapshot, CumulusPalletXcmpQueueInboundStatus, CumulusPalletXcmpQueueOutboundStatus, CumulusPalletXcmpQueueQueueConfigData, FrameSupportWeightsPerDispatchClassU64, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, KaruraRuntimeScheduledTasks, KaruraRuntimeSessionKeys, ModuleAssetRegistryModuleAssetIds, ModuleAssetRegistryModuleAssetMetadata, ModuleAuctionManagerCollateralAuctionItem, ModuleCdpEngineRiskManagementParams, ModuleDexTradingPairStatus, ModuleEvmModuleAccountInfo, ModuleEvmModuleCodeInfo, ModuleHomaModuleStakingLedger, ModuleHomaXcmModuleHomaXcmOperation, ModuleIncentivesPoolId, ModuleLoansPosition, OrmlNftClassInfo, OrmlNftTokenInfo, OrmlOracleModuleTimestampedValue, OrmlRewardsPoolInfo, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTraitsAuctionAuctionInfo, OrmlVestingVestingSchedule, PalletAuthorshipUncleEntryItem, PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesReleases, PalletBalancesReserveData, PalletBountiesBounty, PalletCollectiveVotes, PalletDemocracyPreimageStatus, PalletDemocracyReferendumInfo, PalletDemocracyReleases, PalletDemocracyVoteThreshold, PalletDemocracyVoteVoting, PalletMultisigMultisig, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletSchedulerReleases, PalletSchedulerScheduledV2, PalletTipsOpenTip, PalletTreasuryProposal, PalletXcmQueryStatus, PalletXcmVersionMigrationStage, PolkadotCorePrimitivesOutboundHrmpMessage, PolkadotParachainPrimitivesXcmpMessageFormat, PolkadotPrimitivesV1AbridgedHostConfiguration, PolkadotPrimitivesV1PersistedValidationData, PolkadotPrimitivesV1UpgradeRestriction, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest, XcmV1MultiLocation, XcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { SetheumPrimitivesCurrencyCurrencyId, SetheumPrimitivesTradingPair, FrameSupportWeightsPerDispatchClassU64, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, SetheumRuntimeScheduledTasks, SetheumRuntimeSessionKeys, ModuleAssetRegistryModuleAssetIds, ModuleAssetRegistryModuleAssetMetadata, ModuleAuctionManagerCollateralAuctionItem, ModuleCdpEngineRiskManagementParams, ModuleDexTradingPairStatus, ModuleEvmModuleAccountInfo, ModuleEvmModuleCodeInfo, ModuleLoansPosition, OrmlNftClassInfo, OrmlNftTokenInfo, OrmlOracleModuleTimestampedValue, OrmlRewardsPoolInfo, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTraitsAuctionAuctionInfo, OrmlVestingVestingSchedule, PalletAuthorshipUncleEntryItem, PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesReleases, PalletBalancesReserveData, PalletBountiesBounty, PalletCollectiveVotes, PalletMultisigMultisig, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletSchedulerReleases, PalletSchedulerScheduledV2, PalletTipsOpenTip, PalletTreasuryProposal, SpConsensusBabeSr25519AppSr25519Public, SpRuntimeDigest } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
 declare module '@polkadot/api-base/types/storage' {
@@ -93,11 +93,11 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
-    aura: {
+    babe: {
       /**
        * The current authority set.
        **/
-      authorities: AugmentedQuery<ApiType, () => Observable<Vec<SpConsensusAuraSr25519AppSr25519Public>>, []> & QueryableStorageEntry<ApiType, []>;
+      authorities: AugmentedQuery<ApiType, () => Observable<Vec<SpConsensusBabeSr25519AppSr25519Public>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * The current slot of this block.
        * 
@@ -109,7 +109,7 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
-    auraExt: {
+    babeExt: {
       /**
        * Serves as cache for the authorities.
        * 
@@ -117,7 +117,7 @@ declare module '@polkadot/api-base/types/storage' {
        * but we require the old authorities to verify the seal when validating a PoV. This will always
        * be updated to the latest AuRa authorities in `on_finalize`.
        **/
-      authorities: AugmentedQuery<ApiType, () => Observable<Vec<SpConsensusAuraSr25519AppSr25519Public>>, []> & QueryableStorageEntry<ApiType, []>;
+      authorities: AugmentedQuery<ApiType, () => Observable<Vec<SpConsensusBabeSr25519AppSr25519Public>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -216,18 +216,7 @@ declare module '@polkadot/api-base/types/storage' {
        * DebitExchangeRate: CurrencyId => Option<ExchangeRate>
        **/
       debitExchangeRate: AugmentedQuery<ApiType, (arg: SetheumPrimitivesCurrencyCurrencyId | { Token: any } | { DexShare: any } | { Erc20: any } | string | Uint8Array) => Observable<Option<u128>>, [SetheumPrimitivesCurrencyCurrencyId]> & QueryableStorageEntry<ApiType, [SetheumPrimitivesCurrencyCurrencyId]>;
-      /**
-       * Global interest rate per sec for all types of collateral
-       * 
-       * GlobalInterestRatePerSec: Rate
-       **/
-      globalInterestRatePerSec: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Timestamp in seconds of the last interest accumulation
-       * 
-       * LastAccumulationSecs: u64
-       **/
-      lastAccumulationSecs: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
+      
       /**
        * Generic query
        **/
@@ -248,49 +237,6 @@ declare module '@polkadot/api-base/types/storage' {
        * ExpectedCollateralAuctionSize: map CurrencyId => Balance
        **/
       expectedCollateralAuctionSize: AugmentedQuery<ApiType, (arg: SetheumPrimitivesCurrencyCurrencyId | { Token: any } | { DexShare: any } | { Erc20: any } | string | Uint8Array) => Observable<u128>, [SetheumPrimitivesCurrencyCurrencyId]> & QueryableStorageEntry<ApiType, [SetheumPrimitivesCurrencyCurrencyId]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    collatorSelection: {
-      /**
-       * Fixed deposit bond for each candidate.
-       * 
-       * CandidacyBond: Balance
-       **/
-      candidacyBond: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * The (community, limited) collation candidates.
-       * 
-       * Candidates: BTreeSet<AccountId>
-       **/
-      candidates: AugmentedQuery<ApiType, () => Observable<Vec<AccountId32>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Desired number of candidates.
-       * 
-       * This should ideally always be less than [`Config::MaxCandidates`] for weights to be correct.
-       * DesiredCandidates: u32
-       **/
-      desiredCandidates: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * The invulnerable, fixed collators.
-       * 
-       * Invulnerables: Vec<AccountId>
-       **/
-      invulnerables: AugmentedQuery<ApiType, () => Observable<Vec<AccountId32>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Mapping from the kicked candidate or the left candidate to session index.
-       * 
-       * NonCandidates: map AccountId => SessionIndex
-       **/
-      nonCandidates: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<u32>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
-      /**
-       * Session points for each candidate.
-       * 
-       * SessionPoints: map AccountId => u32
-       **/
-      sessionPoints: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<u32>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Generic query
        **/
@@ -322,28 +268,6 @@ declare module '@polkadot/api-base/types/storage' {
        * TradingPairStatuses: map TradingPair => TradingPairStatus
        **/
       tradingPairStatuses: AugmentedQuery<ApiType, (arg: SetheumPrimitivesTradingPair) => Observable<ModuleDexTradingPairStatus>, [SetheumPrimitivesTradingPair]> & QueryableStorageEntry<ApiType, [SetheumPrimitivesTradingPair]>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
-    dmpQueue: {
-      /**
-       * The configuration.
-       **/
-      configuration: AugmentedQuery<ApiType, () => Observable<CumulusPalletDmpQueueConfigData>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * The overweight messages.
-       **/
-      overweight: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u32, Bytes]>>>, [u64]> & QueryableStorageEntry<ApiType, [u64]>;
-      /**
-       * The page index.
-       **/
-      pageIndex: AugmentedQuery<ApiType, () => Observable<CumulusPalletDmpQueuePageIndexData>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * The queue pages.
-       **/
-      pages: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Vec<ITuple<[u32, Bytes]>>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Generic query
        **/
@@ -529,7 +453,7 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Some documentation
        **/
-      tasks: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<KaruraRuntimeScheduledTasks>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
+      tasks: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<SetheumRuntimeScheduledTasks>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Generic query
        **/

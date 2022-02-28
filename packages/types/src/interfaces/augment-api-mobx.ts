@@ -10,7 +10,7 @@ import type { CodeInfo, Erc20Info, EvmAddress } from '@setheum.js/types/interfac
 import type { Position } from '@setheum.js/types/interfaces/loans';
 import type { ClassInfoOf, TokenId } from '@setheum.js/types/interfaces/nft';
 import type { AuctionId, CurrencyId, TradingPair } from '@setheum.js/types/interfaces/primitives';
-import type { AccountId, Balance, BalanceOf, BlockNumber, H256, Hash, KeyTypeId, Moment, OpaqueCall, OracleKey, Releases, Slot, ValidatorId, Weight } from '@setheum.js/types/interfaces/runtime';
+import type { AccountId, Balance, BalanceOf, BlockNumber, H256, Hash, KeyTypeId, Moment, OpaqueCall, OracleKey, Releases, Slot, ValidatorId } from '@setheum.js/types/interfaces/runtime';
 import type { ExchangeRate, Rate } from '@setheum.js/types/interfaces/support';
 import type { ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { OrderedSet, TimestampedValueOf } from '@open-web3/orml-types/interfaces/oracle';
@@ -19,8 +19,7 @@ import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import type { AccountData, BalanceLock, ReserveData } from '@polkadot/types/interfaces/balances';
 import type { ProposalIndex, Votes } from '@polkadot/types/interfaces/collective';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
-import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
+import type { Proposal } from '@polkadot/types/interfaces/democracy';
 import type { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
@@ -81,7 +80,7 @@ export interface StorageType extends BaseStorageType {
      **/
     totalTargetInAuction: Balance | null;
   };
-  aura: {    /**
+  babe: {    /**
      * The current authority set.
      **/
     authorities: Vec<AuthorityId> | null;
@@ -92,7 +91,7 @@ export interface StorageType extends BaseStorageType {
      **/
     currentSlot: Slot | null;
   };
-  auraExt: {    /**
+  babeExt: {    /**
      * Serves as cache for the authorities.
      *
      * The authorities in AuRa are overwritten in `on_initialize` when we switch to a new session,
@@ -187,120 +186,6 @@ export interface StorageType extends BaseStorageType {
      * ExpectedCollateralAuctionSize: map CurrencyId => Balance
      **/
     expectedCollateralAuctionSize: StorageMap<CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string, Balance>;
-  };
-  collatorSelection: {    /**
-     * Fixed deposit bond for each candidate.
-     *
-     * CandidacyBond: Balance
-     **/
-    candidacyBond: BalanceOf | null;
-    /**
-     * The (community, limited) collation candidates.
-     *
-     * Candidates: BTreeSet<AccountId>
-     **/
-    candidates: BTreeSet<AccountId> | null;
-    /**
-     * Desired number of candidates.
-     *
-     * This should ideally always be less than [`Config::MaxCandidates`] for weights to be correct.
-     * DesiredCandidates: u32
-     **/
-    desiredCandidates: u32 | null;
-    /**
-     * The invulnerable, fixed collators.
-     *
-     * Invulnerables: Vec<AccountId>
-     **/
-    invulnerables: Vec<AccountId> | null;
-    /**
-     * Mapping from the kicked candidate or the left candidate to session index.
-     *
-     * NonCandidates: map AccountId => SessionIndex
-     **/
-    nonCandidates: StorageMap<AccountId | string, SessionIndex>;
-    /**
-     * Session points for each candidate.
-     *
-     * SessionPoints: map AccountId => u32
-     **/
-    sessionPoints: StorageMap<AccountId | string, u32>;
-  };
-  democracy: {    /**
-     * A record of who vetoed what. Maps proposal hash to a possible existent block number
-     * (until when it may not be resubmitted) and who vetoed it.
-     **/
-    blacklist: StorageMap<Hash | string, Option<ITuple<[BlockNumber, Vec<AccountId>]>>>;
-    /**
-     * Record of all proposals that have been subject to emergency cancellation.
-     **/
-    cancellations: StorageMap<Hash | string, bool>;
-    /**
-     * Those who have locked a deposit.
-     *
-     * TWOX-NOTE: Safe, as increasing integer keys are safe.
-     **/
-    depositOf: StorageMap<PropIndex | AnyNumber, Option<ITuple<[Vec<AccountId>, BalanceOf]>>>;
-    /**
-     * True if the last referendum tabled was submitted externally. False if it was a public
-     * proposal.
-     **/
-    lastTabledWasExternal: bool | null;
-    /**
-     * Accounts for which there are locks in action which may be removed at some point in the
-     * future. The value is the block number at which the lock expires and may be removed.
-     *
-     * TWOX-NOTE: OK ― `AccountId` is a secure hash.
-     **/
-    locks: StorageMap<AccountId | string, Option<BlockNumber>>;
-    /**
-     * The lowest referendum index representing an unbaked referendum. Equal to
-     * `ReferendumCount` if there isn't a unbaked referendum.
-     **/
-    lowestUnbaked: ReferendumIndex | null;
-    /**
-     * The referendum to be tabled whenever it would be valid to table an external proposal.
-     * This happens when a referendum needs to be tabled and one of two conditions are met:
-     * - `LastTabledWasExternal` is `false`; or
-     * - `PublicProps` is empty.
-     **/
-    nextExternal: Option<ITuple<[Hash, VoteThreshold]>> | null;
-    /**
-     * Map of hashes to the proposal preimage, along with who registered it and their deposit.
-     * The block number is the block at which it was deposited.
-     **/
-    preimages: StorageMap<Hash | string, Option<PreimageStatus>>;
-    /**
-     * The number of (public) proposals that have been made so far.
-     **/
-    publicPropCount: PropIndex | null;
-    /**
-     * The public proposals. Unsorted. The second item is the proposal's hash.
-     **/
-    publicProps: Vec<ITuple<[PropIndex, Hash, AccountId]>> | null;
-    /**
-     * The next free referendum index, aka the number of referenda started so far.
-     **/
-    referendumCount: ReferendumIndex | null;
-    /**
-     * Information concerning any given referendum.
-     *
-     * TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
-     **/
-    referendumInfoOf: StorageMap<ReferendumIndex | AnyNumber, Option<ReferendumInfo>>;
-    /**
-     * Storage version of the pallet.
-     *
-     * New networks start with last version.
-     **/
-    storageVersion: Option<Releases> | null;
-    /**
-     * All votes for a particular voter. We store the balance for the number of votes that we
-     * have recorded. The second item is the total amount of delegations, that will be added.
-     *
-     * TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway.
-     **/
-    votingOf: StorageMap<AccountId | string, Voting>;
   };
   dex: {    /**
      * Initial exchange rate, used to calculate the dex share amount for founders of provisioning
