@@ -21,7 +21,7 @@ Changes:
 
 ## 3.2.0 (3.x - 3.2.0) Mar 3, 2021
 
-Changes:
+Changes: **Full Changelog**: https://github.com/setheum-js/setheum.js/compare/v2.1.0...v3.2.0
 
 - Add custom Setheum Vesting
 - Remove renvm-bridge
