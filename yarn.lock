@@ -1795,6 +1795,48 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.0.0.tgz#109fb595021de285f05a7db6806f2f48296fcee7"
   integrity sha512-gIVaYhUsy+9s58m/ETjSJVKHhKTBMmcRb9cEV5/5dwvfDlfORjKrFsDeDHWRrm6RjcPvCLZFwGJjAjLj1gg4HA==
 
+"@setheum.js/api-derive@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@setheum.js/api-derive/-/api-derive-3.1.0.tgz#3e95737f58e63e5473c2a1406fbf34901a1d2067"
+  integrity sha512-oK86HNft3TE9jIC3STAO+s4Mavjs2nTddYzNtn8Rx6muZGZioKPBQGgy3D0ZKc2ljKTYpf9xDNRIipGjd95zqg==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/orml-types" "^1.0.2-0"
+    "@polkadot/api-derive" "^7.1.1"
+    "@setheum.js/types" "3.1.0"
+
+"@setheum.js/api@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@setheum.js/api/-/api-3.1.0.tgz#4ee5cb72de4f581f6e1dc404e7c008662bcc87e3"
+  integrity sha512-77qC9P2l25F+XOGxP7i4kyWjHIBW7MG292350eTIwRty4Rme1ptt16jFmHQieSTd6ozNbhWY27fi2e3CfFDfIw==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/orml-api-derive" "^1.0.2-0"
+    "@polkadot/api" "^7.1.1"
+    "@polkadot/rpc-core" "^7.1.1"
+    "@setheum.js/api-derive" "3.1.0"
+    "@setheum.js/types" "3.1.0"
+
+"@setheum.js/type-definitions@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@setheum.js/type-definitions/-/type-definitions-3.1.0.tgz#c3b0aaaedde876f7cda23375afcc0feec7cde1e3"
+  integrity sha512-ek1lniHBcr5CnuKnvPfPOXESjDTvTnlneBAKUQyMkQwP9zGysTieTjOMhldH9f0jghc4la9OWVGS3fPbWrSoWQ==
+  dependencies:
+    "@open-web3/orml-type-definitions" "^1.0.2-0"
+
+"@setheum.js/types@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@setheum.js/types/-/types-3.1.0.tgz#665132ee45a0bfa52645d0d3c211d5a061731ff6"
+  integrity sha512-se35b+rkGATZ6VEfGQ2XENAK1gV9fhZF7lH5PuNHpuKy/v3f8qik4c+N0MCYLBzJn2i41Q9MjCC9Cgz4GplHxg==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/api-mobx" "^1.0.2-0"
+    "@open-web3/orml-types" "^1.0.2-0"
+    "@polkadot/api" "^7.1.1"
+    "@polkadot/typegen" "^7.1.1"
+    "@polkadot/types" "^7.1.1"
+    "@setheum.js/type-definitions" "3.1.0"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
