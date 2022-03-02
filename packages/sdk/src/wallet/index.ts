@@ -18,7 +18,7 @@ import { OrmlAccountData } from '@open-web3/orml-types/interfaces';
 import { BehaviorSubject, combineLatest, Observable, of, firstValueFrom } from 'rxjs';
 import { map, switchMap, shareReplay, filter } from 'rxjs/operators';
 import { TokenRecord, WalletConsts, BalanceData, PresetTokens, TokenPriceFetchSource } from './type';
-import { ChainType, CurrencyNotFound, Liquidity, SDKNotReady } from '..';
+import { CurrencyNotFound, Liquidity, SDKNotReady } from '..';
 import { getMaxAvailableBalance } from './utils/get-max-available-balance';
 import { MarketPriceProvider } from './price-provider/market-price-provider';
 import { OraclePriceProvider } from './price-provider/oracle-price-provider';

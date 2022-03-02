@@ -1,6 +1,6 @@
 import { ChainType } from '../../types';
 import { TokenPriceFetchSource } from '../type';
-import { PriceProviderType } from './types';
+// import { PriceProviderType } from './types';
 
 export const defaultTokenPriceFetchSource: TokenPriceFetchSource = {
   [ChainType.SETHEUM]: {
