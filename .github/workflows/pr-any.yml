@@ -16,7 +16,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: test
         run: |
-          yarn install --immutable | grep -v 'YN0013'
+          yarn install
           yarn test
 
   build_code:
@@ -33,5 +33,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: build
         run: |
-          yarn install --immutable | grep -v 'YN0013'
+          yarn install
           yarn build
