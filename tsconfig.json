@@ -58,6 +58,12 @@
       "@setheum.js/sdk-loan/*": [
         "packages/sdk-loan/src/*"
       ],
+      "@setheum.js/sdk": [
+        "packages/sdk/src"
+      ],
+      "@setheum.js/sdk/*": [
+        "packages/sdk/src/*"
+      ],
     },
     "skipLibCheck": true,
     "typeRoots": [

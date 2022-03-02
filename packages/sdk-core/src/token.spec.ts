@@ -17,12 +17,18 @@ describe('token', () => {
 
   test('fromCurrencyId set default token decimal should work', () => {
     const mockSETM = { asToken: { toString: () => 'SETM' }, isToken: true };
-    const mockSETUSD = { asToken: { toString: () => 'SETUSD' }, isToken: true };
+    const mockSERP = { asToken: { toString: () => 'SERP' }, isToken: true };
     const mockDNAR = { asToken: { toString: () => 'DNAR' }, isToken: true };
+    const mockHELP = { asToken: { toString: () => 'HELP' }, isToken: true };
+    const mockSETR = { asToken: { toString: () => 'SETR' }, isToken: true };
+    const mockSETUSD = { asToken: { toString: () => 'SETUSD' }, isToken: true };
 
     expect(Token.fromCurrencyId(mockSETM as any).name).toEqual('SETM');
-    expect(Token.fromCurrencyId(mockSETUSD as any).name).toEqual('SETUSD');
+    expect(Token.fromCurrencyId(mockSERP as any).name).toEqual('SERP');
     expect(Token.fromCurrencyId(mockDNAR as any).name).toEqual('DNAR');
+    expect(Token.fromCurrencyId(mockHELP as any).name).toEqual('HELP');
+    expect(Token.fromCurrencyId(mockSETR as any).name).toEqual('SETR');
+    expect(Token.fromCurrencyId(mockSETUSD as any).name).toEqual('SETUSD');
   });
 
   test('toChainData should work', () => {
@@ -46,9 +52,13 @@ describe('token', () => {
   test('sort tokens should work', () => {
     const setm = new Token('SETM');
     const dnar = new Token('DNAR');
-    const setusd = new Token('SETUSD');
+    const setmsetusd = new Token('lp://SETM/SETUSD');
 
+    // basic symbol & basic symbol
     expect(Token.sort(setm, dnar)).toEqual([setm, dnar]);
     expect(Token.sort(dnar, setm)).toEqual([setm, dnar]);
+    // basic symbol & lp
+    expect(Token.sort(setmsetusd, setm)).toEqual([setm, setmsetusd]);
+    expect(Token.sort(setm, setmsetusd)).toEqual([setm, setmsetusd]);
   });
 });

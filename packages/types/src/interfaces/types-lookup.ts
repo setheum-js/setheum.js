@@ -389,13 +389,7 @@ declare module '@polkadot/types/lookup' {
     readonly asDexShare: ITuple<[SetheumPrimitivesCurrencyDexShare, SetheumPrimitivesCurrencyDexShare]>;
     readonly isErc20: boolean;
     readonly asErc20: H160;
-    readonly isStableAssetPoolToken: boolean;
-    readonly asStableAssetPoolToken: u32;
-    readonly isLiquidCroadloan: boolean;
-    readonly asLiquidCroadloan: u32;
-    readonly isForeignAsset: boolean;
-    readonly asForeignAsset: u16;
-    readonly type: 'Token' | 'DexShare' | 'Erc20' | 'StableAssetPoolToken' | 'LiquidCroadloan' | 'ForeignAsset';
+    readonly type: 'Token' | 'DexShare' | 'Erc20';
   }
 
   /** @name SetheumPrimitivesCurrencyTokenSymbol (42) */
@@ -415,11 +409,7 @@ declare module '@polkadot/types/lookup' {
     readonly asToken: SetheumPrimitivesCurrencyTokenSymbol;
     readonly isErc20: boolean;
     readonly asErc20: H160;
-    readonly isLiquidCroadloan: boolean;
-    readonly asLiquidCroadloan: u32;
-    readonly isForeignAsset: boolean;
-    readonly asForeignAsset: u16;
-    readonly type: 'Token' | 'Erc20' | 'LiquidCroadloan' | 'ForeignAsset';
+    readonly type: 'Token' | 'Erc20';
   }
 
   /** @name ModuleCurrenciesModuleEvent (46) */
@@ -1173,11 +1163,7 @@ declare module '@polkadot/types/lookup' {
   export interface ModuleAssetRegistryModuleAssetIds extends Enum {
     readonly isErc20: boolean;
     readonly asErc20: H160;
-    readonly isStableAssetId: boolean;
-    readonly asStableAssetId: u32;
-    readonly isForeignAssetId: boolean;
-    readonly asForeignAssetId: u16;
-    readonly type: 'Erc20' | 'StableAssetId' | 'ForeignAssetId';
+    readonly type: 'Erc20';
   }
 
   /** @name ModuleEvmModuleEvent (161) */

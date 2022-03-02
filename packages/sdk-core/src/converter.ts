@@ -1,114 +1,143 @@
-import { CurrencyId } from '@setheum.js/types/interfaces';
+import { CurrencyId, TokenSymbol } from '@setheum.js/types/interfaces';
+import { isArray } from 'lodash';
+import { TokenType } from '.';
+import {
+  ConvertToCurrencyIdFailed,
+  ConvertToCurrencyNameFailed,
+  NotDexShareName
+} from './errors';
 import { Token } from './token';
-import { AnyApi, MaybeCurrency } from './types';
+import { AnyApi, CurrencyObject, MaybeCurrency } from './types';
 
-export class ConvertToCurrencyIdFailed extends Error {
-  constructor() {
-    super();
-
-    this.name = 'convertToCurrencyIdFailed';
-    this.message = 'convert to currency id failed';
-  }
+/**
+ *  we set a name with a prefix to all types of tokens for easy passing and use.
+ *  e.g.
+ *  { DexShare: [{ Token: SETM }, { Token: SERP }] } is lp://SETM/SERP
+ *  { ERC20: '0x100000000' } is erc20://0x10000
+ *  we can also combine these name for complex types
+ *  e.g.
+ *  lp://${encode(lp://SETM/SERP)}/${encode(sa://0)} is { DexShare: [ { DexShare: [{ Token: 'SETM' }, { Token: 'SERP}] } ] }
+ */
+export function isBasicToken(name: string): boolean {
+  return name.search('//') < 0;
 }
 
-export class ConvertToCurrencyIdNameFailed extends Error {
-  constructor() {
-    super();
-
-    this.name = 'convertToNameIdFailed';
-    this.message = 'convert to name failed';
-  }
+// for dex share
+export function createDexShareName(name1: string, name2: string): string {
+  return `lp://${encodeURIComponent(name1)}/${encodeURIComponent(name2)}`;
 }
 
-export const forceToTokenSymbolCurrencyId = (api: AnyApi, target: string | Token | CurrencyId): CurrencyId => {
-  try {
-    if (typeof target === 'string') return api.createType('CurrencyId', { token: target as string });
+export function isDexShareName(name: string): boolean {
+  return name.startsWith('lp://');
+}
+/**
+ * @name unzipDexShareName
+ * @description unzip dex share name to two token name, e.g. lp://KAR/KSM -> [KAR, KSM];
+ */
+export function unzipDexShareName(name: string): [string, string] {
+  if (!isDexShareName(name)) throw new NotDexShareName(name);
 
-    if (target instanceof Token) return target.toCurrencyId(api);
+  const reg = /^lp:\/\/([^/]*)?\/([^/]*)$/;
 
-    if (target?.isToken || target?.isDexShare || target?.isErc20) return target as CurrencyId;
+  const result = reg.exec(name);
 
-    throw new ConvertToCurrencyIdFailed();
-  } catch (e) {
-    throw new ConvertToCurrencyIdFailed();
-  }
-};
+  if (!result) throw new NotDexShareName(name);
 
-export const forceToDexShareCurrencyId = (api: AnyApi, target: [string, string] | CurrencyId): CurrencyId => {
-  try {
-    if (Array.isArray(target))
-      return api.createType('CurrencyId', { dexShare: target.map((item) => ({ token: item })) });
+  return [decodeURIComponent(result[1]), decodeURIComponent(result[2])] as [string, string];
+}
 
-    if (target?.isToken || target?.isDexShare || target?.isErc20) return target as CurrencyId;
+export function getCurrencyTypeByName(name: string): TokenType {
+  if (isDexShareName(name)) return TokenType.DEX_SHARE;
 
-    throw new ConvertToCurrencyIdFailed();
-  } catch (e) {
-    throw new ConvertToCurrencyIdFailed();
-  }
-};
+  if (isDexShareName(name)) return TokenType.DEX_SHARE;
 
-export const forceToCurrencyId = (api: AnyApi, currency: MaybeCurrency): CurrencyId => {
-  let currencyId: CurrencyId | undefined;
+  // FIXME: need to support ERC20
+  return TokenType.BASIC;
+}
 
-  if (typeof currency === 'string') {
-    // first handle string type
-    if (isDexShare(currency)) {
-      currencyId = forceToDexShareCurrencyId(api, getLPCurrenciesFormName(currency));
-    } else {
-      currencyId = forceToTokenSymbolCurrencyId(api, currency as string);
+export function getBasicCurrencyObject(name: string): CurrencyObject {
+  return { Token: name };
+}
+
+export function getDexShareCurrencyObject(name: string): CurrencyObject {
+  const inner = (name: string): CurrencyObject => {
+    if (isDexShareName(name)) {
+      const [name1, name2] = unzipDexShareName(name);
+
+      return { DexShare: [inner(name1), inner(name2)] };
     }
-  } else if (Array.isArray(currency)) {
-    // handle [string, string]
-    currencyId = forceToDexShareCurrencyId(api, currency as [string, string]);
-  } else if (currency instanceof Token) {
-    // handle token
-    currencyId = currency.toCurrencyId(api);
-  } else {
-    // handle CurrencyId
-    currencyId = currency as CurrencyId;
-  }
 
-  // if currencyId is undefined after process, throw error
-  if (!currencyId) throw new ConvertToCurrencyIdFailed();
+    // FIXME: need to support ERC20
+    return getBasicCurrencyObject(name);
+  };
 
-  return currencyId as CurrencyId;
-};
+  return inner(name);
+}
 
-export const forceToCurrencyIdName = (target: MaybeCurrency): string => {
-  if (typeof target === 'string') return target;
+export function getCurrencyObject(name: string): CurrencyObject {
+  if (isDexShareName(name)) return getDexShareCurrencyObject(name);
 
-  if (Array.isArray(target)) return createLPCurrencyName(target[0], target[1]);
+  // FIXME: need to support ERC20
+  return getBasicCurrencyObject(name);
+}
 
-  if (target instanceof Token) return target.toString();
-
+/**
+ * @name forceToCurrencyName
+ * @description convert `maybeCurrency` to currency name
+ */
+export function forceToCurrencyName(target: MaybeCurrency): string {
   try {
+    if (typeof target === 'string') return target;
+
+    if (Array.isArray(target)) return createDexShareName(target[0], target[1]);
+
+    if (target instanceof Token) return target.toString();
+
     if ((target as CurrencyId).isToken) return (target as CurrencyId).asToken.toString();
 
     if ((target as CurrencyId).isDexShare) {
-      return createLPCurrencyName(
-        forceToCurrencyIdName((target as CurrencyId).asDexShare[0] as CurrencyId),
-        forceToCurrencyIdName((target as CurrencyId).asDexShare[1] as CurrencyId)
+      return createDexShareName(
+        forceToCurrencyName((target as CurrencyId).asDexShare[0] as CurrencyId),
+        forceToCurrencyName((target as CurrencyId).asDexShare[1] as CurrencyId)
       );
     }
 
+    // FIXME: should handle erc20
     if ((target as CurrencyId).isErc20) return (target as CurrencyId).asErc20.toString();
-  } catch (e) {
-    throw new ConvertToCurrencyIdNameFailed();
-  }
 
-  return '';
+    return target.toString();
+  } catch (e) {
+    throw new ConvertToCurrencyNameFailed(target);
+  }
+}
+
+export function forceToCurrencyId(api: AnyApi, target: MaybeCurrency): CurrencyId {
+  try {
+    const name = forceToCurrencyName(target);
+
+    return api.createType('SetheumPrimitivesCurrencyCurrencyId', getCurrencyObject(name)) as unknown as CurrencyId;
+  } catch (e) {
+    throw new ConvertToCurrencyIdFailed(origin);
+  }
+}
+
+export const forceToTokenSymbolCurrencyId = (
+  api: AnyApi,
+  target: string | Token | CurrencyId | TokenSymbol
+): CurrencyId => {
+  const name = target.toString();
+
+  return forceToCurrencyId(api, name);
 };
 
-export function createLPCurrencyName(name1: string, name2: string): string {
-  return `lp://${name1}/${name2}`;
-}
+export const forceToDexShareCurrencyId = (api: AnyApi, target: [string, string] | CurrencyId): CurrencyId => {
+  let name = '';
 
-export function getLPCurrenciesFormName(name: string): [string, string] {
-  return name.replace('lp://', '').split('/') as [string, string];
-}
+  if (isArray(target)) {
+    name = createDexShareName(target[0], target[1]);
+  } else {
+    name = forceToCurrencyName(target);
+  }
 
-export function isDexShare(currency: MaybeCurrency): boolean {
-  const name = forceToCurrencyIdName(currency);
-
-  return name.startsWith('lp://');
-}
+  return forceToCurrencyId(api, name);
+};

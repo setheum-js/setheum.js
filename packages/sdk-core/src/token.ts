@@ -1,118 +1,126 @@
-import { CurrencyId, TokenSymbol, DexShare, TradingPair } from '@setheum.js/types/interfaces';
-import primitivesConfig from '@setheum.js/type-definitions/primitives';
+import { TokenSymbol, DexShare, TradingPair } from '@setheum.js/types/interfaces';
 import { assert } from '@polkadot/util';
 
-import { AnyApi } from './types';
-import { createLPCurrencyName, forceToCurrencyIdName, getLPCurrenciesFormName } from './converter';
+import { AnyApi, CombinedCurrencyId, TokenType } from './types';
+import { forceToCurrencyName } from './converter';
+import {
+  createDexShareName,
+  CurrencyObject,
+  FixedPointNumber,
+  getCurrencyObject,
+  getCurrencyTypeByName,
+  unzipDexShareName
+} from '.';
+import { sortTokenByName } from './sort-token';
 
-const TOKEN_SORT: Record<string, number> = primitivesConfig.types.TokenSymbol._enum;
-
-interface TokenOpts {
-  decimal?: number;
-  isDexShare?: boolean;
-  isTokenSymbol?: boolean;
-  isERC20?: boolean;
+interface Configs {
+  display?: string;   // token name for display
+  decimals?: number;  // token decimals
+  decimal?: number;   // token decimal
+  type?: TokenType;   // token type
   chain?: string;
+  symbol?: string;
+  detail?: { id: number };
+  ed?: FixedPointNumber;
 }
 
 export class Token {
   readonly name: string;
+  readonly symbol: string;
+  readonly decimals: number;
   readonly decimal: number;
-  readonly isDexShare: boolean;
-  readonly isTokenSymbol: boolean;
-  readonly isERC20: boolean;
+  readonly ed: FixedPointNumber;
   readonly chain: string | undefined;
+  readonly type: TokenType;
+  readonly display: string;
+  readonly pair?: [Token, Token];
 
-  constructor(name: string, options?: TokenOpts) {
+  constructor(name: string, configs?: Configs) {
     this.name = name;
-    this.decimal = options?.decimal || 18;
-    this.isDexShare = options?.isDexShare || false;
-    this.isTokenSymbol = options?.isTokenSymbol || false;
-    this.isERC20 = options?.isERC20 || false;
-    this.chain = options?.chain;
+    this.decimals = configs?.decimals || configs?.decimal || 18;
+    this.decimal = this.decimals;
+    this.ed = configs?.ed || FixedPointNumber.ZERO;
+    this.chain = configs?.chain;
+    this.type = configs?.type || TokenType.BASIC;
+    this.symbol = configs?.symbol || name;
+    this.display = configs?.display || name;
   }
 
-  static fromCurrencyId(currency: CurrencyId, decimal?: number): Token {
-    if (currency.isDexShare) {
-      // resort the Currencies of DexShare, for some CurrencyId may created manually.
-      const name = forceToCurrencyIdName(currency);
-      const [token1, token2] = Token.sortTokenNames(...getLPCurrenciesFormName(name));
-
-      return new Token(createLPCurrencyName(token1, token2), {
-        decimal: decimal,
-        isDexShare: true,
-        isTokenSymbol: false,
-        isERC20: false
-      });
-    }
-
-    if (currency.isToken) {
-      return new Token(forceToCurrencyIdName(currency), {
-        decimal: decimal,
-        isDexShare: false,
-        isTokenSymbol: true,
-        isERC20: false
-      });
-    }
-
-    if (currency.isErc20) {
-      return new Token(forceToCurrencyIdName(currency), {
-        decimal: decimal,
-        isDexShare: false,
-        isTokenSymbol: false,
-        isERC20: true
-      });
-    }
-
-    throw new Error(`can't construct from CurrencyId`);
+  get isTokenSymbol(): boolean {
+    return this.type === TokenType.BASIC;
   }
 
-  static fromTokenSymbol(token: TokenSymbol, decimal?: number): Token {
-    return new Token(token.toString(), {
-      decimal,
-      isDexShare: false,
-      isTokenSymbol: true,
-      isERC20: false
-    });
+  get isDexShare(): boolean {
+    return this.type === TokenType.DEX_SHARE;
   }
 
-  static fromTokenName(name: string, options?: TokenOpts): Token {
-    return new Token(name, options);
+  get isERC20(): boolean {
+    return this.type === TokenType.ERC20;
+  }
+
+  static create(name: string, configs?: Configs): Token {
+    return new Token(name, configs);
+  }
+
+  /**
+   * @name fromCurrencyName
+   * @description create token from currency name
+   */
+   static fromCurrencyName(name: string, configs?: Configs): Token {
+    const type = getCurrencyTypeByName(name);
+
+    return new Token(name, { ...configs, type });
+  }
+
+  /**
+   * @name fromCurrencyId
+   * @description create token from currency id
+   */
+   static fromCurrencyId(currency: CombinedCurrencyId, configs?: Configs): Token {
+    return this.fromCurrencyName(forceToCurrencyName(currency), configs);
+  }
+
+  static fromTokenSymbol(token: TokenSymbol, configs?: Configs): Token {
+    return this.fromCurrencyName(token.toString(), configs);
   }
 
   /* create DexShareToken by Token array */
-  static fromTokens(token1: Token, token2: Token, decimal?: number): Token {
+  static fromTokens(token1: Token, token2: Token): Token {
     const [_token1, _token2] = this.sort(token1, token2);
 
-    // set decimal as token1 decimal;
-    const _decimal = decimal || _token1.decimal;
+    // set token1 decimals as decimals;
+    const decimals = _token1.decimals;
+    const ed = _token1.ed;
 
-    return new Token(createLPCurrencyName(_token1.name, _token2.name), {
-      decimal: _decimal,
-      isDexShare: true,
-      isTokenSymbol: false,
-      isERC20: false
+    return new Token(createDexShareName(_token1.name, _token2.name), {
+      decimals,
+      type: TokenType.DEX_SHARE,
+      ed
     });
   }
 
-  /* create DexShareToken by CurrencyId array */
-  static fromCurrencies(currency1: CurrencyId, currency2: CurrencyId, decimal?: number | [number, number]): Token {
-    const decimal1 = Array.isArray(decimal) ? decimal[0] : decimal;
-    const decimal2 = Array.isArray(decimal) ? decimal[1] : decimal;
+  /* create DexShareToken form CombinedCurrencyId array */
+  static fromCurrencies(
+    currency1: CombinedCurrencyId,
+    currency2: CombinedCurrencyId,
+    decimals?: number | [number, number]
+  ): Token {
+    const decimals1 = Array.isArray(decimals) ? decimals[0] : decimals;
+    const decimals2 = Array.isArray(decimals) ? decimals[1] : decimals;
 
-    const token1 = Token.fromCurrencyId(currency1, decimal1);
-    const token2 = Token.fromCurrencyId(currency2, decimal2);
+    const token1 = Token.fromCurrencyId(currency1, { decimals: decimals1 });
+    const token2 = Token.fromCurrencyId(currency2, { decimals: decimals2 });
 
     return Token.fromTokens(token1, token2);
   }
 
-  /* create DexShareToken by TokenSymbol array */
-  static fromTokenSymbols(currency1: TokenSymbol, currency2: TokenSymbol, decimal?: number | [number, number]): Token {
-    const decimal1 = Array.isArray(decimal) ? decimal[0] : decimal;
-    const decimal2 = Array.isArray(decimal) ? decimal[1] : decimal;
+  /* create DexShareToken from TokenSymbol array */
+  static fromTokenSymbols(currency1: TokenSymbol, currency2: TokenSymbol, decimals?: number | [number, number]): Token {
+    const decimals1 = Array.isArray(decimals) ? decimals[0] : decimals;
+    const decimals2 = Array.isArray(decimals) ? decimals[1] : decimals;
 
-    const token1 = Token.fromTokenSymbol(currency1, decimal1);
-    const token2 = Token.fromTokenSymbol(currency2, decimal2);
+    const token1 = Token.fromTokenSymbol(currency1, { decimals: decimals1 });
+    const token2 = Token.fromTokenSymbol(currency2, { decimals: decimals2 });
 
     return Token.fromTokens(token1, token2);
   }
@@ -120,31 +128,34 @@ export class Token {
   static sortTokenNames(...names: string[]): string[] {
     const result = [...names];
 
-    return result.sort((a, b) => TOKEN_SORT[a] - TOKEN_SORT[b]);
+    return result.sort((a, b) => {
+      return sortTokenByName(a, b);
+    });
   }
 
-  static sortCurrencies(...currencies: CurrencyId[]): CurrencyId[] {
+  static sortCurrencies(...currencies: CombinedCurrencyId[]): CombinedCurrencyId[] {
     const result = [...currencies];
+    const nameMap = Object.fromEntries(result.map((item) => [forceToCurrencyName(item), item]));
 
-    // FIXME: sort currencies should handle ERC20 and DexShare
-    for (const item of currencies) {
-      assert(item.isToken, `sortCurrencies doesn't support ERC20 and DexShare yet.`);
-    }
-
-    return result.sort((a, b) => TOKEN_SORT[a.asToken.toString()] - TOKEN_SORT[b.asToken.toString()]);
+    return Object.keys(nameMap)
+      .sort((a, b) => sortTokenByName(a, b))
+      .map((name) => nameMap[name]);
   }
 
   static sort(...tokens: Token[]): Token[] {
     const result = [...tokens];
+    const nameMap = Object.fromEntries(result.map((item) => [item.name, item]));
 
-    return result.sort((a, b) => TOKEN_SORT[a.name] - TOKEN_SORT[b.name]);
+    return Object.keys(nameMap)
+      .sort((a, b) => sortTokenByName(a, b))
+      .map((name) => nameMap[name]);
   }
 
-  public toCurrencyId(api: AnyApi): CurrencyId {
+  public toCurrencyId(api: AnyApi): CombinedCurrencyId {
     try {
-      return api.createType('CurrencyId', this.toChainData());
+      return api.createType('SetheumPrimitivesCurrencyCombinedCurrencyId', this.toChainData());
     } catch (e) {
-      throw new Error(`can't convert to CurrencyId`);
+      throw new Error(`can't convert ${this.toChainData()} to Currency Id`);
     }
   }
 
@@ -152,11 +163,11 @@ export class Token {
     assert(this.isDexShare, 'the currency is not a dex share');
 
     try {
-      return api.createType('TradingPair', [
-        Token.sortTokenNames(...getLPCurrenciesFormName(this.name)).map((i) => ({ token: i }))
+      return api.createType('SetheumPrimitivesTradingPair', [
+        ...unzipDexShareName(this.name).map((i) => getCurrencyObject(i))
       ]);
     } catch (e) {
-      throw new Error(`can't convert to TradingPair`);
+      throw new Error(`can't convert ${this.toChainData()} to Trading Pair`);
     }
   }
 
@@ -166,7 +177,7 @@ export class Token {
 
       return api.createType('DexShare', this.toChainData());
     } catch (e) {
-      throw new Error(`can't convert to DexShare`);
+      throw new Error(`can't convert ${this.toChainData()} to DexShare`);
     }
   }
 
@@ -176,42 +187,24 @@ export class Token {
 
       return api.createType('TokenSymbol', this.name);
     } catch (e) {
-      throw new Error(`can't convert to DexShare`);
+      throw new Error(`can't convert ${this.toChainData()} to Token Symbol`);
     }
   }
 
   public clone(): Token {
-    return new Token(this.name, {
-      decimal: this.decimal,
-      isTokenSymbol: this.isTokenSymbol,
-      isERC20: this.isERC20,
-      isDexShare: this.isDexShare,
-      chain: this.chain
-    });
+    return new Token(this.name, { ...this });
   }
 
-  public isEqual(target: Token, compair?: (token1: Token, token2: Token) => boolean): boolean {
-    if (compair) {
-      return compair(this, target);
+  public isEqual(target: Token, compare?: (token1: Token, token2: Token) => boolean): boolean {
+    if (compare) {
+      return compare(this, target);
     }
 
-    return JSON.stringify(this) === JSON.stringify(target);
+    return this.name === target.name;
   }
 
-  public toChainData(): { Token: string } | { DexShare: [{ Token: string }, { Token: string }] } | { ERC20: string } {
-    if (this.isDexShare) {
-      return {
-        DexShare: (
-          getLPCurrenciesFormName(this.name).sort((i, j) => TOKEN_SORT[i] - TOKEN_SORT[j]) as [string, string]
-        ).map((item) => ({ Token: item })) as [{ Token: string }, { Token: string }]
-      };
-    }
-
-    if (this.isERC20) {
-      return { ERC20: this.name };
-    }
-
-    return { Token: this.name };
+  public toChainData(): CurrencyObject {
+    return getCurrencyObject(this.name);
   }
 
   public toString(): string {

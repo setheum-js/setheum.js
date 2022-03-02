@@ -1,9 +1,9 @@
 {
-  "name": "@setheum.js/sdk-core",
+  "name": "@setheum.js/sdk",
   "version": "3.1.0",
-  "description": "The core of the Setheum Network SDK in Javascript",
+  "description": "Setheum JS SDK - Setheum SDK for JavaScript",
   "main": "index.js",
-  "author": "Setheum Labs",
+  "author": "Setheum Developers",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -15,12 +15,17 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
+    "@setheum.js/api": "3.1.0",
+    "@setheum.js/type-definitions": "3.1.0",
     "@polkadot/api": "^7.1.1",
     "@polkadot/types": "^7.1.1",
     "@types/events": "^3.0.0",
+    "axios": "^0.24.0",
     "bignumber.js": "^9.0.0",
+    "cross-fetch": "^3.1.4",
     "events": "^3.2.0",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "rxjs": "^7.4.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.161"
