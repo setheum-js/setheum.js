@@ -235,9 +235,9 @@ export default {
     }
   },
   /**
-   * Lookup37: module_idle_scheduler::module::Event<T>
+   * Lookup37: idle_scheduler::module::Event<T>
    **/
-  ModuleIdleSchedulerModuleEvent: {
+  IdleSchedulerModuleEvent: {
     _enum: {
       TaskDispatched: {
         taskId: 'u32',
@@ -407,50 +407,35 @@ export default {
     }
   },
   /**
-   * Lookup48: orml_vesting::module::Event<T>
+   * Lookup48: module_vesting::module::Event<T>
    **/
-  OrmlVestingModuleEvent: {
+  ModuleVestingModuleEvent: {
     _enum: {
       VestingScheduleAdded: {
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
         from: 'AccountId32',
         to: 'AccountId32',
-        vestingSchedule: 'OrmlVestingVestingSchedule',
+        vestingSchedule: 'ModuleVestingVestingSchedule',
       },
       Claimed: {
         who: 'AccountId32',
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
         amount: 'u128',
       },
       VestingSchedulesUpdated: {
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
         who: 'AccountId32'
       }
     }
   },
   /**
-   * Lookup49: orml_vesting::VestingSchedule<BlockNumber, Balance>
+   * Lookup49: module_vesting::VestingSchedule<BlockNumber, Balance>
    **/
-  OrmlVestingVestingSchedule: {
+  ModuleVestingVestingSchedule: {
     start: 'u32',
     period: 'u32',
     periodCount: 'u32',
     perPeriod: 'Compact<u128>'
-  },
-  /**
-   * Lookup51: module_transaction_payment::module::Event<T>
-   **/
-  ModuleTransactionPaymentModuleEvent: {
-    _enum: {
-      SwapBalanceThresholdUpdated: {
-        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
-        swapThreshold: 'u128',
-      },
-      ChargeFeePoolEnabled: {
-        subAccount: 'AccountId32',
-        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
-        exchangeRate: 'u128',
-        poolSize: 'u128',
-        swapThreshold: 'u128'
-      }
-    }
   },
   /**
    * Lookup53: pallet_treasury::pallet::Event<T, I>
@@ -1679,12 +1664,16 @@ export default {
    **/
   OrmlVestingModuleCall: {
     _enum: {
-      claim: 'Null',
+      claim: {
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
+      },
       vested_transfer: {
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
         dest: 'MultiAddress',
         schedule: 'OrmlVestingVestingSchedule',
       },
       update_vesting_schedules: {
+        currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
         who: 'MultiAddress',
         vestingSchedules: 'Vec<OrmlVestingVestingSchedule>',
       },
@@ -2404,7 +2393,7 @@ export default {
   ModuleEvmModuleCall: {
     _enum: {
       eth_call: {
-        action: 'EthereumTransactionTransactionAction',
+        action: 'TransactionAction',
         input: 'Bytes',
         value: 'Compact<u128>',
         gasLimit: 'Compact<u64>',
@@ -2476,7 +2465,7 @@ export default {
   /**
    * Lookup320: ethereum::transaction::TransactionAction
    **/
-  EthereumTransactionTransactionAction: {
+  TransactionAction: {
     _enum: {
       Call: 'H160',
       Create: 'Null'
@@ -2650,9 +2639,9 @@ export default {
     _enum: ['AmountIntoBalanceFailed', 'BalanceTooLow', 'Erc20InvalidOperation', 'EvmAccountNotFound', 'RealOriginNotFound', 'DepositFailed']
   },
   /**
-   * Lookup360: orml_vesting::module::Error<T>
+   * Lookup360: module_vesting::module::Error<T>
    **/
-  OrmlVestingModuleError: {
+  ModuleVestingModuleError: {
     _enum: ['ZeroVestingPeriod', 'ZeroVestingPeriodCount', 'InsufficientBalanceToLock', 'TooManyVestingSchedules', 'AmountLow', 'MaxVestingSchedulesExceeded']
   },
   /**

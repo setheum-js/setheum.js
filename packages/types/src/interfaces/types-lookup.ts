@@ -2486,7 +2486,7 @@ declare module '@polkadot/types/lookup' {
   export interface ModuleEvmModuleCall extends Enum {
     readonly isEthCall: boolean;
     readonly asEthCall: {
-      readonly action: EthereumTransactionTransactionAction;
+      readonly action: TransactionAction;
       readonly input: Bytes;
       readonly value: Compact<u128>;
       readonly gasLimit: Compact<u64>;
@@ -2567,8 +2567,8 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'EthCall' | 'Call' | 'ScheduledCall' | 'Create' | 'Create2' | 'CreateNftContract' | 'CreatePredeployContract' | 'TransferMaintainer' | 'Deploy' | 'DeployFree' | 'EnableContractDevelopment' | 'DisableContractDevelopment' | 'SetCode' | 'Selfdestruct';
   }
 
-  /** @name EthereumTransactionTransactionAction (320) */
-  export interface EthereumTransactionTransactionAction extends Enum {
+  /** @name TransactionAction (320) */
+  export interface TransactionAction extends Enum {
     readonly isCall: boolean;
     readonly asCall: H160;
     readonly isCreate: boolean;
