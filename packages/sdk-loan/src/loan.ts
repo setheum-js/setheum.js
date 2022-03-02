@@ -7,6 +7,7 @@ import { DerivedLoanType } from '@setheum.js/api-derive';
 import { ApiRx } from '@polkadot/api';
 import { WalletRx } from '@setheum.js/sdk-wallet';
 import { memoize } from 'lodash';
+import { ModuleLoansPosition } from '@polkadot/types/lookup';
 
 export interface LoanParams {
   debitExchangeRate: FixedPointNumber;
@@ -28,8 +29,6 @@ export interface LoanPosition extends LoanParams {
   canWithdraw: FixedPointNumber;
   maxGenerate: FixedPointNumber;
 }
-
-const YEAR_SECONDS = 365 * 24 * 60 * 60; // second of one year
 
 export class LoanRx {
   private api: ApiRx;
@@ -160,7 +159,7 @@ export class LoanRx {
   }
 
   private getLoanPosition() {
-    return this.api.query.loans.positions(this.currency, this.address);
+    return this.api.query.loans.positions(this.currency, this.address) as Observable<ModuleLoansPosition>;
   }
 
   private getCanGenerate(
