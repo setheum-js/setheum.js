@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk-core",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "The core of the Setheum Network SDK in Javascript",
   "main": "index.js",
   "author": "Setheum Labs",
