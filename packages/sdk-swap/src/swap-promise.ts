@@ -10,6 +10,8 @@ import { ITuple } from '@polkadot/types/types';
 import { SwapParameters } from './swap-parameters';
 import { LiquidityPool, SwapTradeMode } from './types';
 import { SwapBase } from './swap-base';
+import { Vec } from '@polkadot/types-codec';
+import { EventRecord } from '@polkadot/types/interfaces';
 
 export class SwapPromise extends SwapBase<ApiPromise> {
   constructor(api: ApiPromise) {
@@ -93,7 +95,7 @@ export class SwapPromise extends SwapBase<ApiPromise> {
 
     inner();
 
-    this.api.query.system.events((result) => {
+    this.api.query.system.events((result: Vec<EventRecord>) => {
       for (const event of result) {
         if (eventMethodsFilter(['EnableTradingPair', 'ProvisioningToEnabled', 'DisableTradingPair'])(event)) {
           inner();
@@ -107,9 +109,14 @@ export class SwapPromise extends SwapBase<ApiPromise> {
   }
 
   private swapper = memoize((inputToken: Token, outputToken: Token) => {
-    return this.getTradePathes(inputToken, outputToken).pipe(
-      switchMap((paths) => this.getLiquidityPoolsByPath(paths).pipe(withLatestFrom(of(paths)))),
-      shareReplay(1)
+    return this.enableTradingPairs$.pipe(
+      filter((i) => i.length !== 0),
+      switchMap(() => {
+        return this.getTradingPathes(inputToken, outputToken).pipe(
+          switchMap((paths) => this.getLiquidityPoolsByPath(paths).pipe(withLatestFrom(of(paths)))),
+          shareReplay(1)
+        );
+      })
     );
   });
 
@@ -142,7 +149,7 @@ export class SwapPromise extends SwapBase<ApiPromise> {
         }),
         take(1)
       )
-      .toPromise();
+      .toPromise(); // TODO - FIXME: use lastValueFrom in RXJS 8, toPromise() is deprecated
 
     return result;
   }

@@ -1,7 +1,7 @@
 import { FixedPointNumber } from '@setheum.js/sdk-core';
 import { Fee } from './types';
 
-// get how much target amount will be got fro specific supply amount and price impact
+// get how much target amount will be got from specific supply amount and price impact
 export function getTargetAmount(
   supplyPool: FixedPointNumber,
   targetPool: FixedPointNumber,

@@ -32,9 +32,6 @@ describe('trade graph', () => {
       new TokenPair(dnar, setusd)
     ]);
 
-    const _dnar = new Token('DNAR');
-
-
     const setm2setusd = tradeGraph.getPathes(setm, setusd);
 
     expect(setm2setusd[0]).toEqual([setm, setusd]);

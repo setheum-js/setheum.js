@@ -29,7 +29,7 @@ export interface TradingPairStatus extends Enum {
   readonly isProvisioning: boolean;
   readonly asProvisioning: TradingPairProvisionParameters;
   readonly isEnabled: boolean;
-  readonly type: 'NotEnabled' | 'Provisioning' | 'Enabled';
+  readonly type: 'Disabled' | 'Provisioning' | 'Enabled';
 }
 
 export type PHANTOM_DEX = 'dex';

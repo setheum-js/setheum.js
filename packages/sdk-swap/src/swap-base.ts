@@ -7,21 +7,18 @@ import { getSupplyAmount, getTargetAmount } from './utils';
 import { LiquidityPool, SwapResult, Fee, SwapTradeMode, MiddleResult } from './types';
 import { TradeGraph } from './trade-graph';
 import { SwapParameters } from './swap-parameters';
-import { NoLiquidityPoolError, InsufficientLiquidityError, AmountTooSmall } from './errors';
+import { NoLiquidityPoolError, InsufficientLiquidityError, AmountTooSmall, NoTradingPathError } from './errors';
 
 const MINIMUM_AMOUNT = 1;
+
 const ONE = FixedPointNumber.ONE;
 
-function computeExchangeFee(path: Token[], fee: FixedPointNumber) {
+function calculateExchangeFeeRate(path: Token[], fee: FixedPointNumber) {
   return ONE.minus(
     path.slice(1).reduce((acc) => {
       return acc.times(ONE.minus(fee));
     }, ONE)
   );
-}
-
-function tokenEq(token1: Token, token2: Token) {
-  return token1.name === token2.name;
 }
 
 export abstract class SwapBase<T extends ApiPromise | ApiRx> {
@@ -30,8 +27,8 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
   // subscribe the enable trading pairs
   protected enableTradingPairs$: BehaviorSubject<TokenPair[]>;
 
-  // the _config of dex module
-  protected _config: {
+  // the constants of dex module
+  readonly constants: {
     tradingPathLimit: number;
     fee: Fee;
   };
@@ -39,10 +36,7 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
   constructor(api: T) {
     this.api = api;
 
-    this._config = {
-      tradingPathLimit: this.getTradingPathLimit(),
-      fee: this.getBaseExchangeFee()
-    };
+    this.constants = this.queryConstants();
 
     this.enableTradingPairs$ = new BehaviorSubject<TokenPair[]>([]);
   }
@@ -50,69 +44,72 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
   protected abstract getTradingPairs(): Observable<TokenPair[]>;
 
   public get config(): { tradingPathLimit: number; fee: Fee } {
-    return this._config;
+    return this.constants;
   }
 
-  private getTradingPathLimit() {
-    return parseInt(this.api?.consts?.dex?.tradingPathLimit?.toString() || '3');
-  }
-
-  private getBaseExchangeFee() {
+  private queryConstants() {
     const exchangeFee = this.api.consts.dex.getExchangeFee;
 
     return {
-      denominator: new FixedPointNumber(exchangeFee[1].toString()),
-      numerator: new FixedPointNumber(exchangeFee[0].toString())
+      tradingPathLimit: parseInt(this.api?.consts?.dex?.tradingPathLimit?.toString() || '3'),
+      fee: {
+        denominator: new FixedPointNumber(exchangeFee[1].toString()),
+        numerator: new FixedPointNumber(exchangeFee[0].toString())
+      }
     };
   }
 
   protected getTokenPairsFromPath(path: Token[]): TokenPair[] {
-    const _path = path.slice();
-    // push undefined as tail
-    _path.push(undefined as any as Token);
+    const temp = path.slice();
 
-    return _path.reduce((acc, cur, current) => {
-      if (!cur || !_path[current + 1]) return acc;
+    // push undefined as tail sentinel
+    temp.push(undefined as any as Token);
 
-      acc.push(new TokenPair(cur, _path[current + 1]));
+    return temp.reduce((acc, cur, current) => {
+      if (!cur || !temp[current + 1]) return acc;
+
+      acc.push(new TokenPair(cur, temp[current + 1]));
 
       return acc;
     }, [] as TokenPair[]);
   }
 
-  protected getTradePathes(input: Token, output: Token): Observable<Token[][]> {
+  protected isTradingPairEnable(currency1: Token, currency2: Token, enablePairs: TokenPair[]): boolean {
+    const temp = new TokenPair(currency1, currency2);
+
+    return !!enablePairs.find((item) => item.isEqual(temp));
+  }
+
+  // check all token pairs is enable which used by the path
+  private isPathUseable(path: Token[], enablePairs: TokenPair[]) {
+    const tokenPairs = this.getTokenPairsFromPath(path);
+
+    const invalidated = tokenPairs.filter((item) => {
+      const [token1, token2] = item.getPair();
+
+      return !this.isTradingPairEnable(token1, token2, enablePairs);
+    });
+
+    return invalidated.length === 0;
+  }
+
+  protected getTradingPathes(input: Token, output: Token): Observable<Token[][]> {
     return this.enableTradingPairs$.pipe(
       map((pairs) => {
         const tradeGraph = new TradeGraph(pairs);
+        let paths = tradeGraph.getPathes(input, output, this.constants.tradingPathLimit);
 
-        return tradeGraph.getPathes(input, output, this._config.tradingPathLimit).filter((path) => {
-          const tokenPairs = this.getTokenPairsFromPath(path);
+        paths = paths.filter((path) => this.isPathUseable(path, pairs));
 
-          for (const item of tokenPairs) {
-            const [token1, token2] = item.getPair();
-            const result = this.checkTradingPairIsEnabled(token1, token2, pairs);
+        if (paths.length === 0) throw new NoTradingPathError();
 
-            if (!result) return false;
-          }
-
-          return true;
-        });
+        return paths;
       })
     );
   }
 
-  protected checkTradingPairIsEnabled(currency1: Token, currency2: Token, tradingPairs: TokenPair[]): boolean {
-    const temp = new TokenPair(currency1, currency2);
-
-    return !!tradingPairs.find((item) => item.isEqual(temp, tokenEq));
-  }
-
   protected sortLiquidityPoolWithTokenOrder(pool: LiquidityPool, token1: Token): [FixedPointNumber, FixedPointNumber] {
-    if (pool.token1.isEqual(token1, tokenEq)) {
-      return [pool.balance1, pool.balance2];
-    }
-
-    return [pool.balance2, pool.balance1];
+    return pool.token1.isEqual(token1) ? [pool.balance1, pool.balance2] : [pool.balance2, pool.balance1];
   }
 
   protected getOutputAmountWithExactInput(
@@ -134,23 +131,19 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     for (let i = 0; i < path.length - 1; i++) {
       const pair = new TokenPair(path[i], path[i + 1]);
       const [token1, token2] = pair.getPair();
-      const pool = liquidityPools.find(
-        (item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq)
-      );
+      const pool = liquidityPools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
 
       if (!pool) throw new NoLiquidityPoolError();
 
       const [supply, target] = this.sortLiquidityPoolWithTokenOrder(pool, path[i]);
 
-      if (supply.isZero()) throw new InsufficientLiquidityError();
-
-      if (target.isZero()) throw new InsufficientLiquidityError();
+      if (supply.isZero() || target.isZero()) throw new InsufficientLiquidityError();
 
       const outputAmount = getTargetAmount(
         supply,
         target,
         i === 0 ? result.inputAmount : result.outputAmount,
-        this._config.fee
+        this.constants.fee
       );
 
       if (inputAmount._getInner().toNumber() < MINIMUM_AMOUNT) throw new AmountTooSmall();
@@ -162,12 +155,12 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
       result.outputAmount = outputAmount;
     }
 
-    const midPrice = this.getMidPrice(path, liquidityPools);
+    const midPrice = this.calculateMidPrice(path, liquidityPools);
 
     return this.transformToSwapResult({
       ...result,
       midPrice,
-      priceImpact: this.getPriceImpact(midPrice, result.inputAmount, result.outputAmount)
+      priceImpact: this.calculatePriceImpact(midPrice, result.inputAmount, result.outputAmount)
     });
   }
 
@@ -190,23 +183,19 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     for (let i = path.length - 1; i > 0; i--) {
       const pair = new TokenPair(path[i], path[i - 1]);
       const [token1, token2] = pair.getPair();
-      const pool = liquidityPools.find(
-        (item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq)
-      );
+      const pool = liquidityPools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
 
       if (!pool) throw new NoLiquidityPoolError();
 
       const [supply, target] = this.sortLiquidityPoolWithTokenOrder(pool, path[i - 1]);
 
-      if (supply.isZero()) throw new InsufficientLiquidityError();
-
-      if (target.isZero()) throw new InsufficientLiquidityError();
+      if (supply.isZero() || target.isZero()) throw new InsufficientLiquidityError();
 
       const inputAmount = getSupplyAmount(
         supply,
         target,
         i === path.length - 1 ? result.outputAmount : result.inputAmount,
-        this._config.fee
+        this.constants.fee
       );
 
       if (outputAmount._getInner().toNumber() < MINIMUM_AMOUNT) throw new AmountTooSmall();
@@ -218,30 +207,39 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
       result.inputAmount = inputAmount;
     }
 
-    const midPrice = this.getMidPrice(path, liquidityPools);
+    const midPrice = this.calculateMidPrice(path, liquidityPools);
 
     return this.transformToSwapResult({
       ...result,
       midPrice,
-      priceImpact: this.getPriceImpact(midPrice, result.inputAmount, result.outputAmount)
+      priceImpact: this.calculatePriceImpact(midPrice, result.inputAmount, result.outputAmount)
     });
   }
 
-  protected getExchangeFee(path: Token[], input: FixedPointNumber, fee: Fee, decimal: number): FixedPointNumber {
-    const data = input.times(computeExchangeFee(path, fee.numerator.div(fee.denominator)));
+  protected calculateExchangeFee(
+    path: Token[],
+    input: FixedPointNumber,
+    fee: Fee,
+    decimal: number
+  ): {
+    fee: FixedPointNumber;
+    rate: FixedPointNumber;
+  } {
+    const rate = calculateExchangeFeeRate(path, fee.numerator.div(fee.denominator));
+    const data = input.times(rate);
 
     data.forceSetPrecision(decimal);
 
-    return data;
+    return { fee: data, rate };
   }
 
-  protected getMidPrice(path: Token[], pools: LiquidityPool[]): FixedPointNumber {
+  protected calculateMidPrice(path: Token[], pools: LiquidityPool[]): FixedPointNumber {
     const prices: FixedPointNumber[] = [];
 
     for (let i = 0; i < path.length - 1; i++) {
       const pair = new TokenPair(path[i], path[i + 1]);
       const [token1, token2] = pair.getPair();
-      const pool = pools.find((item) => item.token1.isEqual(token1, tokenEq) && item.token2.isEqual(token2, tokenEq));
+      const pool = pools.find((item) => item.token1.isEqual(token1) && item.token2.isEqual(token2));
 
       if (!pool) throw new NoLiquidityPoolError();
 
@@ -255,7 +253,7 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     }, prices[0]);
   }
 
-  protected getPriceImpact(
+  protected calculatePriceImpact(
     midPrice: FixedPointNumber,
     inputAmount: FixedPointNumber,
     outputAmount: FixedPointNumber
@@ -271,14 +269,23 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     const _inputAmount = inputAmount.clone();
     const _outputAmount = outputAmount.clone();
 
-    _inputAmount.forceSetPrecision(inputToken.decimal);
-    _outputAmount.forceSetPrecision(outputToken.decimal);
+    _inputAmount.forceSetPrecision(inputToken.decimals);
+    _outputAmount.forceSetPrecision(outputToken.decimals);
+
+    const { fee: exchangeFee, rate: exchangeRate } = this.calculateExchangeFee(
+      path,
+      inputAmount,
+      this.config.fee,
+      inputToken.decimals
+    );
 
     return {
-      exchangeFee: this.getExchangeFee(path, inputAmount, this.config.fee, inputToken.decimal),
+      exchangeFee,
+      exchangeRate,
       input: new TokenBalance(inputToken, _inputAmount),
       output: new TokenBalance(outputToken, _outputAmount),
       path,
+      naturalPriceImpact: others.priceImpact.sub(exchangeRate).max(FixedPointNumber.ZERO),
       ...others
     };
   }
@@ -289,7 +296,7 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
     liquidityPools: LiquidityPool[],
     baseParams: [Token, Token, FixedPointNumber, FixedPointNumber]
   ): SwapParameters {
-    const swapResult = paths.map((path): SwapResult => {
+    const swapResult = paths.map((path): [Error | null, SwapResult | null] => {
       const params = [...baseParams, path, liquidityPools] as [
         Token,
         Token,
@@ -299,19 +306,37 @@ export abstract class SwapBase<T extends ApiPromise | ApiRx> {
         LiquidityPool[]
       ];
 
-      return mode === 'EXACT_INPUT'
-        ? this.getOutputAmountWithExactInput(...params)
-        : this.getInputAmountWithExactOutput(...params);
+      try {
+        return [
+          null,
+          mode === 'EXACT_INPUT'
+            ? this.getOutputAmountWithExactInput(...params)
+            : this.getInputAmountWithExactOutput(...params)
+        ];
+      } catch (e) {
+        return [e, null] as [Error, null];
+      }
     });
 
-    const temp = swapResult.reduce((acc, cur) => {
-      if (mode === 'EXACT_INPUT' && acc.output.balance.isGreaterThanOrEqualTo(cur.output.balance)) return acc;
+    const swapResultsLen = swapResult.length;
 
-      if (mode === 'EXACT_OUTPUT' && acc.input.balance.isLessOrEqualTo(cur.input.balance)) return acc;
+    const result = swapResult.reduce((preResult, [error, result], i) => {
+      if (!preResult && error && i === swapResultsLen - 1) {
+        throw error;
+      }
 
-      return cur;
-    }, swapResult[0]);
+      if (!result) return preResult;
 
-    return new SwapParameters({ mode, ...temp });
+      if (result && preResult) {
+        if (mode === 'EXACT_INPUT' && preResult.output.balance.gt(result.output.balance)) return preResult;
+
+        if (mode === 'EXACT_OUTPUT' && preResult.input.balance.lt(result.input.balance)) return preResult;
+      }
+
+      return result;
+    }, swapResult?.[0]?.[1]);
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return new SwapParameters(mode, result!);
   }
 }
