@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
+import type { Enum, Struct } from '@polkadot/types-codec';
+import type { ITuple } from '@polkadot/types-codec/types';
 import type { Balance, BlockNumber } from '@setheum.js/types/interfaces/runtime';
-import type { Enum, Struct } from '@polkadot/types';
-import type { ITuple } from '@polkadot/types/types';
 
 /** @name BalanceRequest */
 export interface BalanceRequest extends Struct {
@@ -25,10 +25,11 @@ export interface TradingPairProvisionParameters extends Struct {
 
 /** @name TradingPairStatus */
 export interface TradingPairStatus extends Enum {
-  readonly isNotEnabled: boolean;
+  readonly isDisabled: boolean;
   readonly isProvisioning: boolean;
   readonly asProvisioning: TradingPairProvisionParameters;
   readonly isEnabled: boolean;
+  readonly type: 'Disabled' | 'Provisioning' | 'Enabled';
 }
 
 export type PHANTOM_DEX = 'dex';

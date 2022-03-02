@@ -2,7 +2,7 @@ import { ApiRx } from '@polkadot/api';
 import { memoize } from '@polkadot/util';
 import { Observable, from, of } from 'rxjs';
 import { filter, switchMap, startWith, map, shareReplay, withLatestFrom } from 'rxjs/operators';
-import { Balance, TradingPairStatus } from '@setheum.js/types/interfaces';
+import { Balance, CurrencyId, TradingPairStatus } from '@setheum.js/types/interfaces';
 import { eventMethodsFilter, mockEventRecord, Token, TokenPair, TokenSet } from '@setheum.js/sdk-core';
 import { FixedPointNumber } from '@setheum.js/sdk-core/fixed-point-number';
 import { ITuple } from '@polkadot/types/types';
@@ -10,6 +10,8 @@ import { ITuple } from '@polkadot/types/types';
 import { SwapParameters } from './swap-parameters';
 import { LiquidityPool, SwapTradeMode } from './types';
 import { SwapBase } from './swap-base';
+import { Vec } from '@polkadot/types-codec';
+import { EventRecord } from '@polkadot/types/interfaces';
 
 export class SwapRx extends SwapBase<ApiRx> {
   constructor(api: ApiRx) {
@@ -40,7 +42,7 @@ export class SwapRx extends SwapBase<ApiRx> {
   }
 
   protected getTradingPairs(): Observable<TokenPair[]> {
-    return this.api.query.system.events().pipe(
+    return this.api.query.system.events<Vec<EventRecord>>().pipe(
       startWith(mockEventRecord('', 'EnableTradingPair')),
       switchMap((events) => from(events)),
       filter(eventMethodsFilter(['EnableTradingPair', 'ProvisioningToEnabled', 'DisableTradingPair'])),
@@ -50,7 +52,9 @@ export class SwapRx extends SwapBase<ApiRx> {
 
         return result
           .filter((item) => _filterFn(item[1]))
-          .map((item) => TokenPair.fromCurrencies(item[0].args[0][0], item[0].args[0][1]));
+          .map((item) =>
+            TokenPair.fromCurrencies(item[0].args[0][0] as any as CurrencyId, item[0].args[0][1] as any as CurrencyId)
+          );
       }),
       shareReplay(1)
     );
@@ -92,7 +96,7 @@ export class SwapRx extends SwapBase<ApiRx> {
   }
 
   private _swapper = memoize((inputToken: Token, outputToken: Token) => {
-    return this.getTradePathes(inputToken, outputToken).pipe(
+    return this.getTradingPathes(inputToken, outputToken).pipe(
       switchMap((paths) => this.getLiquidityPoolsByPath(paths).pipe(withLatestFrom(of(paths))))
     );
   });
@@ -103,34 +107,15 @@ export class SwapRx extends SwapBase<ApiRx> {
 
     // clear input amount's precision information
     const _input = FixedPointNumber._fromBN(input._getInner());
-    const _inputToken = new Token(inputToken.name, {
-      isDexShare: inputToken.isDexShare,
-      isERC20: inputToken.isERC20,
-      isTokenSymbol: inputToken.isTokenSymbol,
-      decimal: 18
-    });
-    const _outputToken = new Token(outputToken.name, {
-      isDexShare: outputToken.isDexShare,
-      isERC20: outputToken.isERC20,
-      isTokenSymbol: outputToken.isTokenSymbol,
-      decimal: 18
-    });
 
     const inputAmount = mode === 'EXACT_INPUT' ? _input : FixedPointNumber.ZERO;
     const outputAmount = mode === 'EXACT_OUTPUT' ? _input : FixedPointNumber.ZERO;
 
-    const swapper = this._swapper(_inputToken, _outputToken);
+    const swapper = this._swapper(inputToken, outputToken);
 
     return swapper.pipe(
       map(([liquidityPool, paths]) => {
-        const result = this.getBestSwapResult(mode, paths, liquidityPool, [
-          inputToken,
-          outputToken,
-          inputAmount,
-          outputAmount
-        ]);
-
-        return new SwapParameters(result);
+        return this.getBestSwapResult(mode, paths, liquidityPool, [inputToken, outputToken, inputAmount, outputAmount]);
       })
     );
   }

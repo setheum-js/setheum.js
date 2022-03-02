@@ -58,17 +58,11 @@
       "@setheum.js/sdk-loan/*": [
         "packages/sdk-loan/src/*"
       ],
-      "@setheum.js/setcloud-pin": [
-        "packages/setcloud-pin/src"
+      "@setheum.js/sdk": [
+        "packages/sdk/src"
       ],
-      "@setheum.js/setcloud-pin/*": [
-        "packages/setcloud-pin/src/*"
-      ],
-      "@setheum.js/ipfs-w3auth": [
-        "packages/ipfs-w3auth/src"
-      ],
-      "@setheum.js/ipfs-w3auth/*": [
-        "packages/ipfs-w3auth/src/*"
+      "@setheum.js/sdk/*": [
+        "packages/sdk/src/*"
       ],
     },
     "skipLibCheck": true,

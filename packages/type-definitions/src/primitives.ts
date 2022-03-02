@@ -5,14 +5,8 @@ export default {
     AmountOf: 'Amount',
     AuctionId: 'u32',
     AuctionIdOf: 'AuctionId',
-    TokenSymbol: {
-      _enum: {
-        SETM: 0,
-        SERP: 1,
-        DNAR: 2,
-        SETR: 3,
-        SETUSD: 4,
-      }
+    AuthoritysOriginId: {
+      _enum: ['Root', 'Treasury']
     },
     DexShare: {
       _enum: {
@@ -27,18 +21,40 @@ export default {
         ERC20: 'EvmAddress',
       }
     },
+    TradingPair: '(CurrencyId,  CurrencyId)',
     CurrencyIdOf: 'CurrencyId',
+    OrmlCurrencyId: 'CurrencyId',
+    TokenSymbol: {
+      _enum: {
+        SETM: 0,
+        SERP: 1,
+        DNAR: 2,
+        HELP: 3,
+        SETR: 4,
+        SETUSD: 5,
+      }
+    },
+    TokenInfo: {
+      currency_id: 'Option<u8>',
+      name: 'Option<u8>',
+      symbol: 'Option<u8>',
+      decimals: 'Option<u8>'
+    },
     AirDropCurrencyId: {
+      _enum: ['SETR', 'SETUSD', 'SETM', 'SERP', 'DNAR', 'HELP']
+    },
+    SerpStableCurrencyId: {
       _enum: ['SETR', 'SETUSD']
     },
-    AuthoritysOriginId: {
-      _enum: ['Root', 'Treasury']
+    SetheumAssetMetadata: {
+      name: 'Vec<u8>',
+      symbol: 'Vec<u8>',
+      decimals: 'u8',
+      minimalBalance: 'Balance'
     },
     SetheumDataProviderId: {
       _enum: ['Aggregated', 'Setheum']
     },
-    TradingPair: '(CurrencyId,  CurrencyId)',
-    OrmlCurrencyId: 'CurrencyId',
   },
   typesAlias: {
     oracle: {

@@ -4,10 +4,10 @@ import {
   MaybeCurrency,
   ObOrPromiseResult,
   forceToTokenSymbolCurrencyId,
-  forceToCurrencyIdName,
-  getLPCurrenciesFormName,
-  isDexShare,
-  FixedPointNumber as FN
+  forceToCurrencyName,
+  unzipDexShareName,
+  FixedPointNumber as FN,
+  isDexShareName,
 } from '@setheum.js/sdk-core';
 import { CurrencyId } from '@setheum.js/types/interfaces';
 
@@ -19,7 +19,7 @@ import { getExistentialDepositConfig } from './utils/get-existential-deposit-con
 
 export abstract class WalletBase<T extends ApiRx | ApiPromise> {
   protected api: T;
-  protected decimalMap: Map<string, number>;
+  protected decimalsMap: Map<string, number>;
   protected currencyIdMap: Map<string, CurrencyId>;
   protected tokenMap: Map<string, Token>;
   protected nativeToken!: string;
@@ -27,7 +27,7 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
 
   protected constructor(api: T) {
     this.api = api;
-    this.decimalMap = new Map<string, number>([]);
+    this.decimalsMap = new Map<string, number>([]);
     this.currencyIdMap = new Map<string, CurrencyId>([]);
     this.tokenMap = new Map<string, Token>([]);
 
@@ -38,7 +38,7 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
     const tokenDecimals = this.api.registry.chainDecimals;
     const tokenSymbol = this.api.registry.chainTokens;
 
-    const defaultTokenDecimal = Number(tokenDecimals?.[0]) || 12;
+    const defaultTokenDecimal = Number(tokenDecimals?.[0]) || 18;
 
     this.runtimeChain = this.api.runtimeChain.toString();
     this.nativeToken = tokenSymbol[0].toString();
@@ -47,11 +47,11 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
       try {
         const key = item.toString();
         const currencyId = forceToTokenSymbolCurrencyId(this.api, key);
-        const decimal = Number(tokenDecimals?.[index]) || defaultTokenDecimal;
+        const decimals = Number(tokenDecimals?.[index]) || defaultTokenDecimal;
 
-        this.decimalMap.set(key, Number(tokenDecimals?.[index]) || defaultTokenDecimal);
+        this.decimalsMap.set(key, Number(tokenDecimals?.[index]) || defaultTokenDecimal);
         this.currencyIdMap.set(key, currencyId);
-        this.tokenMap.set(key, Token.fromCurrencyId(currencyId, decimal));
+        this.tokenMap.set(key, Token.fromCurrencyId(currencyId, { decimals }));
       } catch (e) {
         // ignore eorror
       }
@@ -59,7 +59,7 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
   }
 
   public isNativeToken(currency: MaybeCurrency): boolean {
-    return forceToCurrencyIdName(currency) === forceToCurrencyIdName(this.nativeToken);
+    return forceToCurrencyName(currency) === forceToCurrencyName(this.nativeToken);
   }
 
   /**
@@ -81,10 +81,10 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
    * @description get the currency
    */
   public getToken(currency: MaybeCurrency): Token {
-    const currencyName = forceToCurrencyIdName(currency);
+    const currencyName = forceToCurrencyName(currency);
 
-    if (isDexShare(currencyName)) {
-      const [token1, token2] = getLPCurrenciesFormName(currencyName);
+    if (isDexShareName(currencyName)) {
+      const [token1, token2] = unzipDexShareName(currencyName);
 
       const _token1 = this.getToken(token1);
       const _token2 = this.getToken(token2);
@@ -98,17 +98,18 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
   }
 
   public getTransferConfig(currency: MaybeCurrency): TransferConfig {
-    const name = forceToCurrencyIdName(currency);
+    const name = forceToCurrencyName(currency);
 
-    if (isDexShare(name)) {
-      const [token1] = Token.sortTokenNames(...getLPCurrenciesFormName(name));
+    if (isDexShareName(name)) {
+      // if the token is dex, use the first token config after sort
+      const [token1] = Token.sortTokenNames(...unzipDexShareName(name));
 
       return {
         existentialDeposit: getExistentialDepositConfig(this.runtimeChain, token1)
       };
     }
 
-    const existentialDeposit = getExistentialDepositConfig(this.runtimeChain, forceToCurrencyIdName(currency));
+    const existentialDeposit = getExistentialDepositConfig(this.runtimeChain, forceToCurrencyName(currency));
 
     return { existentialDeposit };
   }
@@ -157,12 +158,6 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
    * @description get the oracle feed price
    */
   public abstract queryPriceFromDex(currency: MaybeCurrency, at?: number): ObOrPromiseResult<T, PriceData>;
-
-  /**
-   * @name queryLiquidPriceFromStakingPool
-   * @description get the oracle feed price
-   */
-  public abstract queryLiquidPriceFromStakingPool(at?: number): ObOrPromiseResult<T, PriceData>;
 
   /**
    * @name queryDexSharePriceFormDex

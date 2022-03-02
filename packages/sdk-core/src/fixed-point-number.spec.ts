@@ -45,7 +45,7 @@ describe('fixed point number constructor should worker', () => {
     const a = new FixedPointNumber(1000000, 6);
     const b = new FixedPointNumber(1000000, 6);
 
-    b.setPrecision(12);
+    b.setPrecision(18);
 
     expect(a.isEqualTo(b)).toEqual(true);
   });

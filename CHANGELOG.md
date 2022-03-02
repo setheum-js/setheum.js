@@ -1,6 +1,34 @@
 # CHANGELOG
 
 ## 1.0.0 Oct 23, 2021
+
 Changes:
+
 - Setheum v0.9.6
 - Bump polkadot.js version to 6.3.1
+
+## 2.0.0 Oct 23, 2021
+
+Changes:
+
+- Update
+
+## 2.1.0 Oct 23, 2021
+
+Changes:
+
+- Update
+
+## 3.0.1 (3.0.0 - 3.0.1) Oct 23, 2021
+
+Changes:
+
+- Add custom Setheum Vesting
+- Remove renvm-bridge
+- Remove setcloud and ipfs related modules
+- Update type-definitions
+- Bump to v3.0.0
+- Update types and primitives
+- Add HELP currencyId
+- Update polkadot-js to v7.1.1
+- Update to setheum v1.0.0 spec

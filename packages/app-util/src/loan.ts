@@ -80,19 +80,6 @@ export function calcCollateralRatio(collateralAmount: Fixed18, debitAmount: Fixe
   return collateralAmount.div(debitAmount);
 }
 
-const YEAR = 365 * 24 * 60 * 60; // second of one year
-/**
- * @name calcStableFeeAPR
- * @description calculate stable fee annual percentage rate. Equation: stableFee = (1 + stableFee) ** (yearSecond * 1000 / expectedBlockTime) - 1
- * @param {Fixed18} stableFee - loan stable fee on the chain config
- * @param {number} expectedBlockTime - expected block time on the chain config (precision in milliseconds)
- * @return {Fixed18} return stable fee annual percentage rate
- */
-export function calcStableFeeAPR(stableFee: Fixed18, blockTime: number): Fixed18 {
-  // set stable fee decimal places to 18 and round mode to ROUND_FLOOR
-  return Fixed18.fromNatural((1 + stableFee.toNumber(18, 3)) ** ((YEAR / blockTime) * 1000) - 1);
-}
-
 /**
  * @name calcRequiredCollateral
  * @description calculate how many collateral needs. Equation: requiredColalteral = debitAmount * requiredCollateralRatio / collateralPrice
@@ -168,9 +155,6 @@ interface LoanParams {
   debits: Fixed18 | Codec;
   collaterals: Fixed18 | Codec;
   requiredCollateralRatio: Fixed18 | Codec;
-  stableFee: Fixed18 | Codec;
-  globalStableFee: Fixed18 | Codec;
-  expectedBlockTime: number;
   liquidationRatio: Fixed18 | Codec;
   collateralPrice: Fixed18 | Codec;
   stableCoinPrice: Fixed18 | Codec;
