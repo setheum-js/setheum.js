@@ -1,4 +1,4 @@
-import { MaybeAccount, forceToCurrencyIdName, MaybeCurrency } from '@setheum.js/sdk-core';
+import { MaybeAccount, forceToCurrencyName, MaybeCurrency } from '@setheum.js/sdk-core';
 
 export class NotSupportToken extends Error {
   constructor() {
@@ -14,6 +14,6 @@ export class BelowExistentialDeposit extends Error {
     super();
 
     this.name = 'BelowExistentialDeposit';
-    this.message = `The ${forceToCurrencyIdName(currency)} balance may below the existential deposit after this action`;
+    this.message = `The ${forceToCurrencyName(currency)} balance may below the existential deposit after this action`;
   }
 }
