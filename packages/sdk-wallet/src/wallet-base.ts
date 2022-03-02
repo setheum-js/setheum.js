@@ -38,7 +38,7 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
     const tokenDecimals = this.api.registry.chainDecimals;
     const tokenSymbol = this.api.registry.chainTokens;
 
-    const defaultTokenDecimal = Number(tokenDecimals?.[0]) || 12;
+    const defaultTokenDecimal = Number(tokenDecimals?.[0]) || 18;
 
     this.runtimeChain = this.api.runtimeChain.toString();
     this.nativeToken = tokenSymbol[0].toString();

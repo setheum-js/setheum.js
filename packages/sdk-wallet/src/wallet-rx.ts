@@ -55,13 +55,23 @@ export class WalletRx extends WalletBase<ApiRx> {
       return this.queryDexSharePriceFormDex(currency, at);
     }
 
-    // get stable coin price
-    if (tokenName === 'AUSD' || tokenName === 'KUSD') {
-      const usd = this.tokenMap.get('AUSD') || this.tokenMap.get('KUSD') || new Token('USD', { decimals: 12 });
+    // get stable coin price - SETUSD
+    if (tokenName === 'SETUSD') {
+      const usd = this.tokenMap.get('SETUSD') || new Token('USD', { decimals: 18 });
 
       return of({
         token: usd,
         price: new FN(1, usd.decimals)
+      });
+    }
+
+    // get stable coin price - SETR
+    if (tokenName === 'SETR') {
+      const usd = this.tokenMap.get('SETR') || new Token('SETR', { decimals: 18 });
+
+      return of({
+        token: usd,
+        price: new FN(0.25, usd.decimals)
       });
     }
 

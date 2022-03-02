@@ -37,11 +37,11 @@ describe('token', () => {
 
   test('isEqual should work', () => {
     const t2 = t1.clone();
-    const t3 = new Token('SETM', { decimal: 17 });
+    const t3 = new Token('SETM', { decimal: 18 });
     const t4 = new Token('SETUSD', { decimal: 18 });
 
     expect(t1.isEqual(t2)).toEqual(true);
-    expect(t1.isEqual(t3)).toEqual(false);
+    expect(t1.isEqual(t3)).toEqual(true);
     expect(t1.isEqual(t4)).toEqual(false);
   });
 
