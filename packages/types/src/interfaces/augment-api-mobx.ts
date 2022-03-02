@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { BTreeMap, BTreeSet, Bytes, Option, U8aFixed, Vec, bool, u16, u32, u64 } from '@polkadot/types';
+import type { Bytes, Option, U8aFixed, Vec, bool, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, ITuple } from '@polkadot/types/types';
 import type { CollateralAuctionItem } from '@setheum.js/types/interfaces/auctionManager';
 import type { RiskManagementParams } from '@setheum.js/types/interfaces/cdpEngine';
@@ -11,7 +11,7 @@ import type { Position } from '@setheum.js/types/interfaces/loans';
 import type { ClassInfoOf, TokenId } from '@setheum.js/types/interfaces/nft';
 import type { AuctionId, CurrencyId, TradingPair } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, Balance, BalanceOf, BlockNumber, H256, Hash, KeyTypeId, Moment, OpaqueCall, OracleKey, Releases, Slot, ValidatorId } from '@setheum.js/types/interfaces/runtime';
-import type { ExchangeRate, Rate } from '@setheum.js/types/interfaces/support';
+import type { ExchangeRate } from '@setheum.js/types/interfaces/support';
 import type { ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { OrderedSet, TimestampedValueOf } from '@open-web3/orml-types/interfaces/oracle';
 import type { AuctionInfo, Price } from '@open-web3/orml-types/interfaces/traits';

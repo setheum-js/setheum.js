@@ -26,6 +26,7 @@ import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
 import type { Attributes, CID, ClassIdOf, Properties, TokenIdOf } from '@setheum.js/types/interfaces/nft';
 import type { AirDropCurrencyId, Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, AccountIndex, AsOriginId, Balance, BalanceOf, BlockNumber, Call, CallHashOf, ChangesTrieConfiguration, H256, Hash, Header, KeyValue, LookupSource, Moment, OpaqueCall, OracleKey, OracleValue, PalletsOrigin, Perbill, Percent, Weight } from '@setheum.js/types/interfaces/runtime';
+import type { EthereumTransactionTransactionAction, } from '@polkadot/types/lookup';
 
 declare module '@polkadot/api-base/types/submittable' {
   export interface AugmentedSubmittables<ApiType extends ApiTypes> {
@@ -652,7 +653,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * This allows the address to interact with non-deployed contracts.
        **/
       enableContractDevelopment: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      ethCall: AugmentedSubmittable<(action: TransactionAction, input: Bytes | string | Uint8Array, value: Compact<BalanceOf> | AnyNumber | Uint8Array, gasLimit: Compact<u64> | AnyNumber | Uint8Array, storageLimit: Compact<u32> | AnyNumber | Uint8Array, validUntil: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [TransactionAction, Bytes, Compact<BalanceOf>, Compact<u64>, Compact<u32>, Compact<BlockNumber>]>;
+      ethCall: AugmentedSubmittable<(action: EthereumTransactionTransactionAction, input: Bytes | string | Uint8Array, value: Compact<BalanceOf> | AnyNumber | Uint8Array, gasLimit: Compact<u64> | AnyNumber | Uint8Array, storageLimit: Compact<u32> | AnyNumber | Uint8Array, validUntil: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [EthereumTransactionTransactionAction, Bytes, Compact<BalanceOf>, Compact<u64>, Compact<u32>, Compact<BlockNumber>]>;
       /**
        * Issue an EVM call operation on a scheduled contract call, and
        * refund the unused gas reserved when the call was scheduled.
