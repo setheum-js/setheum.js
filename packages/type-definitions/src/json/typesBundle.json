@@ -265,16 +265,6 @@
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
                         },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
-                        },
                         "SerpStableCurrencyId": {
                             "_enum": [
                                 "SETR",
@@ -576,16 +566,6 @@
                             "name": "Option<u8>",
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
-                        },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
                         },
                         "SerpStableCurrencyId": {
                             "_enum": [
@@ -889,16 +869,6 @@
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
                         },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
-                        },
                         "SerpStableCurrencyId": {
                             "_enum": [
                                 "SETR",
@@ -1201,16 +1171,6 @@
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
                         },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
-                        },
                         "SerpStableCurrencyId": {
                             "_enum": [
                                 "SETR",
@@ -1507,16 +1467,6 @@
                             "name": "Option<u8>",
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
-                        },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
                         },
                         "SerpStableCurrencyId": {
                             "_enum": [
@@ -1815,16 +1765,6 @@
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
                         },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
-                        },
                         "SerpStableCurrencyId": {
                             "_enum": [
                                 "SETR",
@@ -2121,16 +2061,6 @@
                             "name": "Option<u8>",
                             "symbol": "Option<u8>",
                             "decimals": "Option<u8>"
-                        },
-                        "AirDropCurrencyId": {
-                            "_enum": [
-                                "SETR",
-                                "SETUSD",
-                                "SETM",
-                                "SERP",
-                                "DNAR",
-                                "HELP"
-                            ]
                         },
                         "SerpStableCurrencyId": {
                             "_enum": [

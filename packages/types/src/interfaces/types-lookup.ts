@@ -988,8 +988,8 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'PositionUpdated' | 'ConfiscateCollateralAndDebit' | 'TransferLoan';
   }
 
-  /** @name SetMintModuleEvent (142) */
-  export interface SetMintModuleEvent extends Enum {
+  /** @name SetmintModuleEvent (142) */
+  export interface SetmintModuleEvent extends Enum {
     readonly isAuthorization: boolean;
     readonly asAuthorization: {
       readonly authorizer: AccountId32;
@@ -2312,8 +2312,8 @@ declare module '@polkadot/types/lookup' {
   /** @name ModuleLoansModuleCall (293) */
   export type ModuleLoansModuleCall = Null;
 
-  /** @name SetMintModuleCall (294) */
-  export interface SetMintModuleCall extends Enum {
+  /** @name SetmintModuleCall (294) */
+  export interface SetmintModuleCall extends Enum {
     readonly isAdjustLoan: boolean;
     readonly asAdjustLoan: {
       readonly currencyId: SetheumPrimitivesCurrencyCurrencyId;
@@ -2720,12 +2720,12 @@ declare module '@polkadot/types/lookup' {
   export interface SetheumPrimitivesReserveIdentifier extends Enum {
     readonly isEvmStorageDeposit: boolean;
     readonly isEvmDeveloperDeposit: boolean;
-    readonly isSetMint: boolean;
+    readonly isSetmint: boolean;
     readonly isNft: boolean;
     readonly isTransactionPayment: boolean;
     readonly isTransactionPaymentDeposit: boolean;
     readonly isCount: boolean;
-    readonly type: 'EvmStorageDeposit' | 'EvmDeveloperDeposit' | 'SetMint' | 'Nft' | 'TransactionPayment' | 'TransactionPaymentDeposit' | 'Count';
+    readonly type: 'EvmStorageDeposit' | 'EvmDeveloperDeposit' | 'Setmint' | 'Nft' | 'TransactionPayment' | 'TransactionPaymentDeposit' | 'Count';
   }
 
   /** @name PalletBalancesReleases (350) */
@@ -3266,8 +3266,8 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'AmountConvertFailed';
   }
 
-  /** @name SetMintModuleError (513) */
-  export interface SetMintModuleError extends Enum {
+  /** @name SetmintModuleError (513) */
+  export interface SetmintModuleError extends Enum {
     readonly isNoPermission: boolean;
     readonly isAlreadyShutdown: boolean;
     readonly isAuthorizationNotExists: boolean;

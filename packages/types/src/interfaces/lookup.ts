@@ -952,7 +952,7 @@ export default {
   /**
    * Lookup142: serp_setmint::module::Event<T>
    **/
-   SetMintModuleEvent: {
+   SetmintModuleEvent: {
     _enum: {
       Authorization: {
         authorizer: 'AccountId32',
@@ -2227,7 +2227,7 @@ export default {
   /**
    * Lookup294: serp_setmint::module::Call<T>
    **/
-   SetMintModuleCall: {
+   SetmintModuleCall: {
     _enum: {
       adjust_loan: {
         currencyId: 'SetheumPrimitivesCurrencyCurrencyId',
@@ -2597,7 +2597,7 @@ export default {
    * Lookup348: setheum_primitives::ReserveIdentifier
    **/
   SetheumPrimitivesReserveIdentifier: {
-    _enum: ['EvmStorageDeposit', 'EvmDeveloperDeposit', 'SetMint', 'Nft', 'TransactionPayment', 'TransactionPaymentDeposit', 'Count']
+    _enum: ['EvmStorageDeposit', 'EvmDeveloperDeposit', 'Setmint', 'Nft', 'TransactionPayment', 'TransactionPaymentDeposit', 'Count']
   },
   /**
    * Lookup350: pallet_balances::Releases
@@ -3041,7 +3041,7 @@ export default {
   /**
    * Lookup513: serp_setmint::module::Error<T>
    **/
-   SetMintModuleError: {
+   SetmintModuleError: {
     _enum: ['NoPermission', 'AlreadyShutdown', 'AuthorizationNotExists', 'AlreadyAuthorized']
   },
   /**
