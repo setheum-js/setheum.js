@@ -9138,9 +9138,9 @@
           "index": 39
         },
         {
-          "name": "SetMint",
+          "name": "Setmint",
           "storage": {
-            "prefix": "SetMint",
+            "prefix": "Setmint",
             "items": [
               {
                 "name": "Authorization",
@@ -10016,7 +10016,7 @@
                   "doubleMap": {
                     "hasher": "Twox64Concat",
                     "key1": "AccountId",
-                    "key2": "AirDropCurrencyId",
+                    "key2": "CurrencyId",
                     "value": "Balance",
                     "key2Hasher": "Twox64Concat"
                   }
@@ -10036,7 +10036,7 @@
                 },
                 {
                   "name": "currency_id",
-                  "type": "AirDropCurrencyId"
+                  "type": "CurrencyId"
                 },
                 {
                   "name": "amount",
@@ -10054,7 +10054,7 @@
                 },
                 {
                   "name": "currency_id",
-                  "type": "AirDropCurrencyId"
+                  "type": "CurrencyId"
                 },
                 {
                   "name": "amount",
@@ -10069,7 +10069,7 @@
               "name": "Airdrop",
               "args": [
                 "AccountId",
-                "AirDropCurrencyId",
+                "CurrencyId",
                 "Balance"
               ],
               "documentation": [
@@ -10080,7 +10080,7 @@
               "name": "UpdateAirdrop",
               "args": [
                 "AccountId",
-                "AirDropCurrencyId",
+                "CurrencyId",
                 "Balance"
               ],
               "documentation": [

@@ -40,9 +40,6 @@ export default {
       symbol: 'Option<u8>',
       decimals: 'Option<u8>'
     },
-    AirDropCurrencyId: {
-      _enum: ['SETR', 'SETUSD', 'SETM', 'SERP', 'DNAR', 'HELP']
-    },
     SerpStableCurrencyId: {
       _enum: ['SETR', 'SETUSD']
     },

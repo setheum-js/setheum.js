@@ -32,3 +32,10 @@ Changes: **Full Changelog**: https://github.com/setheum-js/setheum.js/compare/v2
 - Add HELP currencyId
 - Update polkadot-js to v7.1.1
 - Update to setheum v1.0.0 spec
+
+## 3.3.0 Mar 16, 2021
+
+Changes: **Full Changelog**: 
+
+- Update latest Setheum types
+- Update to setheum v1.0.0 spec

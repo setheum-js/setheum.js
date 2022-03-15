@@ -1,3 +1,3 @@
 # @setheum.js/sdk-loan
 
-SDK for Setheum's SetMint Loans.
+SDK for Setheum's Setmint Loans.
