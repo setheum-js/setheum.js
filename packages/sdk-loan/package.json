@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk-loan",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "the loan sub module in Setheum Network sdk",
   "main": "index.js",
   "author": "Setheum Labs",
