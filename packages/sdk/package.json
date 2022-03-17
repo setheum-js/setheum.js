@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Setheum JS SDK - Setheum SDK for JavaScript",
   "main": "index.js",
   "author": "Setheum Developers",
@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum.js/api": "3.1.0",
-    "@setheum.js/type-definitions": "3.1.0",
+    "@setheum.js/api": "3.3.1",
+    "@setheum.js/type-definitions": "3.3.1",
     "@polkadot/api": "^7.1.1",
     "@polkadot/types": "^7.1.1",
     "@types/events": "^3.0.0",

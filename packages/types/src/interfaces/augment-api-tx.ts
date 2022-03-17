@@ -25,35 +25,12 @@ import type { TransactionAction } from '@polkadot/types/lookup';
 import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio } from '@setheum.js/types/interfaces/cdpEngine';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
 import type { Attributes, CID, ClassIdOf, Properties, TokenIdOf } from '@setheum.js/types/interfaces/nft';
-import type { AirDropCurrencyId, Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
+import type { Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, AccountIndex, AsOriginId, Balance, BalanceOf, BlockNumber, Call, CallHashOf, ChangesTrieConfiguration, H256, Hash, Header, KeyValue, LookupSource, Moment, OpaqueCall, OracleKey, OracleValue, PalletsOrigin, Perbill, Percent, Weight } from '@setheum.js/types/interfaces/runtime';
+import type { SwapLimit } from '@setheum.js/types/interfaces/support';
 
 declare module '@polkadot/api-base/types/submittable' {
   export interface AugmentedSubmittables<ApiType extends ApiTypes> {
-    airDrop: {
-      /**
-       * Fund Airdrop Treasury from deposit creation.
-       * 
-       * The dispatch origin of this call must be `DropOrigin`.
-       * 
-       * - `currency_id`: `AirDropCurrencyId` funding currency type.
-       * - `amount`: `BalanceOf<T>` funding amounts.
-       **/
-      fundAirdropTreasury: AugmentedSubmittable<(currencyId: AirDropCurrencyId | 'SETR' | 'SETUSD' | 'SETM' | 'SERP' | 'DNAR' | 'HELP' | number | Uint8Array, amount: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AirDropCurrencyId, BalanceOf]>;
-      /**
-       * Make Airdrop to beneficiaries.
-       * 
-       * The dispatch origin of this call must be `DropOrigin`.
-       * 
-       * - `currency_id`: `AirDropCurrencyId` airdrop currency type.
-       * - `airdrop_list_json`: airdrop accounts and respective amounts in json format.
-       **/
-      makeAirdrop: AugmentedSubmittable<(currencyId: AirDropCurrencyId | 'SETR' | 'SETUSD' | 'SETM' | 'SERP' | 'DNAR' | 'HELP' | number | Uint8Array, airdropList: Vec<ITuple<[AccountId, Balance]>> | ([AccountId | string | Uint8Array, Balance | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [AirDropCurrencyId, Vec<ITuple<[AccountId, Balance]>>]>;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
     auction: {
       /**
        * Bid an auction.
@@ -84,11 +61,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * Cancel a scheduled dispatchable.
        **/
-      cancelScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { AirDrop: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex]>;
+      cancelScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { Empty20: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { Empty34: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex]>;
       /**
        * Delay a scheduled dispatchable.
        **/
-      delayScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { AirDrop: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array, additionalDelay: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex, BlockNumber]>;
+      delayScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { Empty20: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { Empty34: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array, additionalDelay: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex, BlockNumber]>;
       /**
        * Dispatch a dispatchable on behalf of other origin
        **/
@@ -96,7 +73,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * Fast track a scheduled dispatchable.
        **/
-      fastTrackScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { AirDrop: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array, when: DispatchTime | { At: any } | { After: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex, DispatchTime]>;
+      fastTrackScheduledDispatch: AugmentedSubmittable<(initialOrigin: PalletsOrigin | { System: any } | { RandomnessCollectiveFlip: any } | { Timestamp: any } | { Sudo: any } | { Scheduler: any } | { Prices: any } | { Dex: any } | { Multisig: any } | { Recovery: any } | { Proxy: any } | { Auction: any } | { OrmlNFT: any } | { ShuraCouncil: any } | { ShuraCouncilMembership: any } | { FinancialCouncil: any } | { FinancialCouncilMembership: any } | { TechnicalCommittee: any } | { TechnicalCommitteeMembership: any } | { Authority: any } | { Utility: any } | { Empty20: any } | { SetheumOracle: any } | { OperatorMembershipSetheum: any } | { AuctionManager: any } | { Loans: any } | { Setmint: any } | { SerpTreasury: any } | { CdpTreasury: any } | { CdpEngine: any } | { EmergencyShutdown: any } | { Treasury: any } | { Bounties: any } | { Tips: any } | { NFT: any } | { Empty34: any } | { Indices: any } | { Balances: any } | { Currencies: any } | { Tokens: any } | { TransactionPayment: any } | { TransactionPause: any } | { Vesting: any } | { Identity: any } | { EVM: any } | { EvmAccounts: any } | { EVMBridge: any } | { EvmManager: any } | { Authorship: any } | { Babe: any } | { Grandpa: any } | { Staking: any } | { Session: any } | { Historical: any } | { Offences: any } | { ImOnline: any } | { AuthorityDiscovery: any } | string | Uint8Array, taskId: ScheduleTaskIndex | AnyNumber | Uint8Array, when: DispatchTime | { At: any } | { After: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletsOrigin, ScheduleTaskIndex, DispatchTime]>;
       removeAuthorizedCall: AugmentedSubmittable<(hash: Hash | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Hash]>;
       /**
        * Schedule a dispatchable to be dispatched at later block.
@@ -417,7 +394,26 @@ declare module '@polkadot/api-base/types/submittable' {
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
     cdpTreasury: {
+      /**
+       * Auction the collateral not occupied by the auction.
+       * 
+       * The dispatch origin of this call must be `UpdateOrigin`.
+       * 
+       * - `currency_id`: collateral type
+       * - `amount`: collateral amount
+       * - `target`: target amount
+       * - `splited`: splite collateral to multiple auction according to the config size
+       **/
       auctionCollateral: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array, target: Compact<Balance> | AnyNumber | Uint8Array, splited: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Compact<Balance>, Compact<Balance>, bool]>;
+      /**
+       * Swap the collateral not occupied by the auction to stable.
+       * 
+       * The dispatch origin of this call must be `UpdateOrigin`.
+       * 
+       * - `currency_id`: collateral type
+       * - `swap_limit`: target amount
+       **/
+      exchangeCollateralToStable: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, swapLimit: SwapLimit | { ExactSupply: any } | { ExactTarget: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, SwapLimit]>;
       extractSurplusToSerp: AugmentedSubmittable<(amount: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Balance]>;
       /**
        * Update parameters related to collateral auction under specific
@@ -478,7 +474,7 @@ declare module '@polkadot/api-base/types/submittable' {
       addLiquidity: AugmentedSubmittable<(currencyIdA: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, currencyIdB: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, maxAmountA: Compact<Balance> | AnyNumber | Uint8Array, maxAmountB: Compact<Balance> | AnyNumber | Uint8Array, minShareIncrement: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, CurrencyId, Compact<Balance>, Compact<Balance>, Compact<Balance>]>;
       /**
        * Add provision to Provisioning trading pair.
-       * If succecceds, will record the provision, but shares issuing will happen after the
+       * If succeeds, will record the provision, but shares issuing will happen after the
        * trading pair convert to Enabled status.
        * 
        * - `currency_id_a`: currency id A.
@@ -2203,9 +2199,24 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `currency_id`: collateral currency id.
        * - `max_collateral_amount`: the max collateral amount which is used to swap enough
        * stable token to clear debit.
-       * - `maybe_path`: the custom swap path.
        **/
-      closeLoanHasDebitByDex: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, maxCollateralAmount: Compact<Balance> | AnyNumber | Uint8Array, maybePath: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Compact<Balance>, Option<Vec<CurrencyId>>]>;
+      closeLoanHasDebitByDex: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, maxCollateralAmount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Compact<Balance>]>;
+      /**
+       * Generate new debit in advance, buy collateral and deposit it into CDP.
+       * 
+       * - `currency_id`: collateral currency id.
+       * - `increase_debit_value`: the specific increased debit value for CDP
+       * - `min_increase_collateral`: the minimal increased collateral amount for CDP
+       **/
+      expandPositionCollateral: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, increaseDebitValue: Balance | AnyNumber | Uint8Array, minIncreaseCollateral: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Balance, Balance]>;
+      /**
+       * Sell ​​the collateral locked in CDP to get stable coin to repay the debit.
+       * 
+       * - `currency_id`: collateral currency id.
+       * - `decrease_collateral`: the specific decreased collateral amount for CDP
+       * - `min_decrease_debit_value`: the minimal decreased debit value for CDP
+       **/
+      shrinkPositionDebit: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array, decreaseCollateral: Balance | AnyNumber | Uint8Array, minDecreaseDebitValue: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Balance, Balance]>;
       /**
        * Transfer the whole CDP of `from` under `currency_id` to caller's CDP
        * under the same `currency_id`, caller must have the authorization of

@@ -39,3 +39,11 @@ Changes: **Full Changelog**: https://github.com/setheum-js/setheum.js/compare/v3
 
 - Update latest Setheum types
 - Update to setheum v1.0.0 spec
+
+## 3.3.1 Mar 17, 2021
+
+Changes: **Full Changelog**: https://github.com/setheum-js/setheum.js/compare/v3.3.0...v3.3.1
+
+- Update latest chain types
+- Update chain metadata
+- Update to the latest setheum v1.0.0 spec

@@ -18,49 +18,6 @@ import type { ExchangeRate, Rate, Ratio } from '@setheum.js/types/interfaces/sup
 
 declare module '@polkadot/api-base/types/consts' {
   export interface AugmentedConsts<ApiType extends ApiTypes> {
-    airDrop: {
-      /**
-       * The Airdrop module pallet id, keeps airdrop funds.
-       **/
-      fundingOrigin: AccountId & AugmentedConst<ApiType>;
-      /**
-       * The Dinar (DNAR) currency id.
-       * 
-       **/
-      getDinarCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * HighEnd LaunchPad (HELP) currency id. (LaunchPad Token)
-       * 
-       **/
-      getHelpCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * Native Setheum (SETM) currency id. [P]Pronounced "set M" or "setem"
-       * 
-       **/
-      getNativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * Serp (SERP) currency id.
-       * 
-       **/
-      getSerpCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * The SetDollar (SETUSD) currency id
-       **/
-      getSetUSDId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * The Airdrop module pallet id, keeps airdrop funds.
-       **/
-      palletId: PalletId & AugmentedConst<ApiType>;
-      /**
-       * Setter (SETR) currency id
-       * 
-       **/
-      setterCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-      /**
-       * Generic const
-       **/
-      [key: string]: Codec;
-    };
     auctionManager: {
       /**
        * When the total duration of the auction exceeds this soft cap, push
@@ -71,12 +28,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The extended time for the auction to end after each successful bid
        **/
       auctionTimeToClose: BlockNumber & AugmentedConst<ApiType>;
-      /**
-       * The default parital path list for DEX to directly take auction,
-       * Note: the path is parital, the whole swap path is collateral currency id concat
-       * the partial path. And the list is sorted, DEX try to take auction by order.
-       **/
-      defaultSwapParitalPathList: Vec<Vec<CurrencyId>> & AugmentedConst<ApiType>;
       /**
        * The stable currency id
        **/
@@ -184,6 +135,11 @@ declare module '@polkadot/api-base/types/consts' {
     };
     cdpEngine: {
       /**
+       * The alternative swap path joint list, which can be concated to
+       * alternative swap path when cdp treasury swap collateral to stable.
+       **/
+      alternativeSwapPathJointList: Vec<Vec<CurrencyId>> & AugmentedConst<ApiType>;
+      /**
        * The list of valid collateral currency types
        **/
       collateralCurrencyIds: Vec<CurrencyId> & AugmentedConst<ApiType>;
@@ -199,12 +155,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The default liquidation ratio for all collateral types of CDP
        **/
       defaultLiquidationRatio: Ratio & AugmentedConst<ApiType>;
-      /**
-       * The default parital path list for CDP engine to swap collateral to stable,
-       * Note: the path is parital, the whole swap path is collateral currency id concat
-       * the partial path. And the list is sorted, CDP engine trys to swap stable by order.
-       **/
-      defaultSwapParitalPathList: Vec<Vec<CurrencyId>> & AugmentedConst<ApiType>;
       /**
        * Stablecoin currency id
        **/
@@ -230,6 +180,11 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     cdpTreasury: {
+      /**
+       * The alternative swap path joint list, which can be concated to
+       * alternative swap path when cdp treasury swap collateral to stable.
+       **/
+      alternativeSwapPathJointList: Vec<Vec<CurrencyId>> & AugmentedConst<ApiType>;
       /**
        * Stablecoin currency id
        **/
@@ -565,6 +520,11 @@ declare module '@polkadot/api-base/types/consts' {
     };
     serpTreasury: {
       /**
+       * The alternative swap path joint list, which can be concated to
+       * alternative swap path when SERP-Treasury swaps for buyback.
+       **/
+      alternativeSwapPathJointList: Vec<Vec<CurrencyId>> & AugmentedConst<ApiType>;
+      /**
        * CDP-Treasury account for processing serplus funds
        * CDPTreasury account.
        **/
@@ -603,10 +563,6 @@ declare module '@polkadot/api-base/types/consts' {
        * A duration period of inflation injection.
        **/
       stableCurrencyInflationPeriod: BlockNumber & AugmentedConst<ApiType>;
-      /**
-       * The limit for length of trading path
-       **/
-      tradingPathLimit: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
