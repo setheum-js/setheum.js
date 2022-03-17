@@ -25,7 +25,7 @@ import type { TransactionAction } from '@polkadot/types/lookup';
 import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio } from '@setheum.js/types/interfaces/cdpEngine';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
 import type { Attributes, CID, ClassIdOf, Properties, TokenIdOf } from '@setheum.js/types/interfaces/nft';
-import type { AirDropCurrencyId, Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
+import type { Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, AccountIndex, AsOriginId, Balance, BalanceOf, BlockNumber, Call, CallHashOf, ChangesTrieConfiguration, H256, Hash, Header, KeyValue, LookupSource, Moment, OpaqueCall, OracleKey, OracleValue, PalletsOrigin, Perbill, Percent, Weight } from '@setheum.js/types/interfaces/runtime';
 
 declare module '@polkadot/api-base/types/submittable' {
@@ -36,19 +36,19 @@ declare module '@polkadot/api-base/types/submittable' {
        * 
        * The dispatch origin of this call must be `DropOrigin`.
        * 
-       * - `currency_id`: `AirDropCurrencyId` funding currency type.
+       * - `currency_id`: `CurrencyId` funding currency type.
        * - `amount`: `BalanceOf<T>` funding amounts.
        **/
-      fundAirdropTreasury: AugmentedSubmittable<(currencyId: AirDropCurrencyId | 'SETR' | 'SETUSD' | 'SETM' | 'SERP' | 'DNAR' | 'HELP' | number | Uint8Array, amount: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AirDropCurrencyId, BalanceOf]>;
+      fundAirdropTreasury: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | number | Uint8Array, amount: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf]>;
       /**
        * Make Airdrop to beneficiaries.
        * 
        * The dispatch origin of this call must be `DropOrigin`.
        * 
-       * - `currency_id`: `AirDropCurrencyId` airdrop currency type.
+       * - `currency_id`: `CurrencyId` airdrop currency type.
        * - `airdrop_list_json`: airdrop accounts and respective amounts in json format.
        **/
-      makeAirdrop: AugmentedSubmittable<(currencyId: AirDropCurrencyId | 'SETR' | 'SETUSD' | 'SETM' | 'SERP' | 'DNAR' | 'HELP' | number | Uint8Array, airdropList: Vec<ITuple<[AccountId, Balance]>> | ([AccountId | string | Uint8Array, Balance | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [AirDropCurrencyId, Vec<ITuple<[AccountId, Balance]>>]>;
+      makeAirdrop: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | number | Uint8Array, airdropList: Vec<ITuple<[AccountId, Balance]>> | ([AccountId | string | Uint8Array, Balance | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [CurrencyId, Vec<ITuple<[AccountId, Balance]>>]>;
       /**
        * Generic tx
        **/

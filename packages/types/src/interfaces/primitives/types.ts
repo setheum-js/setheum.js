@@ -6,17 +6,6 @@ import type { ITuple } from '@polkadot/types-codec/types';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
 import type { Balance } from '@setheum.js/types/interfaces/runtime';
 
-/** @name AirDropCurrencyId */
-export interface AirDropCurrencyId extends Enum {
-  readonly isSetr: boolean;
-  readonly isSetusd: boolean;
-  readonly isSetm: boolean;
-  readonly isSerp: boolean;
-  readonly isDnar: boolean;
-  readonly isHelp: boolean;
-  readonly type: 'Setr' | 'Setusd' | 'Setm' | 'Serp' | 'Dnar' | 'Help';
-}
-
 /** @name Amount */
 export interface Amount extends i128 {}
 
