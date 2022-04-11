@@ -1,10 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Option, Struct, i128, u32, u8 } from '@polkadot/types-codec';
+import type { BTreeMap, Bytes, Enum, Option, Struct, bool, i128, u32, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
-import type { Balance } from '@setheum.js/types/interfaces/runtime';
+import type { AccountId, Balance, BlockNumber } from '@setheum.js/types/interfaces/runtime';
 
 /** @name Amount */
 export interface Amount extends i128 {}
@@ -24,6 +24,41 @@ export interface AuthoritysOriginId extends Enum {
   readonly isTreasury: boolean;
   readonly type: 'Root' | 'Treasury';
 }
+
+/** @name CampaignId */
+export interface CampaignId extends u32 {}
+
+/** @name CampaignIdOf */
+export interface CampaignIdOf extends CampaignId {}
+
+/** @name CampaignInfo */
+export interface CampaignInfo extends Struct {
+  readonly origin: AccountId;
+  readonly beneficiary: AccountId;
+  readonly raiseCurrency: CurrencyId;
+  readonly saleToken: CurrencyId;
+  readonly crowdAllocation: Balance;
+  readonly goal: Balance;
+  readonly raised: Balance;
+  readonly contributorsCount: u32;
+  readonly contributions: BTreeMap<AccountId, ITuple<[Balance, Balance, bool]>>;
+  readonly period: BlockNumber;
+  readonly campaignStart: BlockNumber;
+  readonly campaignEnd: BlockNumber;
+  readonly campaignRetirementPeriod: BlockNumber;
+  readonly proposalRetirementPeriod: BlockNumber;
+  readonly isApproved: bool;
+  readonly isRejected: bool;
+  readonly isWaiting: bool;
+  readonly isActive: bool;
+  readonly isSuccessful: bool;
+  readonly isFailed: bool;
+  readonly isEnded: bool;
+  readonly isClaimed: bool;
+}
+
+/** @name CampaignInfoOf */
+export interface CampaignInfoOf extends CampaignInfo {}
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {

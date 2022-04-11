@@ -72,7 +72,7 @@ import type { BalanceRequest, BalanceWrapper, TradingPairProvisionParameters, Tr
 import type { CallRequest, CodeInfo, Erc20Info, EstimateResourcesResponse, EvmAccountInfo, EvmAddress, EvmContractInfo } from '@setheum.js/types/interfaces/evm';
 import type { Position } from '@setheum.js/types/interfaces/loans';
 import type { Attributes, CID, ClassData, ClassIdOf, ClassInfoOf, NFTBalance, NFTBalanceOf, NFTClassId, Properties, TokenData, TokenId, TokenIdOf, TokenInfoOf } from '@setheum.js/types/interfaces/nft';
-import type { Amount, AmountOf, AuctionId, AuctionIdOf, AuthoritysOriginId, CurrencyId, CurrencyIdOf, DexShare, SerpStableCurrencyId, SetheumAssetMetadata, SetheumDataProviderId, TokenInfo, TokenSymbol, TradingPair } from '@setheum.js/types/interfaces/primitives';
+import type { Amount, AmountOf, AuctionId, AuctionIdOf, AuthoritysOriginId, CampaignId, CampaignIdOf, CampaignInfo, CampaignInfoOf, CurrencyId, CurrencyIdOf, DexShare, SerpStableCurrencyId, SetheumAssetMetadata, SetheumDataProviderId, TokenInfo, TokenSymbol, TradingPair } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AsOriginId, AssetId, AtLeast64BitUnsigned, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, CrateVersion, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@setheum.js/types/interfaces/runtime';
 import type { ExchangeRate, Rate, Ratio, SwapLimit } from '@setheum.js/types/interfaces/support';
 
@@ -211,6 +211,10 @@ declare module '@polkadot/types/types/registry' {
     CallOf: CallOf;
     CallOrigin: CallOrigin;
     CallRequest: CallRequest;
+    CampaignId: CampaignId;
+    CampaignIdOf: CampaignIdOf;
+    CampaignInfo: CampaignInfo;
+    CampaignInfoOf: CampaignInfoOf;
     CandidateCommitments: CandidateCommitments;
     CandidateDescriptor: CandidateDescriptor;
     CandidateHash: CandidateHash;
