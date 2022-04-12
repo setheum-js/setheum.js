@@ -12,7 +12,7 @@ import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support'
 import type { BlockLength, BlockWeights } from '@polkadot/types/interfaces/system';
 import type { PalletBalanceOf } from '@setheum.js/types/interfaces/accounts';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
-import type { CurrencyId } from '@setheum.js/types/interfaces/primitives';
+import type { CurrencyId, CurrencyIdOf } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, Balance, BalanceOf, BlockNumber, Moment, PalletId, Percent, Permill, RuntimeDbWeight, TransactionPriority, Weight } from '@setheum.js/types/interfaces/runtime';
 import type { ExchangeRate, Rate, Ratio } from '@setheum.js/types/interfaces/support';
 
@@ -344,6 +344,29 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    launchPad: {
+      /**
+       * The Campaign Commission rate taken from successful campaigns
+       * The Treasury Commission is transferred to the Network's Treasury account.
+       * The first item of the tuple is the numerator of the commission rate, second
+       * item is the denominator, fee_rate = numerator / denominator,
+       * use (u32, u32) over another type to minimize internal division operation.
+       **/
+      getCommission: ITuple<[u32, u32]> & AugmentedConst<ApiType>;
+      /**
+       * Native currency_id.
+       * 
+       **/
+      getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
+      /**
+       * The Airdrop module pallet id, keeps airdrop funds.
+       **/
+      palletId: PalletId & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     loans: {
       /**
        * The loan's module id, keep all collaterals of CDPs.
@@ -560,7 +583,7 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       setterCurrencyId: CurrencyId & AugmentedConst<ApiType>;
       /**
-       * A duration period of inflation injection.
+       * A duration period for performing SERP-TES Operations.
        **/
       stableCurrencyInflationPeriod: BlockNumber & AugmentedConst<ApiType>;
       /**
