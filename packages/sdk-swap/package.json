@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk-swap",
-  "version": "3.3.10",
+  "version": "3.3.2",
   "description": "The swap (DEX - SetSwap) sub module in SetheumJS SDK",
   "main": "index.js",
   "author": "Setheum Labs",

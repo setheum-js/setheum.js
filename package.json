@@ -6,7 +6,7 @@
     "HuangLeiWan. <setheumjs@gmail.com>"
   ],
   "license": "Apache-2",
-  "version": "3.3.10",
+  "version": "3.3.2",
   "private": true,
   "engines": {
     "yarn": "^1.22.10"

@@ -1,5 +1,6 @@
 {
   "name": "@setheum.js/type-definitions",
+  "version": "3.3.2",
   "version": "3.3.10",
   "description": "Polkadot.js type definations for Setheum Network",
   "main": "index.js",

@@ -44,6 +44,6 @@ generateDefaultConsts('packages/types/src/interfaces/augment-api-consts.ts', met
 // generateDefaultLookup('packages/types/src/interfaces', metadata);
 
 generateDefaultTx('packages/types/src/interfaces/augment-api-tx.ts', metadata, definations, false, customLookupDefinitions);
-// generateDefaultQuery('packages/types/src/interfaces/augment-api-query.ts', metadata, definations, false, customLookupDefinitions);
+generateDefaultQuery('packages/types/src/interfaces/augment-api-query.ts', metadata, definations, false, customLookupDefinitions);
 generateDefaultRpc('packages/types/src/interfaces/augment-api-rpc.ts', definations);
 // generateMobx('packages/types/src/interfaces/augment-api-mobx.ts', metaHex, definations);
