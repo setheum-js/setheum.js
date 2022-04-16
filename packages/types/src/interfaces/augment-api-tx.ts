@@ -21,13 +21,13 @@ import type { EraIndex, RewardDestination, ValidatorPrefs } from '@polkadot/type
 import type { Key } from '@polkadot/types/interfaces/system';
 import type { BountyIndex } from '@polkadot/types/interfaces/treasury';
 import type { Timepoint } from '@polkadot/types/interfaces/utility';
-import type { TransactionAction } from '@polkadot/types/lookup';
 import type { ChangeBalance, ChangeOptionRate, ChangeOptionRatio } from '@setheum.js/types/interfaces/cdpEngine';
 import type { EvmAddress } from '@setheum.js/types/interfaces/evm';
 import type { Attributes, CID, ClassIdOf, Properties, TokenIdOf } from '@setheum.js/types/interfaces/nft';
 import type { Amount, AmountOf, AuctionId, CurrencyId, CurrencyIdOf, SerpStableCurrencyId } from '@setheum.js/types/interfaces/primitives';
 import type { AccountId, AccountIndex, AsOriginId, Balance, BalanceOf, BlockNumber, Call, CallHashOf, ChangesTrieConfiguration, H256, Hash, Header, KeyValue, LookupSource, Moment, OpaqueCall, OracleKey, OracleValue, PalletsOrigin, Perbill, Percent, Weight } from '@setheum.js/types/interfaces/runtime';
 import type { SwapLimit } from '@setheum.js/types/interfaces/support';
+import type { EthTransactionAction as TransactionAction } from '@polkadot/types/interfaces/eth';
 
 declare module '@polkadot/api-base/types/submittable' {
   export interface AugmentedSubmittables<ApiType extends ApiTypes> {

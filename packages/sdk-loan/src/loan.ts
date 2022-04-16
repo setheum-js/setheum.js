@@ -7,7 +7,6 @@ import { DerivedLoanType } from '@setheum.js/api-derive';
 import { ApiRx } from '@polkadot/api';
 import { WalletRx } from '@setheum.js/sdk-wallet';
 import { memoize } from 'lodash';
-import { ModuleLoansPosition } from '@polkadot/types/lookup';
 
 export interface LoanParams {
   debitExchangeRate: FixedPointNumber;
@@ -159,7 +158,7 @@ export class LoanRx {
   }
 
   private getLoanPosition() {
-    return this.api.query.loans.positions(this.currency, this.address) as Observable<ModuleLoansPosition>;
+    return this.api.query.loans.positions(this.currency, this.address) as Observable<Position>;
   }
 
   private getCanGenerate(

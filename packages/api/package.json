@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/api",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Setheum JS API",
   "main": "index.js",
   "author": "Setheum Developers",
@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/setheum-js/setheum.js",
   "dependencies": {
-    "@setheum.js/api-derive": "3.3.1",
-    "@setheum.js/types": "3.3.1",
+    "@setheum.js/api-derive": "3.3.2",
+    "@setheum.js/types": "3.3.2",
     "@babel/runtime": "^7.10.2",
     "@open-web3/orml-api-derive": "^1.0.2-0",
     "@polkadot/api": "^7.1.1",

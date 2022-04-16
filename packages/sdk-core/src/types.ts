@@ -1,7 +1,7 @@
 import { CurrencyId } from '@setheum.js/types/interfaces';
 import { ApiPromise, ApiRx } from '@polkadot/api';
 import { AccountId } from '@polkadot/types/interfaces';
-import { SetheumPrimitivesCurrencyCurrencyId } from '@polkadot/types/lookup';
+import { CurrencyId as SetheumPrimitivesCurrencyCurrencyId } from '@setheum.js/types/interfaces';
 import { Codec, Observable } from '@polkadot/types/types';
 import { Token } from './token';
 
