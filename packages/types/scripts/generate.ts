@@ -41,7 +41,7 @@ const customLookupDefinitions = {
 generateTsDef(definations, 'packages/types/src/interfaces', '@setheum.js/types/interfaces');
 generateInterfaceTypes(definations, 'packages/types/src/interfaces/augment-types.ts');
 generateDefaultConsts('packages/types/src/interfaces/augment-api-consts.ts', metadata, definations, false, customLookupDefinitions);
-generateDefaultLookup('packages/types/src/interfaces', metadata);
+// generateDefaultLookup('packages/types/src/interfaces', metadata);
 
 generateDefaultTx('packages/types/src/interfaces/augment-api-tx.ts', metadata, definations, false, customLookupDefinitions);
 generateDefaultQuery('packages/types/src/interfaces/augment-api-query.ts', metadata, definations, false, customLookupDefinitions);
