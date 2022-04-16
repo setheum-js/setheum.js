@@ -93,8 +93,35 @@
             "ERC20": "EvmAddress"
         }
     },
-    "TradingPair": "(CurrencyId,  CurrencyId)",
     "CurrencyIdOf": "CurrencyId",
+    "CampaignId": "u32",
+    "CampaignIdOf": "CampaignId",
+    "CampaignInfo": {
+        "origin": "AccountId",
+        "beneficiary": "AccountId",
+        "raiseCurrency": "CurrencyId",
+        "saleToken": "CurrencyId",
+        "crowdAllocation": "Balance",
+        "goal": "Balance",
+        "raised": "Balance",
+        "contributorsCount": "u32",
+        "contributions": "BTreeMap<AccountId, (Balance, Balance, bool)>",
+        "period": "BlockNumber",
+        "campaignStart": "BlockNumber",
+        "campaignEnd": "BlockNumber",
+        "campaignRetirementPeriod": "BlockNumber",
+        "proposalRetirementPeriod": "BlockNumber",
+        "isApproved": "bool",
+        "isRejected": "bool",
+        "isWaiting": "bool",
+        "isActive": "bool",
+        "isSuccessful": "bool",
+        "isFailed": "bool",
+        "isEnded": "bool",
+        "isClaimed": "bool"
+    },
+    "CampaignInfoOf": "CampaignInfo",
+    "TradingPair": "(CurrencyId,  CurrencyId)",
     "TokenSymbol": {
         "_enum": {
             "SETM": 0,
