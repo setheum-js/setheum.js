@@ -772,11 +772,23 @@ declare module '@polkadot/api-base/types/storage' {
     };
     serpTreasury: {
       /**
+       * The Total count of CashDrops successfully been claimed
+       * 
+       * CashDropCount: map CurrencyId => u32
+       **/
+      cashDropCount: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<u32>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      /**
        * The CashDrop Pool
        * 
        * CashDropPool: map CurrencyId => Balance
        **/
       cashDropPool: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
+      /**
+       * The Total amounts of CashDrops successfully been claimed
+       * 
+       * CashDrops: map CurrencyId => Balance
+       **/
+      cashDrops: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { DEXShare: any } | { ERC20: any } | string | Uint8Array) => Observable<Balance>, [CurrencyId]> & QueryableStorageEntry<ApiType, [CurrencyId]>;
       /**
        * The inflation rate amount per StableCurrencyInflationPeriod of specific
        * stable currency type.

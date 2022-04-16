@@ -560,7 +560,7 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       setterCurrencyId: CurrencyId & AugmentedConst<ApiType>;
       /**
-       * A duration period of inflation injection.
+       * A duration period for performing SERP-TES Operations.
        **/
       stableCurrencyInflationPeriod: BlockNumber & AugmentedConst<ApiType>;
       /**
