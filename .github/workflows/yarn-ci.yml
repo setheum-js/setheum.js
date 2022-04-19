@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: yarn
-    - run: yarn build
+    - run: yarn polkadot-dev-build-ts
   
   test:
 
