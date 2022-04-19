@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/app-util",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "Utilities to work with Setheum Network",
   "author": "Setheum Labs",
   "main": "index.js",

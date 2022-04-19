@@ -4,7 +4,8 @@ import { TokenType } from '.';
 import {
   ConvertToCurrencyIdFailed,
   ConvertToCurrencyNameFailed,
-  NotDexShareName
+  NotDexShareName,
+  NotERC20TokenName,
 } from './errors';
 import { Token } from './token';
 import { AnyApi, CurrencyObject, MaybeCurrency } from './types';
@@ -46,17 +47,39 @@ export function unzipDexShareName(name: string): [string, string] {
   return [decodeURIComponent(result[1]), decodeURIComponent(result[2])] as [string, string];
 }
 
+// for erc20
+export function createERC20Name(hash: string): string {
+  return `erc20://${hash}`;
+}
+
+export function isERC20Name(name: string): boolean {
+  return name.startsWith('erc20://');
+}
+
+export function getERC20TokenAddressFromName(name: string): string {
+  if (!isERC20Name(name)) throw new NotERC20TokenName(name);
+
+  return name.replace('erc20://', '');
+}
+
 export function getCurrencyTypeByName(name: string): TokenType {
   if (isDexShareName(name)) return TokenType.DEX_SHARE;
 
   if (isDexShareName(name)) return TokenType.DEX_SHARE;
 
-  // FIXME: need to support ERC20
+  if (isERC20Name(name)) return TokenType.ERC20;
+
   return TokenType.BASIC;
 }
 
 export function getBasicCurrencyObject(name: string): CurrencyObject {
   return { Token: name };
+}
+
+export function getERC20Object(name: string): CurrencyObject {
+  return {
+    Erc20: getERC20TokenAddressFromName(name)
+  };
 }
 
 export function getDexShareCurrencyObject(name: string): CurrencyObject {
@@ -67,7 +90,8 @@ export function getDexShareCurrencyObject(name: string): CurrencyObject {
       return { DexShare: [inner(name1), inner(name2)] };
     }
 
-    // FIXME: need to support ERC20
+    if (isERC20Name(name)) return getERC20Object(name);
+
     return getBasicCurrencyObject(name);
   };
 
@@ -77,7 +101,8 @@ export function getDexShareCurrencyObject(name: string): CurrencyObject {
 export function getCurrencyObject(name: string): CurrencyObject {
   if (isDexShareName(name)) return getDexShareCurrencyObject(name);
 
-  // FIXME: need to support ERC20
+  if (isERC20Name(name)) return getERC20Object(name);
+
   return getBasicCurrencyObject(name);
 }
 
@@ -102,8 +127,7 @@ export function forceToCurrencyName(target: MaybeCurrency): string {
       );
     }
 
-    // FIXME: should handle erc20
-    if ((target as CurrencyId).isErc20) return (target as CurrencyId).asErc20.toString();
+    if ((target as CurrencyId).isErc20) return createERC20Name((target as CurrencyId).asErc20.toString());
 
     return target.toString();
   } catch (e) {
@@ -135,6 +159,18 @@ export const forceToDexShareCurrencyId = (api: AnyApi, target: [string, string] 
 
   if (isArray(target)) {
     name = createDexShareName(target[0], target[1]);
+  } else {
+    name = forceToCurrencyName(target);
+  }
+
+  return forceToCurrencyId(api, name);
+};
+
+export const forceToERC20CurrencyId = (api: AnyApi, target: string | CurrencyId): CurrencyId => {
+  let name = '';
+
+  if (typeof target === 'string') {
+    name = createERC20Name(target);
   } else {
     name = forceToCurrencyName(target);
   }

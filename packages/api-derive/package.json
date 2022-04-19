@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/api-derive",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "Additional polkadot.js derives for Setheum Network",
   "main": "index.js",
   "author": "Setheum Labs",

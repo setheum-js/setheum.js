@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "Setheum JS SDK - Setheum SDK for JavaScript",
   "main": "index.js",
   "author": "Setheum Developers",

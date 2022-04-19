@@ -4,8 +4,8 @@ import fetch from 'axios';
 import { PriceProvider } from './types';
 import { FixedPointNumber as FN, forceToCurrencyName, MaybeCurrency } from '@setheum.js/sdk-core';
 
-// TODO - FIXME: Change this to use the new price provider
-const PRICE_API = 'https://api.polkawallet.io/price-server/';
+// TODO - FIXME: Change this to use the new price provider - coingecko endpoint
+const PRICE_API = 'https://setheum.xyz/price-server/';
 
 export class MarketPriceProvider implements PriceProvider {
   private interval: number;

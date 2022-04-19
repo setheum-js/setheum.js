@@ -52,7 +52,7 @@ export class WalletRx extends WalletBase<ApiRx> {
    
     // get dex share price
     if (isDexShareName(tokenName)) {
-      return this.queryDexSharePriceFormDex(currency, at);
+      return this.queryDexSharePriceFromDex(currency, at);
     }
 
     // get stable coin price - SETUSD
@@ -84,7 +84,7 @@ export class WalletRx extends WalletBase<ApiRx> {
     return this.queryPriceFromDex(currency, at);
   });
 
-  public queryDexSharePriceFormDex = memoize((currency: MaybeCurrency, at?: number): Observable<PriceData> => {
+  public queryDexSharePriceFromDex = memoize((currency: MaybeCurrency, at?: number): Observable<PriceData> => {
     const [key1, key2] = unzipDexShareName(forceToCurrencyName(currency));
     const dexShareCurrency = forceToCurrencyId(this.api, currency);
     const currency1 = forceToCurrencyId(this.api, key1);

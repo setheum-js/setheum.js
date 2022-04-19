@@ -1,12 +1,29 @@
 import { FixedPointNumber as FN, Token } from '@setheum.js/sdk-core';
-import { PriceProviderType } from './price-provider/types';
+import { PriceProvider, PriceProviderType } from './price-provider/types';
 import { ChainType } from '../types';
+import { WsProvider } from '@polkadot/api';
 
 export type TokenRecord = Record<string, Token>;
+
+export type PriceProviders = Partial<{
+  [k in PriceProviderType]: PriceProvider;
+}>;
 
 export interface WalletConsts {
   readonly runtimeChain: string;
   readonly nativeCurrency: string;
+}
+
+export interface WalletConfigs {
+  supportSERP?: Boolean;
+  supportDNAR?: Boolean;
+  supportHELP?: Boolean;
+  supportSETR?: Boolean;
+  supportSETUSD?: boolean;
+  // overview price providers if need
+  priceProviders?: PriceProviders;
+  // ws provider for evm adapter
+  wsProvider?: WsProvider;
 }
 
 export interface BalanceData {
@@ -23,9 +40,11 @@ export interface TransferConfig {
 
 export interface PresetTokens {
   nativeToken: Token;
-  stableToken?: Token;
-  liquidToken?: Token;
-  stakingToken?: Token;
+  serpToken?: Token;
+  dnarToken?: Token;
+  helpToken?: Token;
+  setrToken?: Token;
+  setusdToken?: Token;
 }
 
 export type TokenPriceFetchSource = {
