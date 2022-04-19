@@ -4,6 +4,5 @@ export const ORACLE_FEEDS_TOKEN = [
   // 'DNAR',
   // 'SETR',
   // 'SETUSD',
-  // TODO: FIXME - Add cross-chain bridged tokens
   'sa://0'
 ];

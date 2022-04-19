@@ -1,20 +1,46 @@
 import {
   Token,
-  forceToCurrencyName
+  TokenType,
+  FixedPointNumber as FN,
+  forceToCurrencyName,
+  createERC20Name
 } from '@setheum.js/sdk-core';
-import { TradingPair, TradingPairStatus } from '@setheum.js/types/interfaces';
-import { StorageKey } from '@polkadot/types';
-// import { hexToString } from '@polkadot/util';
+import { TradingPair, TradingPairStatus, SetheumAssetMetadata } from '@setheum.js/types/interfaces';
+import { Option, StorageKey, u16 } from '@polkadot/types';
+import { hexToString } from '@polkadot/util';
 import { TokenRecord } from '../type';
 
 export function createTokenList(
   basicTokens: TokenRecord,
-  tradingPairs: [StorageKey<[TradingPair]>, TradingPairStatus][]
+  tradingPairs: [StorageKey<[TradingPair]>, TradingPairStatus][],
+  erc20: [StorageKey<u16[]>, Option<SetheumAssetMetadata>][]
 ): TokenRecord {
   // tokens list temp
   let temp: TokenRecord = { ...basicTokens };
 
-  // TODO: need support stable coin assets & erc20
+  const erc20Tokens = Object.fromEntries(
+    erc20.map((item) => {
+      const key = item[0].args[0].toString();
+      const value = item[1].unwrapOrDefault();
+      const name = createERC20Name(key);
+      const decimals = value.decimals.toNumber();
+
+      return [
+        name,
+        Token.create(name, {
+          type: TokenType.ERC20,
+          display: hexToString(value.name.toHex()),
+          symbol: hexToString(value.symbol.toHex()),
+          decimals,
+          ed: FN.fromInner(value.minimalBalance.toString(), decimals)
+        })
+      ];
+    })
+  );
+
+  // insert foreign tokens to temp
+  temp = { ...temp, ...erc20Tokens };
+
   // handle dex share at latest
   const dexShareTokens = Object.fromEntries(
     tradingPairs
@@ -26,7 +52,9 @@ export function createTokenList(
         const token1 = temp[token1Name];
         const token2 = temp[token2Name];
 
-        const token = Token.fromTokens(token1, token2);
+        const token = Token.fromTokens(token1, token2, {
+          display: `LP ${token1.display}-${token2.display}`
+        });
 
         return [token.name, token];
       })

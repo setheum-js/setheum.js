@@ -41,3 +41,12 @@ export class NotDexShareName extends Error {
     this.message = `${origin} is not dex share name`;
   }
 }
+
+export class NotERC20TokenName extends Error {
+  constructor(origin: string) {
+    super();
+
+    this.name = 'notERC20Token';
+    this.message = `${origin} is not erc20 token name`;
+  }
+}

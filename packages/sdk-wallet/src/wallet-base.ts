@@ -37,7 +37,6 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
   private init() {
     const tokenDecimals = this.api.registry.chainDecimals;
     const tokenSymbol = this.api.registry.chainTokens;
-
     const defaultTokenDecimal = Number(tokenDecimals?.[0]) || 18;
 
     this.runtimeChain = this.api.runtimeChain.toString();
@@ -91,8 +90,6 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
 
       return Token.fromTokens(_token1, _token2);
     }
-
-    // FIXME: need handle erc20
 
     return this.tokenMap.get(currencyName)?.clone() || new Token('EMPTY');
   }
@@ -160,10 +157,10 @@ export abstract class WalletBase<T extends ApiRx | ApiPromise> {
   public abstract queryPriceFromDex(currency: MaybeCurrency, at?: number): ObOrPromiseResult<T, PriceData>;
 
   /**
-   * @name queryDexSharePriceFormDex
+   * @name queryDexSharePriceFromDex
    * @description get the oracle feed price
    */
-  public abstract queryDexSharePriceFormDex(currency: MaybeCurrency, at?: number): ObOrPromiseResult<T, PriceData>;
+  public abstract queryDexSharePriceFromDex(currency: MaybeCurrency, at?: number): ObOrPromiseResult<T, PriceData>;
 
   /**
    * @name subscribeOracleFeeds

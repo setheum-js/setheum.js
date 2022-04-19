@@ -1,8 +1,8 @@
-import { Observable, BehaviorSubject, lastValueFrom, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, lastValueFrom, Subscription, combineLatest } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 import { PriceProvider } from './types';
 import { TimestampedValue } from '@open-web3/orml-types/interfaces';
-import { AnyApi, FixedPointNumber as FN, forceToCurrencyName } from '@setheum.js/sdk-core';
+import { AnyApi, FixedPointNumber, FixedPointNumber as FN, forceToCurrencyName, MaybeCurrency } from '@setheum.js/sdk-core';
 import { OracleKey } from '@setheum.js/types/interfaces';
 import { Storage } from '../../utils/storage';
 
@@ -49,11 +49,45 @@ export class OraclePriceProvider implements PriceProvider {
     });
   };
 
-  subscribe(currency: string): Observable<FN> {
-    return this.subject.pipe(map((data) => data[currency]));
+  subscribe(currency: MaybeCurrency): Observable<FN> {
+    return combineLatest({
+      oracle: this.subject,
+    }).pipe(
+      filter(({ oracle }) => oracle !== undefined),
+      map(({ oracle }) => {
+        const name = forceToCurrencyName(currency);
+
+        // TODO: should check the token symbol
+        if (name === 'SETM') {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return oracle!.SETM || FixedPointNumber.ZERO;
+        }
+
+        // TODO: should check the token symbol
+        if (name === 'SERP') {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return oracle!.SERP || FixedPointNumber.ZERO;
+        }
+
+        // TODO: should check the token symbol
+        if (name === 'DNAR') {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return oracle!.DNAR || FixedPointNumber.ZERO;
+        }
+
+        // TODO: should check the token symbol
+        if (name === 'HELP') {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return oracle!.HELP || FixedPointNumber.ZERO;
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return oracle![forceToCurrencyName(currency)] || FixedPointNumber.ZERO;
+      })
+    );
   }
 
-  async query(currency: string): Promise<FN> {
+  async query(currency: MaybeCurrency): Promise<FN> {
     return lastValueFrom(this.subscribe(currency));
   }
 }

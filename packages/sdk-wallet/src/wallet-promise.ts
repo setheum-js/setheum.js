@@ -28,7 +28,7 @@ export class WalletPromise extends WalletBase<ApiPromise> {
     
     // get dex share price
     if (isDexShareName(currencyName)) {
-      return this.queryDexSharePriceFormDex(currency, at); // TODO: FIXME - spelling mistake and adjust dependents too.
+      return this.queryDexSharePriceFromDex(currency, at); // TODO: FIXME - spelling mistake and adjust dependents too.
     }
 
     // get stable coin price - SETUSD
@@ -60,7 +60,7 @@ export class WalletPromise extends WalletBase<ApiPromise> {
     return this.queryPriceFromDex(currency, at);
   };
 
-  public queryDexSharePriceFormDex = async (currency: MaybeCurrency, at?: number): Promise<PriceData> => {
+  public queryDexSharePriceFromDex = async (currency: MaybeCurrency, at?: number): Promise<PriceData> => {
     const [key1, key2] = unzipDexShareName(forceToCurrencyName(currency));
     const dexShareCurrency = forceToCurrencyId(this.api, currency);
     const currency1 = forceToCurrencyId(this.api, key1);

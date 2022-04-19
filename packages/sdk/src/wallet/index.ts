@@ -4,20 +4,20 @@
 
 import { memoize } from '@polkadot/util';
 import {
+  FixedPointNumber,
   FixedPointNumber as FN,
   AnyApi,
   Token,
   MaybeCurrency,
   forceToCurrencyName,
   TokenType,
-  unzipDexShareName,
-  isDexShareName
+  isDexShareName,
 } from '@setheum.js/sdk-core';
 import { AccountInfo, Balance, RuntimeDispatchInfo } from '@polkadot/types/interfaces';
 import { OrmlAccountData } from '@open-web3/orml-types/interfaces';
 import { BehaviorSubject, combineLatest, Observable, of, firstValueFrom } from 'rxjs';
 import { map, switchMap, shareReplay, filter } from 'rxjs/operators';
-import { TokenRecord, WalletConsts, BalanceData, PresetTokens, TokenPriceFetchSource } from './type';
+import { TokenRecord, WalletConsts, BalanceData, PresetTokens, WalletConfigs } from './type';
 import { CurrencyNotFound, Liquidity, SDKNotReady } from '..';
 import { getMaxAvailableBalance } from './utils/get-max-available-balance';
 import { MarketPriceProvider } from './price-provider/market-price-provider';
@@ -28,9 +28,11 @@ import { BaseSDK } from '../types';
 import { createStorages } from './storages';
 import tokenList from '../configs/token-list';
 import { TokenProvider } from '../base-provider';
-import { defaultTokenPriceFetchSource } from './price-provider/default-token-price-fetch-source-config';
-import { subscribeDexShareTokenPrice } from './utils/get-dex-share-token-price';
-import { getChainType } from '../utils/get-chain-type';
+// import { defaultTokenPriceFetchSource } from './price-provider/default-token-price-fetch-source-config';
+// import { subscribeDexShareTokenPrice } from './utils/get-dex-share-token-price';
+// import { getChainType } from '../utils/get-chain-type';
+import { DexPriceProvider } from './price-provider/dex-price-provider';
+import { AggregateProvider } from './price-provider/aggregate-price-provider';
 
 type PriceProviders = Partial<{
   [k in PriceProviderType]: PriceProvider;
@@ -42,25 +44,47 @@ export class Wallet implements BaseSDK, TokenProvider {
   // readed from chain information
   private tokens$: BehaviorSubject<TokenRecord>;
   private storages: ReturnType<typeof createStorages>;
-  private tokenPriceFetchSource: TokenPriceFetchSource;
+  private configs: WalletConfigs;
 
+  // inject liquidity, homa sdk by default for easy using
+  public readonly liquidity: Liquidity;
+  
   public isReady$: BehaviorSubject<boolean>;
   public consts!: WalletConsts;
 
   public constructor(
     api: AnyApi,
-    tokenPriceFetchSource = defaultTokenPriceFetchSource,
-    priceProviders?: Record<PriceProviderType, PriceProvider>
+    configs?: WalletConfigs
+    // tokenPriceFetchSource = defaultTokenPriceFetchSource,
+    // priceProviders?: Record<PriceProviderType, PriceProvider>
   ) {
     this.api = api;
 
     this.isReady$ = new BehaviorSubject<boolean>(false);
     this.tokens$ = new BehaviorSubject<TokenRecord>({});
+    this.configs = {
+      supportSERP: true,
+      supportDNAR: true,
+      supportHELP: true,
+      supportSETR: true,
+      supportSETUSD: true,
+      ...configs
+    };
 
-    this.tokenPriceFetchSource = tokenPriceFetchSource;
+    // we should init sdk before init price provider
+    this.liquidity = new Liquidity(this.api, this);
+
+    const market = new MarketPriceProvider();
+    const dex = new DexPriceProvider(this.liquidity);
+    const aggregate = new AggregateProvider({ market, dex });
+    const oracle = new OraclePriceProvider(this.api);
+
     this.priceProviders = {
-      ...this.defaultPriceProviders,
-      ...priceProviders
+      [PriceProviderType.AGGREGATE]: aggregate,
+      [PriceProviderType.MARKET]: market,
+      [PriceProviderType.ORACLE]: oracle,
+      [PriceProviderType.DEX]: dex,
+      ...this.configs?.priceProviders
     };
     this.storages = createStorages(this.api);
 
@@ -85,13 +109,6 @@ export class Wallet implements BaseSDK, TokenProvider {
     };
   }
 
-  private get defaultPriceProviders(): PriceProviders {
-    return {
-      [PriceProviderType.MARKET]: new MarketPriceProvider(),
-      [PriceProviderType.ORACLE]: new OraclePriceProvider(this.api)
-    };
-  }
-
   private initTokens() {
     const chainDecimals = this.api.registry.chainDecimals;
     const chainTokens = this.api.registry.chainTokens;
@@ -101,6 +118,66 @@ export class Wallet implements BaseSDK, TokenProvider {
     const basicTokens = Object.fromEntries(
       chainTokens.map((token, i) => {
         const config = tokenList.getToken(token, this.consts.runtimeChain);
+
+        if (config?.symbol === 'SERP' && this.configs.supportSERP) {
+          return [
+            token,
+            new Token(token, {
+              ...config,
+              display: 'SERP',
+              type: TokenType.BASIC,
+              decimals: chainDecimals[i] ?? 18
+            })
+          ];
+        }
+
+        if (config?.symbol === 'DNAR' && this.configs.supportDNAR) {
+          return [
+            token,
+            new Token(token, {
+              ...config,
+              display: 'DNAR',
+              type: TokenType.BASIC,
+              decimals: chainDecimals[i] ?? 18
+            })
+          ];
+        }
+
+        if (config?.symbol === 'HELP' && this.configs.supportHELP) {
+          return [
+            token,
+            new Token(token, {
+              ...config,
+              display: 'HELP',
+              type: TokenType.BASIC,
+              decimals: chainDecimals[i] ?? 18
+            })
+          ];
+        }
+
+        if (config?.symbol === 'SETR' && this.configs.supportSETR) {
+          return [
+            token,
+            new Token(token, {
+              ...config,
+              display: 'SETR',
+              type: TokenType.BASIC,
+              decimals: chainDecimals[i] ?? 18
+            })
+          ];
+        }
+
+        if (config?.symbol === 'SETUSD' && this.configs.supportSETUSD) {
+          return [
+            token,
+            new Token(token, {
+              ...config,
+              display: 'SETUSD',
+              type: TokenType.BASIC,
+              decimals: chainDecimals[i] ?? 18
+            })
+          ];
+        }
 
         return [
           token,
@@ -118,7 +195,7 @@ export class Wallet implements BaseSDK, TokenProvider {
       assetMetadatas: assetMetadatas$
     }).subscribe({
       next: ({ tradingPairs, assetMetadatas }) => {
-        const list = createTokenList(basicTokens, tradingPairs);
+        const list = createTokenList(basicTokens, tradingPairs, assetMetadatas);
 
         this.tokens$.next(list);
         this.isReady$.next(true);
@@ -131,29 +208,55 @@ export class Wallet implements BaseSDK, TokenProvider {
    *  @param type
    *  @description subscirbe the token list, can filter by type
    */
-  public subscribeTokens = memoize((type?: TokenType): Observable<TokenRecord> => {
+   public subscribeTokens = memoize((type?: TokenType | TokenType[]): Observable<TokenRecord> => {
     return this.isReady$.pipe(
       // wait sdk isReady
       filter((i) => i),
       switchMap(() => {
         return this.tokens$.pipe(
+          filter((data) => !!data),
           map((data) => {
-            if (!type) return data;
+            if (type === undefined) return data || {};
 
             return Object.fromEntries(
-              Object.entries(data).filter(([, value]) => {
-                return value.type === type;
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              Object.entries(data!).filter(([, value]) => {
+                return Array.isArray(type) ? type.includes(value.type) : value.type === type;
               })
             );
-          }),
-          shareReplay(1)
+          })
         );
-      })
+      }),
+      shareReplay(1)
     );
   });
 
   public async getTokens(type?: TokenType): Promise<TokenRecord> {
     return firstValueFrom(this.subscribeTokens(type));
+  }
+
+  private tokenEeual(a: string, b: Token): boolean {
+    if (this.configs.supportSERP && (a === 'SERP')) {
+      return b.display === 'SERP' || b.symbol === 'SERP';
+    }
+
+    if (this.configs.supportDNAR && (a === 'DNAR')) {
+      return b.display === 'DNAR' || b.symbol === 'DNAR';
+    }
+
+    if (this.configs.supportHELP && (a === 'HELP')) {
+      return b.display === 'HELP' || b.symbol === 'HELP';
+    }
+    
+    if (this.configs.supportSETR && (a === 'SETR')) {
+      return b.display === 'SETR' || b.symbol === 'SETR';
+    }
+    
+    if (this.configs.supportSETUSD && (a === 'SETUSD')) {
+      return b.display === 'SETUSD' || b.symbol === 'SETUSD';
+    }
+
+    return b.display === a || b.symbol === a || b.name === a;
   }
 
   /**
@@ -165,7 +268,8 @@ export class Wallet implements BaseSDK, TokenProvider {
 
     return this.subscribeTokens().pipe(
       map((all) => {
-        const result = Object.values(all).find((item) => item.name === name);
+        // filter token by name or symbol
+        const result = Object.values(all).find((item) => this.tokenEeual(name, item));
 
         if (!result) throw new CurrencyNotFound(name);
 
@@ -176,6 +280,13 @@ export class Wallet implements BaseSDK, TokenProvider {
 
   public async getToken(target: MaybeCurrency): Promise<Token> {
     return firstValueFrom(this.subscribeToken(target));
+  }
+
+  // get token, must be called when wallet sdk is ready
+  public __getToken(target: MaybeCurrency): Token | undefined {
+    const name = forceToCurrencyName(target);
+
+    return Object.values(this.tokens$.value || {}).find((item) => this.tokenEeual(name, item));
   }
 
   /**
@@ -358,7 +469,7 @@ export class Wallet implements BaseSDK, TokenProvider {
       throw new SDKNotReady('wallet');
     }
 
-    const tokens = this.tokens$.value;
+    const tokens = this.tokens$.value || {};
 
     /**
      * Native (SETM) currency id
@@ -371,35 +482,35 @@ export class Wallet implements BaseSDK, TokenProvider {
      * The Serp (SERP) currency id
      **/
     if (this.api.consts?.serpTreasury.getSerpCurrencyId) {
-      data.stableToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getSerpCurrencyId)];
+      data.serpToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getSerpCurrencyId)];
     }
     
     /**
      * The Dinar (DNAR) currency id
      **/
     if (this.api.consts?.serpTreasury.getDinarCurrencyId) {
-      data.stableToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getDinarCurrencyId)];
+      data.dnarToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getDinarCurrencyId)];
     }
    
     /**
      * HighEnd LaunchPad (HELP) currency id. (LaunchPad Token)
      **/
     if (this.api.consts?.serpTreasury.getHelpCurrencyId) {
-      data.stableToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getHelpCurrencyId)];
+      data.helpToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getHelpCurrencyId)];
     }
     
     /**
      * Setter (SETR) currency id
      **/
     if (this.api.consts?.serpTreasury.setterCurrencyId) {
-      data.stableToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.setterCurrencyId)];
+      data.setrToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.setterCurrencyId)];
     }
     
     /**
      * The SetUSD currency id, it should be SETUSD in Setheum.
      **/
     if (this.api.consts?.serpTreasury.getSetUSDId) {
-      data.stableToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getSetUSDId)];
+      data.setusdToken = tokens[forceToCurrencyName(this.api.consts.serpTreasury.getSetUSDId)];
     }
 
     return data;
@@ -409,38 +520,46 @@ export class Wallet implements BaseSDK, TokenProvider {
    * @name subscribePrice
    * @description subscirbe the price of `token`
    */
-  public subscribePrice = memoize((token: MaybeCurrency, type?: PriceProviderType): Observable<FN> => {
-    let priceProvider: PriceProvider | undefined;
+  public subscribePrice = memoize((token: MaybeCurrency, type = PriceProviderType.AGGREGATE): Observable<FN> => {
     const name = forceToCurrencyName(token);
     const isDexShare = isDexShareName(name);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const _type =
-      type || this.tokenPriceFetchSource?.[getChainType(this.consts.runtimeChain)]?.[name] || PriceProviderType.MARKET;
-
-    if (_type === PriceProviderType.MARKET) {
-      priceProvider = this.priceProviders?.[PriceProviderType.MARKET];
-    }
-
-    if (_type === PriceProviderType.ORACLE) {
-      priceProvider = this.priceProviders?.[PriceProviderType.ORACLE];
-    }
-
-    if (!priceProvider) return of(FN.ZERO);
-
-    // should calculate dexShare price
+    // if token is dex share, get dex share price form liquidity sdk
     if (isDexShare) {
-      const [token0, token1] = unzipDexShareName(name);
+      return this.liquidity.subscribePoolDetails(name).pipe(map((data) => data.sharePrice));
+    }
 
-      return subscribeDexShareTokenPrice(
-        this.subscribePrice(token0),
-        this.subscribePrice(token1),
-        new Liquidity(this.api, this).subscribePoolDetail(name)
+    if (type === PriceProviderType.AGGREGATE && this.priceProviders[PriceProviderType.AGGREGATE]) {
+      return this.subscribeToken(token).pipe(
+        switchMap(
+          (token) => this.priceProviders[PriceProviderType.AGGREGATE]?.subscribe(token) || of(FixedPointNumber.ZERO)
+        )
       );
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.subscribeToken(token).pipe(switchMap((token) => priceProvider!.subscribe(token.name)));
+    if (type === PriceProviderType.DEX && this.priceProviders[PriceProviderType.DEX]) {
+      return this.subscribeToken(token).pipe(
+        switchMap((token) => this.priceProviders[PriceProviderType.DEX]?.subscribe(token) || of(FixedPointNumber.ZERO))
+      );
+    }
+
+    if (type === PriceProviderType.MARKET && this.priceProviders[PriceProviderType.MARKET]) {
+      return this.subscribeToken(token).pipe(
+        switchMap(
+          (token) => this.priceProviders[PriceProviderType.MARKET]?.subscribe(token) || of(FixedPointNumber.ZERO)
+        )
+      );
+    }
+
+    if (type === PriceProviderType.ORACLE && this.priceProviders[PriceProviderType.ORACLE]) {
+      return this.subscribeToken(token).pipe(
+        switchMap(
+          (token) => this.priceProviders[PriceProviderType.ORACLE]?.subscribe(token) || of(FixedPointNumber.ZERO)
+        )
+      );
+    }
+
+    return of(FixedPointNumber.ZERO);
   });
 
   public getPrice(token: MaybeCurrency, type?: PriceProviderType): Promise<FN> {
