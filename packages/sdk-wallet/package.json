@@ -1,6 +1,6 @@
 {
   "name": "@setheum.js/sdk-wallet",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "The Setheum wallet JS SDK for Setheum Network",
   "main": "index.js",
   "author": "Setgheum Labs",
