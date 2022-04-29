@@ -1795,6 +1795,48 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.0.0.tgz#109fb595021de285f05a7db6806f2f48296fcee7"
   integrity sha512-gIVaYhUsy+9s58m/ETjSJVKHhKTBMmcRb9cEV5/5dwvfDlfORjKrFsDeDHWRrm6RjcPvCLZFwGJjAjLj1gg4HA==
 
+"@setheum.js/api-derive@3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@setheum.js/api-derive/-/api-derive-3.3.2.tgz#49636e96117680b5ec06c68e39df59b167fafae5"
+  integrity sha512-zmGCIuQiGWXEy8iwpnBBzM2rcpbLWn0kly6TTkBQmilmuNcYi6f291yycv3ObZVpnqyc0va2jygxJOzzNh1/+Q==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/orml-types" "^1.0.2-0"
+    "@polkadot/api-derive" "^7.1.1"
+    "@setheum.js/types" "3.3.2"
+
+"@setheum.js/api@3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@setheum.js/api/-/api-3.3.2.tgz#e33a4f766b5d33da8d9a4c84330df575f890b52d"
+  integrity sha512-brNl8OxMvxHAQrCYUfU1Y4mAe6y/41/nZLNkvSfBR1LCM5/V1mljNTvlktRctXml1FhKpsOJE6pMmf6NdWmscg==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/orml-api-derive" "^1.0.2-0"
+    "@polkadot/api" "^7.1.1"
+    "@polkadot/rpc-core" "^7.1.1"
+    "@setheum.js/api-derive" "3.3.2"
+    "@setheum.js/types" "3.3.2"
+
+"@setheum.js/type-definitions@3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@setheum.js/type-definitions/-/type-definitions-3.3.2.tgz#4ad61a5c317b6f9b7c34f5692dc74cea8070ef1b"
+  integrity sha512-LK0RbQjtrh5MP6E5Xrrvav3mo3ab+A2suWfTBIf1n5wAos4/H3DPLQ9uRc+g0e3sKOXNmOMxTeZYU9FMtn1I9A==
+  dependencies:
+    "@open-web3/orml-type-definitions" "^1.0.2-0"
+
+"@setheum.js/types@3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@setheum.js/types/-/types-3.3.2.tgz#66329dad6636e0cbed301660973aee48e31ae1b6"
+  integrity sha512-FJvyV5vfgnqtnVb8vzWTRREekrfiuJjLywYzqUxvX5LmIDyuvnsa9i7fVb3JfIgoTjIkAK28N9GCWsr/e9dEDw==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    "@open-web3/api-mobx" "^1.0.2-0"
+    "@open-web3/orml-types" "^1.0.2-0"
+    "@polkadot/api" "^7.1.1"
+    "@polkadot/typegen" "^7.1.1"
+    "@polkadot/types" "^7.1.1"
+    "@setheum.js/type-definitions" "3.3.2"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -2338,9 +2380,9 @@ astral-regex@^2.0.0:
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
 async@^2.6.1:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
-  integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz#706b7ff6084664cd7eae713f6f965433b5504221"
+  integrity sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==
   dependencies:
     lodash "^4.17.14"
 
